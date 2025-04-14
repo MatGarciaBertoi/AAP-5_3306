@@ -1,0 +1,171 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background-color: #121212;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    gap: 10px;
+}
+
+.logo {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.search-bar {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar input {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 15px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #00e676; /* Efeito ao passar o mouse */
+}
+
+.header-text {
+    text-align: center;
+    margin: 40px 0;
+    max-width: 700px;
+}
+
+.header-text h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.header-text p {
+    font-size: 1.2em;
+    color: #b0b0b0;
+    margin-bottom: 20px;
+}
+
+.planos-btn {
+    padding: 12px 25px;
+    background-color: #00d8a4;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.courses {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px 0;
+    justify-items: center;
+}
+
+.course-card {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 260px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 216, 164, 0.4);
+}
+
+.course-card h3 {
+    color: #00d8a4;
+    margin-bottom: 10px;
+}
+
+.course-card p {
+    color: #b0b0b0;
+}
+
+/* Estilo para a seção de ondas */
+section .wave {
+    position: absolute; /* Posicionamento absoluto */
+    bottom: 0; /* Alinha ao fundo */
+    left: 0; /* Alinha à esquerda */
+    width: 100%; /* Largura total */
+    height: 100px; /* Altura fixa */
+    background: url(../images/wave.png); /* Imagem de fundo */
+    background-size: 1000px 100px; /* Tamanho da imagem */
+}
+/* Animações das ondas */
+section .wave.wave1 {
+    animation: animate 30s linear infinite; /* Animação contínua */
+    z-index: 1000; /* Camada superior */
+    opacity: 1; /* Opacidade total */
+    animation-delay: 0s; /* Sem atraso */
+    bottom: 0; /* Alinha ao fundo */
+}
+section .wave.wave2 {
+    animation: animate2 15s linear infinite; /* Animação contínua */
+    z-index: 999; /* Camada inferior à wave1 */
+    opacity: 0.5; /* Opacidade reduzida */
+    animation-delay: -5s; /* Atraso na animação */
+    bottom: 10px; /* Alinha 10px acima do fundo */
+}
+section .wave.wave3 {
+    animation: animate3 30s linear infinite; /* Animação contínua */
+    z-index: 997; /* Camada inferior à wave2 */
+    opacity: 0.7; /* Opacidade intermediária */
+    animation-delay: -2s; /* Atraso na animação */
+    bottom: 20px; /* Alinha 20px acima do fundo */
+}
+/* Animações */
+@keyframes animate {
+    0% {background-position-x: 0;}
+    100% {background-position-x: 1000px;}
+}
+@keyframes animate2 {
+    0% {background-position-x: 0;}
+    100% {background-position-x: -1000px;}
+}
+@keyframes animate3 {
+    0% {background-position-x: 0;}
+    100% {background-position-x: 1000px;}
+}
+@keyframes animate4 {
+    0% {background-position-x: 0;}
+    100% {background-position-x: -1000px;}
+}
