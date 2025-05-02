@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rejeitar'])) {
     $curriculo_absoluto = $_SERVER['DOCUMENT_ROOT'] . $curriculo_relativo;
 
     // Segurança: verifica se o caminho está dentro da pasta de currículos
-    $caminho_pasta_permitida = realpath($_SERVER['DOCUMENT_ROOT'] . "/AAP-CW_Cursos/adm/usuarios/professor/uploads/curriculos");
+    $caminho_pasta_permitida = realpath($_SERVER['DOCUMENT_ROOT'] . "/AAP-5_3306/adm/usuarios/professor/uploads/curriculos");
 
     if (file_exists($curriculo_absoluto) && strpos(realpath($curriculo_absoluto), $caminho_pasta_permitida) === 0) {
         unlink($curriculo_absoluto);

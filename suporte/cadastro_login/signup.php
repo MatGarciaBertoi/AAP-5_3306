@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
         // Exibe mensagem de sucesso e redireciona para home.html
         echo "<script>
                     alert('Usuário cadastrado com sucesso!');
-                    window.location.href = 'http://localhost/AAP-CW_Cursos/suporte/suporte.php';
+                    window.location.href = 'http://localhost/AAP-5_3306/suporte/suporte.php';
                     </script>";
     } else {
         echo "<script>alert('Erro ao cadastrar o usuário.');</script>";

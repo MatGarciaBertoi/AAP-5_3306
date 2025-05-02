@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->close();
     $conexao->close();
 } else {
-    header("Location: http://localhost/AAP-CW_Cursos/suporte/ticket.php"); // Se acessarem diretamente
+    header("Location: http://localhost/AAP-5_3306/suporte/ticket.php"); // Se acessarem diretamente
     exit();
 }
 ?>

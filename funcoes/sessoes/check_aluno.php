@@ -2,7 +2,7 @@
     session_start();
     
     if (!isset($_SESSION['aluno_id'])) {
-        header("Location: http://localhost/Projeto_CrowdGym/cadastro_login/login_aluno.php");
+        header("Location: http://localhost/AAP-5_3306/cadastro_login/aluno/signin.php");
         exit;
     }
 ?>

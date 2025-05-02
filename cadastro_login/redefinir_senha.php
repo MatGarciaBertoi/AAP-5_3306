@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($usuario)) {
             if ($updateStmt->affected_rows > 0) {
                 $mensagem = "Senha alterada com sucesso! Redirecionando para menu inicial...";
                 $classeMensagem = "sucesso";
-                header("refresh:3;url=http://localhost/AAP-CW_Cursos/TelaInicial/index.php");
+                header("refresh:3;url=http://localhost/AAP-5_3306/TelaInicial/index.php");
             } else {
                 $mensagem = "Erro ao atualizar a senha. Tente novamente.";
                 $classeMensagem = "erro";

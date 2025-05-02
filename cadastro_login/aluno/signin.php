@@ -32,13 +32,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 
             // Redireciona para a página conforme o tipo de usuário
             if ($user['tipo'] === 'administrador') {
-                header("Location: http://localhost/AAP-CW_Cursos/adm/index.php");
+                header("Location: http://localhost/AAP-5_3306/adm/index.php");
                 exit;
             } elseif ($user['tipo'] === 'professor') {
-                header("Location: http://localhost/AAP-CW_Cursos/professor/index.php");
+                header("Location: http://localhost/AAP-5_3306/professor/index.php");
                 exit;
             } elseif ($user['tipo'] === 'aluno') {
-                header("Location: http://localhost/AAP-CW_Cursos/TelaInicial/index.php");
+                header("Location: http://localhost/AAP-5_3306/TelaInicial/index.php");
                 exit;
             } else {
                 $mensagemErro = "Tipo de usuário desconhecido.";

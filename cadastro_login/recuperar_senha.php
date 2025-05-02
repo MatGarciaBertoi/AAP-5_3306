@@ -35,7 +35,7 @@ if (isset($_POST['SendRecupSenha'])) {
             $mail->Subject = "CW Cursos - Alterar Senha"; // Assunto do email
 
             // Cria o link com o token
-            $link = "http://localhost/AAP-CW_Cursos/cadastro_login/redefinir_senha.php?token=$token";
+            $link = "http://localhost/AAP-5_3306/cadastro_login/redefinir_senha.php?token=$token";
 
             // Corpo do e-mail com o link de recuperação
             $mail->Body = <<<END

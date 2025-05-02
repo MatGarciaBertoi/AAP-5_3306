@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
             $tiposPermitidos = ['aluno', 'professor', 'administrador'];
 
             if (in_array($user['tipo'], $tiposPermitidos)) {
-                header("Location: http://localhost/AAP-CW_Cursos/suporte/suporte.php");
+                header("Location: http://localhost/AAP-5_3306/suporte/suporte.php");
                 exit;
             } else {
                 $mensagemErro = "Apenas usuários autorizados podem acessar esta área.";

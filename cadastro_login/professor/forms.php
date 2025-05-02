@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $verificar->close();
 
     // Caminho absoluto no servidor (para salvar o arquivo fisicamente)
-    $caminho_fisico = $_SERVER['DOCUMENT_ROOT'] . "/AAP-CW_Cursos/adm/usuarios/professor/uploads/curriculos/";
+    $caminho_fisico = $_SERVER['DOCUMENT_ROOT'] . "/AAP-5_3306/adm/usuarios/professor/uploads/curriculos/";
     $curriculo_tipo = strtolower(pathinfo($_FILES["curriculo"]["name"], PATHINFO_EXTENSION));
 
     if ($_FILES["curriculo"]["error"] !== UPLOAD_ERR_OK) {
@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome_arquivo = uniqid("curriculo_", true) . ".pdf";
 
     // Caminho para o navegador (este será salvo no banco e usado no link)
-    $curriculo_path = "/AAP-CW_Cursos/adm/usuarios/professor/uploads/curriculos/" . $nome_arquivo;
+    $curriculo_path = "/AAP-5_3306/adm/usuarios/professor/uploads/curriculos/" . $nome_arquivo;
 
     if (!move_uploaded_file($_FILES["curriculo"]["tmp_name"], $caminho_fisico . $nome_arquivo)) {
         die("Erro ao salvar o currículo.");
@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssssssssssss", $nome, $cpf, $rg, $data_nascimento, $endereco, $email, $telefone, $linkedin, $experiencia, $area_conhecimento, $disponibilidade, $curriculo_path);
 
     if ($stmt->execute()) {
-        echo "<script>alert('Formulário enviado com sucesso!'); window.location.href='http://localhost/AAP-CW_Cursos/TelaInicial/index.php';</script>";
+        echo "<script>alert('Formulário enviado com sucesso!'); window.location.href='http://localhost/AAP-5_3306/TelaInicial/index.php';</script>";
     } else {
         echo "Erro: " . $stmt->error;
     }
