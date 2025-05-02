@@ -1,0 +1,283 @@
+/*Estilo Geral*/
+:root {
+  --azul: #1A73E8;
+  --cinza-claro: #F1F3F4;
+  --cinza-escuro: #202124;
+  --amarelo: #FFB400;
+}
+
+h2.titulo {
+  color: #202124;
+  font-size: 34px;
+  text-align: center;
+}
+
+h2.titulo span {
+  color: #1A73E8;
+}
+
+.btn-cursos button {
+  padding: 10px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: #1A73E8;
+  color: var(--cinza-claro);
+  border: 0;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.btn-cursos button:hover {
+  box-shadow: 0px 0px 8px var(--amarelo);
+  color: var(--amarelo);
+}
+
+/* Estilo do topo do site*/
+
+section.topo-do-site {
+    padding: 40px 0.2%;
+  }
+
+  section.topo-do-site .flex {
+    align-items: center;
+    justify-content: center;
+    gap: 70px;
+  }
+
+  .topo-do-site h1 {
+    color: #202124;
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  .topo-do-site .txt-topo-site p {
+    color: #202124;
+    margin: 40px 0;
+  }
+
+  .topo-do-site .img-topo-site img {
+    position: relative;
+    animation: flutuar 2s ease-in-out infinite alternate;
+  }
+
+  .flex{
+    display: flex;
+  }
+
+  @keyframes flutuar {
+    0% {
+      top: 0;
+    }
+    100% {
+      top: 30px;
+    }
+  }
+  /* Estilo das especialidades*/
+
+  section.especialidades {
+    padding: 40px 4%;
+  }
+  section.especialidades .flex {
+    gap: 60px;
+  }
+
+  .especialidades .especialidades-box {
+    color: #202124;
+    padding: 40px;
+    border-radius: 20px;
+    margin-top: 45px;
+    transition: 0.2s;
+  }
+
+  .especialidades .especialidades-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 8px #1A73E8;
+  }
+
+  .especialidades .especialidades-box i {
+    font-size: 66px;
+    color: #1A73E8;
+  }
+  .especialidades .especialidades-box h3 {
+    font-size: 28px;
+    margin: 15px 0;
+  }
+
+  /* ESTILO DO SOBRE */
+
+  section.sobre {
+    padding: 40px 4%;
+  }
+
+  section.sobre .flex {
+    align-items: center;
+    gap: 60px;
+  }
+
+  .sobre .txt-sobre {
+    color: #202124;
+  }
+
+  .sobre .txt-sobre h2 {
+    font-size: 40px;
+    line-height: 40px;
+    margin-bottom: 30px;
+  }
+
+  .sobre .txt-sobre h2 span {
+    color: #1A73E8;
+    display: block;
+  }
+
+  .sobre .txt-sobre p {
+    margin: 20px 0;
+    text-align: justify;
+  }
+
+  .sobre .txt-sobre .btn-social button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background-color: #1A73E8;
+    font-size: 30px;
+    cursor: pointer;
+    margin: 0 4px;
+    transition: 0.2s;
+  }
+
+  .img-sobre img{
+    width: 400px;
+    height: 400px;
+  }
+
+  .btn-social button:hover {
+    box-shadow: 0px 0px 8px var(--amarelo);
+    transform: scale(1.05);
+    color: var(--amarelo);
+  }
+
+  @media (max-width: 660px) {
+    /* Estilo do cabeçalho*/
+
+    .btn-alunos {
+      order: 3; /* Coloca o botão depois do menu */
+    }
+
+    .menu-container {
+      display: flex;
+      align-content: center;
+    }
+
+    .logo {
+      order: 2; /* Coloca o logo depois do menu */
+    }
+
+    .menu-desktop {
+      order: 1; /* Coloca o menu antes do logo */
+      width: 4rem;
+      height: 4rem;
+      left: 5rem;
+      top: 5rem;
+    }
+
+    .menu-items {
+      display: none;
+      flex-direction: column;
+      background: #b3b3b3;
+      padding: 2rem;
+    }
+
+    .menu-toggle {
+      display: block;
+      transition: 0.2s;
+    }
+
+    .menu-toggle:hover {
+      color: #202124;
+      transform: scale(1.2);
+    }
+
+    .menu-items {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      background: #000;
+      width: 100%;
+      top: 9rem;
+      border-radius: 2px;
+      font-weight: 600;
+    }
+
+    .menu-items.show {
+      display: flex;
+      background: #eeeeeee3;
+      width: 7.5rem;
+      height: 12rem;
+      padding: 0rem;
+    }
+
+    .menu-items.show a {
+      color: #000;
+    }
+
+    .main-container {
+      margin-left: 0.2rem;
+      padding-left: 1rem;
+    }
+
+    .main-content a {
+      font-size: 20px;
+      margin: 0.5rem 0;
+    }
+
+    /*Estilo do Topo do Site*/
+
+    section.topo-do-site .flex {
+      flex-direction: column;
+    }
+
+    /* ESTILO DO SOBRE */
+
+    section.sobre .flex {
+      flex-direction: column-reverse;
+    }
+  }
+
+  @media (max-width: 460px) {
+    /* Estilo do cabeçalho*/
+    .btn-alunos a button {
+      padding: 10px 10px;
+    }
+
+    /* Estilo do topo do site*/
+    .img-topo-site img {
+      width: 20rem;
+    }
+
+    /* ESTILO DO SOBRE */
+    .img-sobre img {
+      width: 20rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    /* Estilo Geral*/
+    h2.titulo {
+      font-size: 32px;
+    }
+    /* Estilo do cabeçalho*/
+    .btn-alunos a button {
+      font-size: 15px;
+    }
+
+    /* Estilo do topo do site*/
+    .img-topo-site img {
+      width: 15rem;
+    }
+
+    /* ESTILO DO SOBRE */
+    .img-sobre img {
+      width: 15rem;
+    }
+  }

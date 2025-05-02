@@ -1,0 +1,139 @@
+/* Estilos gerais para o corpo da página */
+:root {
+    --azul: #1A73E8;
+    --cinza-claro: #F1F3F4;
+    --cinza-escuro: #202124;
+    --amarelo: #FFB400;
+  }
+
+body {
+    font-family: Arial, sans-serif; /* Define a fonte padrão */
+    margin: 0; /* Remove margem padrão */
+    padding: 0; /* Remove padding padrão */
+    background-size: cover; /* Cobre toda a área */
+    color: white; /* Define a cor do texto */
+    min-height: 100vh; /* Define a altura mínima */
+    display: flex; /* Usa flexbox */
+    flex-direction: column; /* Direção da flexbox em coluna */
+}
+
+/* Estilos para o cabeçalho */
+
+header {
+    background-color: var(--azul); /* Fundo preto semitransparente */
+    color: var(--cinza-claro); /* Cor do texto */
+    padding: 1em 0; /* Espaçamento interno */
+    text-align: center; /* Centraliza o texto */
+}
+
+header {
+    padding: 10px 4%;
+}
+
+header > .interface {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header a {
+    color: var(--cinza-claro);
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.2s;
+}
+
+header a:hover {
+    transform: scale(1.2);
+}
+
+header .btn-alunos a {
+    padding: 0.8rem 10px;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: var(--azul);
+    color: var(--cinza-claro);
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 0;
+    gap: 10px;
+}
+
+.nav-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 2rem 0 2rem;
+}
+
+.nav-botoes{
+    display: flex;
+}
+
+.nav-support li{
+    margin-left: 1rem;
+}
+
+.logo {
+    display: flex;
+    font-weight: bold;
+}
+
+.logo h1{
+    font-size: 1.5rem;
+    padding: 1.2rem 0 0 0; 
+    margin-left: 1.5rem;
+    color: var(--cinza-claro);
+}
+
+.planos-btn {
+    background-color: var(--azul);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+/* Estilos para o menu de navegação */
+nav ul {
+    list-style: none; /* Remove marcadores */
+    padding: 0; /* Remove padding */
+}
+
+nav ul li {
+    display: inline; /* Exibe os itens em linha */
+    margin: 0 1em; /* Define margem entre os itens */
+}
+
+nav ul li a {
+    color: white; /* Cor do texto */
+    text-decoration: none; /* Remove sublinhado */
+}
+
+/* Estilos para a área principal */
+main {
+    background-color: var(--cinza-claro);
+    flex: 1; /* Flex cresce para preencher o espaço disponível */
+    padding: 2em; /* Espaçamento interno */
+    display: flex; /* Usa flexbox */
+    flex-direction: column; /* Direção da flexbox em coluna */
+    gap: 2em; /* Adiciona espaçamento entre as seções */
+}
+
+/* Estilos para o rodapé */
+footer {
+    background-color: var(--azul); /* Fundo preto semitransparente */
+    color: var(--cinza-claro); /* Cor do texto */
+    text-align: center; /* Centraliza o texto */
+    padding: 1em 0; /* Espaçamento interno */
+}

@@ -1,0 +1,97 @@
+:root {
+    --azul: #1A73E8;
+    --cinza-claro: #F1F3F4;
+    --cinza-escuro: #202124;
+    --amarelo: #FFB400;
+}  
+
+.faq-title{
+    display: flex;
+    margin: 4rem 0 3rem 0;
+    
+}
+
+.faq-title h1{
+    font-size: 2rem;
+}
+
+/* Estilos para os itens da FAQ */
+.faq-item { 
+    padding: 1em; /* Espaçamento interno */
+    border-radius: 8px; /* Bordas arredondadas */
+    margin-bottom: 1em; /* Margem inferior */
+    border: 1px solid var(--azul); /* Borda cinza */
+}
+
+/* Estilos para as perguntas da FAQ */
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    background: none; /* Sem fundo */
+    border: none; /* Sem borda */
+    font-size: 1.2em; /* Tamanho da fonte */
+    font-weight: bold; /* Texto em negrito */
+    text-align: left; /* Alinha o texto à esquerda */
+    width: 100%; /* Largura total */
+    padding: 0.5em 0; /* Espaçamento interno */
+    cursor: pointer; /* Cursor de ponteiro */
+}
+
+.faq-question i{
+    color: var(--azul);
+}
+
+/* Estilos para as respostas da FAQ */
+.faq-answer {
+    display: none; /* Esconde por padrão */
+    padding: 0.5em 0; /* Espaçamento interno */
+}
+
+#central{
+    display: flex;
+    flex-direction: column;
+    margin-top: 4rem;
+}
+
+.central-header h1{
+    margin-bottom: 1rem;
+}
+
+.central-header a{
+    text-decoration: none;
+    color: var(--azul);
+}
+
+.central-main{
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+}
+
+.central-subtitle h2{
+    margin-bottom: 2rem;
+}
+
+.central-buttons{
+    display: flex;
+}
+
+.central-button{  
+    margin-right: 1rem;
+}
+
+.central-button a{
+    display: flex;
+    justify-content: space-between;
+    background: none; /* Sem fundo */
+    border: none; /* Sem borda */
+    font-size: 1.2em; /* Tamanho da fonte */
+    font-weight: bold; /* Texto em negrito */
+    text-align: left; /* Alinha o texto à esquerda */
+    width: 100%; /* Largura total */
+    padding: 1em; /* Espaçamento interno */
+    cursor: pointer; /* Cursor de ponteiro */
+    color: var(--cinza-escuro); /* Cor branco */
+    text-decoration: none;
+    border-radius: 8px; /* Bordas arredondadas */
+    border: 1px solid var(--azul); /* Borda cinza */
+}

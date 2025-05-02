@@ -1,0 +1,168 @@
+/*Estilo Geral*/
+:root {
+    --azul: #1A73E8;
+    --cinza-claro: #F1F3F4;
+    --cinza-escuro: #202124;
+    --amarelo: #FFB400;
+}
+
+ /* Container principal */
+ .container {
+     display: flex; /* Flexbox */
+     justify-content: center; /* Centraliza horizontalmente */
+     width: 100%; /* Largura total */
+     margin-top: 0; /* Margem superior */
+ }
+
+ /* Cartão de login */
+ .card {
+     background-color: #ffffff80; /* Fundo branco semitransparente */
+     padding: 30px; /* Espaçamento interno */
+     border-radius: 4%; /* Bordas arredondadas */
+     box-shadow: 3px 3px 1px 0px var(--cinza-escuro); /* Sombra */
+ }
+
+ /* Estilo para o título */
+ h1 {
+     text-align: center; /* Centraliza o texto */
+     margin-bottom: 20px; /* Margem inferior */
+     color: var(--azul); /* Cor do texto */
+ }
+
+ /* Estilo para os inputs dentro do label-float */
+ .label-float input {
+     width: 100%; /* Largura total */
+     padding: 5px 5px; /* Espaçamento interno */
+     display: inline-block; /* Exibição em linha */
+     border: 0; /* Remove borda */
+     border-bottom: 2px solid var(--azul); /* Borda inferior */
+     background-color: transparent; /* Fundo transparente */
+     outline: none; /* Remove outline */
+     min-width: 180px; /* Largura mínima */
+     font-size: 16px; /* Tamanho da fonte */
+     transition: all .3s ease-out; /* Transição suave */
+     border-radius: 0; /* Remove bordas arredondadas */
+ }
+
+ /* Container para os inputs e labels flutuantes */
+ .label-float {
+     position: relative; /* Posicionamento relativo */
+     padding-top: 13px; /* Espaçamento superior */
+     margin-top: 5%; /* Margem superior */
+     margin-bottom: 5%; /* Margem inferior */
+ }
+
+ /* Estilo para os inputs focados */
+ .label-float input:focus {
+     border-bottom: 4px solid var(--azul); /* Borda inferior quando focado */
+ }
+
+ /* Estilo para os labels */
+ .label-float label {
+     color: var(--cinza-escuro); /* Cor do texto */
+     pointer-events: none; /* Desabilita eventos do mouse */
+     position: absolute; /* Posicionamento absoluto */
+     top: 0; /* Alinha ao topo */
+     left: 0; /* Alinha à esquerda */
+     margin-top: 13px; /* Margem superior */
+     transition: all .3s ease-out; /* Transição suave */
+ }
+
+ /* Estilo para labels quando o input está focado ou preenchido */
+ .label-float input:focus + label,
+ .label-float input:valid + label {
+     font-size: 13px; /* Tamanho da fonte */
+     margin-top: 0; /* Remove margem superior */
+     color: var(--azul); /* Cor do texto */
+ }
+
+ /* Estilo para o botão de submit */
+ .inputSubmit {
+     background-color: transparent; /* Fundo transparente */
+     border-color: var(--azul); /* Cor da borda */
+     color: var(--azul); /* Cor do texto */
+     padding: 7px; /* Espaçamento interno */
+     font-weight: bold; /* Texto em negrito */
+     font-size: 12pt; /* Tamanho da fonte */
+     margin-top: 20px; /* Margem superior */
+     border-radius: 4px; /* Bordas arredondadas */
+     cursor: pointer; /* Cursor de ponteiro */
+     outline: none; /* Remove outline */
+     transition: all .4s ease-out; /* Transição suave */
+ }
+
+ /* Estilo para o botão de submit quando o mouse está sobre ele */
+ .inputSubmit:hover {
+     background-color: var(--azul); /* Fundo azul */
+     color: var(--cinza-claro); /* Cor do texto */
+ }
+
+ /* Container para centralizar conteúdo */
+ .justify-center {
+     display: flex; /* Flexbox */
+     justify-content: center; /* Centraliza horizontalmente */
+ }
+
+ /* Estilo para a linha horizontal */
+ hr {
+     margin-top: 10%; /* Margem superior */
+     margin-bottom: 10%; /* Margem inferior */
+     width: 60%; /* Largura */
+ }
+
+ /* Estilo para parágrafos */
+ .card p {
+     color: var(--azul); /* Cor do texto */
+     font-size: 14pt; /* Tamanho da fonte */
+     text-align: center; /* Centraliza o texto */
+ }
+
+ /* Estilo para links */
+ a {
+     color: var(--cinza-escuro); /* Cor do texto */
+     font-weight: bold; /* Texto em negrito */
+     text-decoration: none; /* Remove sublinhado */
+     transition: all .3s ease-out; /* Transição suave */
+ }
+
+ /* Estilo para links quando o mouse está sobre eles */
+ a:hover {
+     color: var(--amarelo); /* Cor do texto */
+ }
+ 
+ .mostrar-senha {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    cursor: pointer;
+    color: var(--azul);
+}
+
+.label-float {
+    position: relative;
+}
+
+.forca-senha {
+    font-size: 0.9em;
+    margin-top: 4px;
+}
+
+.fraca {
+    color: red;
+}
+
+.media {
+    color: orange;
+}
+
+.forte {
+    color: green;
+}
+
+#msgError .erro {
+    color: #e63946;
+    padding: 10px;
+    border-radius: 8px;
+    display: inline-block;
+    opacity: 1;
+}

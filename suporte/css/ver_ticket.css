@@ -1,0 +1,93 @@
+.ticket-detalhes {
+    max-width: 800px;
+    margin: 0px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-detalhes h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.ticket-detalhes p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.ticket-mensagem, .ticket-respostas {
+    margin-top: 30px;
+}
+
+.ticket-mensagem h2, .ticket-respostas h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.resposta-item {
+    background-color: #f7f7f7;
+    padding: 15px;
+    border-left: 5px solid #007bff;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.resposta-item p {
+    margin: 0 0 5px 0;
+}
+
+.resposta-item small {
+    display: block;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.btn-voltar {
+    display: inline-block;
+    margin-top: 30px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-voltar:hover {
+    background-color: #0056b3;
+}
+
+/* Formulário de resposta */
+.responder-form {
+    margin-top: 40px;
+}
+
+.responder-form textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: vertical;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.responder-form button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.responder-form button:hover {
+    background-color: #218838;
+}

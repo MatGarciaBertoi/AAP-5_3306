@@ -1,0 +1,130 @@
+/*Estilo Geral*/
+:root {
+    --azul: #1A73E8;
+    --cinza-claro: #F1F3F4;
+    --cinza-escuro: #202124;
+    --amarelo: #FFB400;
+}
+
+.container-main{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-image img{
+    margin-right: 10rem;
+    width: 390px;
+    height: 600px;
+}
+
+.container-card {
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 3rem;
+}
+
+.card {
+    padding: 30px;
+    width: 450px;
+}
+
+.card h1 {
+    text-align: left;
+    margin-bottom: 20px;
+    color: var(--cinza-escuro);
+    font-size: 2.5rem;
+}
+
+.inputSubmit {
+    background-color: var(--azul);
+    padding: 10px;
+    font-weight: bold;
+    font-size: 12pt;
+    margin-top: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.4s;
+}
+
+.justify-center {
+    display: flex;
+    justify-content: center;
+}
+
+p {
+    color: var(--cinza-escuro);
+    font-size: 14pt;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.card a {
+    color: var(--cinza-claro);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.card a:hover {
+    box-shadow: 0px 0px 8px var(--azul);
+    color: var(--amarelo);
+    transform: scale(1.1);
+}
+
+.error-msg {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.info-section {
+    padding: 3rem 2rem;
+    background-color: var(--cinza-claro);
+    color: var(--cinza-escuro);
+    text-align: center;
+}
+
+.info-section h2 {
+    font-size: 2.5rem;
+    color: var(--cinza-escuro);
+    margin-bottom: 2rem;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.info-card {
+    background-color: transparent;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+    text-align: left;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.info-card h3 {
+    font-size: 1.3rem;
+    color: var(--azul);
+    margin-bottom: 0.5rem;
+}
+
+.info-card p {
+    font-size: 13pt;
+    line-height: 1.5;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.info-block p {
+    font-size: 14pt;
+    line-height: 1.6;
+    text-align: center;
+}

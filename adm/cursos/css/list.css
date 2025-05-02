@@ -1,0 +1,78 @@
+/* Cores e variáveis */
+:root {
+    --primary-color: #1A73E8;
+    --secondary-color: #F1F3F4;
+    --text-color: #202124;
+    --accent-color: #FFB400;
+    --border-color: #ccc;
+  }
+
+.course-list h2 {
+    margin-top: 2rem;
+    color: #333;
+    border-bottom: 2px solid #2980b9;
+    padding-bottom: 0.5rem;
+}
+.course-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.course-card h3 {
+    margin-top: 0.5rem;
+}
+
+.course-actions {
+    margin-top: 10px;
+}
+
+.course-actions .btn-edit,
+.course-actions .btn-delete {
+    padding: 6px 12px;
+    margin-right: 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn-edit {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-delete {
+    background-color: #f44336;
+    color: white;
+}
+
+.alerta-sucesso, .alerta-erro {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.alerta-sucesso {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alerta-erro {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.alerta-sucesso,
+.alerta-erro {
+    transition: opacity 0.5s ease;
+}
+
+.alerta-sucesso.hidden,
+.alerta-erro.hidden {
+    opacity: 0;
+    visibility: hidden;
+}

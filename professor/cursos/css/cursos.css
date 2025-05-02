@@ -1,0 +1,118 @@
+/* Título e subtítulo */
+  .welcome-text {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .welcome-text h1 {
+    font-size: 2.2rem;
+    color: #2c3e50;
+  }
+  .welcome-text p {
+    color: #555;
+    font-size: 1.1rem;
+  }
+  
+  /* Seção da lista de cursos */
+  .list-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  /* Cartão de curso */
+  .course-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease;
+  }
+  .course-card:hover {
+    transform: scale(1.01);
+  }
+  .course-card img {
+    width: 200px;
+    height: auto;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+  }
+  .course-card h3 {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: #34495e;
+  }
+  .course-card p {
+    margin: 0.3rem 0;
+    color: #666;
+  }
+  
+  /* Botões */
+  .course-card .btn-publicar,
+  .course-card .btn-excluir {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-publicar {
+    background-color: #2980b9;
+  }
+  .btn-publicar:hover {
+    background-color: #2471a3;
+  }
+  
+  .btn-excluir {
+    background-color: #e74c3c;
+  }
+  .btn-excluir:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Alerta de mensagem */
+  .alerta {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .alerta.sucesso {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  .alerta.erro {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+
+  
+.search-bar {
+    max-width: 400px;
+    margin: 0 auto 2rem auto;
+    text-align: center;
+  }
+  
+  .search-bar input {
+    width: 100%;
+    padding: 0.7rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: border-color 0.3s ease;
+  }
+  
+  .search-bar input:focus {
+    border-color: #2980b9;
+  }

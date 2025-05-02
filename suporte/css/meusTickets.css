@@ -1,0 +1,78 @@
+.search-bar {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar input {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 3rem;
+}
+
+.meus-tickets {
+    padding: 2rem;
+}
+
+.filtros {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.filtro-btn {
+    padding: 0.5rem 1.5rem;
+    background-color: #eee;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filtro-btn.ativo {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.lista-tickets {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ticket-item {
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fafafa;
+}
+
+.ticket-item h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.ticket-status {
+    font-weight: bold;
+}
+
+.ticket-item h1, p{
+    color: #333;
+}
+
+.btn-ver-mais {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-ver-mais:hover {
+    background: #0056b3;
+}

@@ -1,0 +1,85 @@
+:root {
+    --azul: #1A73E8;
+    --cinza-claro: #F1F3F4;
+    --cinza-escuro: #202124;
+    --amarelo: #FFB400;
+  }
+
+.search-bar {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar input {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 3rem;
+}
+
+.articles-section {
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* SEMPRE 2 colunas */
+    gap: 20px;
+}
+
+.article-card {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.article-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.article-card h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.article-card h3 i {
+    margin-right: 10px;
+    color: #007bff;
+    font-size: 1.8rem;
+}
+
+.article-card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.article-card ul li {
+    margin-bottom: 10px;
+}
+
+.article-card ul li a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.article-card ul li a:hover {
+    color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .articles-grid {
+        grid-template-columns: 1fr; /* Em telas pequenas, só 1 coluna */
+    }
+}

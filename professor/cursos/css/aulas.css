@@ -1,0 +1,180 @@
+/* Estilo geral */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fdfdfd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Título */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Botão principal */
+.btn-voltar, .btn-padrao {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 5px 20px 0;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-voltar:hover, .btn-padrao:hover {
+    background-color: #0056b3;
+}
+
+/* Barra de pesquisa */
+.pesquisa-aulas {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.pesquisa-aulas input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* Lista de aulas */
+.aulas-lista {
+    list-style: none;
+    padding: 0;
+}
+
+.aula-item {
+    border: 1px solid #ddd;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background: #fff;
+    position: relative;
+}
+
+.aula-item h2 {
+    margin-top: 0;
+}
+
+.aula-item small {
+    font-weight: normal;
+    color: #555;
+}
+
+.aula-item p {
+    margin: 8px 0;
+}
+
+/* Botões dentro da aula */
+.aula-acoes {
+    margin-top: 15px;
+}
+
+.aula-acoes a {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-right: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.aula-acoes .editar {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.aula-acoes .editar:hover {
+    background-color: #e0a800;
+}
+
+.aula-acoes .excluir {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.aula-acoes .excluir:hover {
+    background-color: #bd2130;
+}
+
+/* Mensagens */
+.mensagem.sucesso {
+    color: #155724;
+    background-color: #d4edda;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.mensagem.erro {
+    color: #721c24;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.aula-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease;
+  }
+  .aula-item:hover {
+    transform: scale(1.01);
+  }
+  .aula-item img {
+    width: 200px;
+    height: auto;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+  }
+  .aula-item h3 {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: #34495e;
+  }
+  .aula-item p {
+    margin: 0.3rem 0;
+    color: #666;
+  }
+  
+  /* Botões */
+  .aula-item .btn-editar,
+  .aula-item .btn-excluir {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-editar {
+    background-color: #2980b9;
+  }
+  .btn-editar:hover {
+    background-color: #2471a3;
+  }
+  
+  .btn-excluir {
+    background-color: #e74c3c;
+  }
+  .btn-excluir:hover {
+    background-color: #c0392b;
+  }

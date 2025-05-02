@@ -1,0 +1,228 @@
+:root {
+    --azul: #1A73E8;
+    --cinza-claro: #F1F3F4;
+    --cinza-escuro: #202124;
+    --amarelo: #FFB400;
+  }
+  
+  html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--cinza-claro);
+    color: var(--cinza-escuro);
+  }
+  
+  .container {
+    flex: 1; /* Ocupa o espaço restante entre header e footer */
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 5rem;
+  }
+  
+  header {
+    background: linear-gradient(90deg, #000000, var(--azul));
+    color: var(--cinza-claro);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .logo img {
+    height: 60px;
+    width: auto;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .logo img:hover {
+    transform: rotate(360deg);
+  }
+  
+  .nav-main{
+    display: flex;
+  }
+  
+  .nav-main ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-main ul li {
+    margin: 0 15px;
+  }
+  
+  .nav-main ul li a {
+    display: inline-block;
+    color: var(--cinza-claro);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: 0.2s;
+  }
+  
+  .nav-main ul li a:hover {
+    transform: scale(1.2);
+  }
+  
+  .perfil-aluno-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    background-color: var(--cinza-claro);
+    padding: 8px 12px;
+    border-radius: 30px;
+    transition: 0.2s;
+  }
+  
+  .perfil-aluno-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 8px var(--azul);
+  }
+  
+  .icone-perfil {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+  
+  .perfil-opcoes {
+    background-color: var(--cinza-claro);
+    position: absolute;
+    top: 100px; /* ajusta conforme seu layout */
+    right: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 150px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    z-index: 100;
+  }
+  
+  .perfil-opcoes.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  
+  .perfil-opcoes a {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: var(--cinza-escuro);
+    font-size: 15px;
+    transition: 0.2s;
+  }
+  
+  .perfil-opcoes a:hover {
+    color: var(--azul);
+    transform: scale(1.1);
+  }
+  
+  .perfil-aluno-btn svg {
+    fill: var(--cinza-escuro);
+    transition: fill 0.3s ease;
+  }
+  
+  .perfil-aluno-btn:hover svg {
+    fill: var(--azul); /* muda para azul no hover */
+  }
+  
+  .main-content a{
+    color: var(--cinza-escuro);
+  }
+  
+  main {
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .waves {
+    position: relative;
+    width: 100%;
+    height: 100px; /* ou mais, se quiser mais espaço */
+    margin-top: 60px;
+  }
+  
+  .waves footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--cinza-claro);
+    padding: 10px 0;
+    z-index: 1001;
+  }
+  
+  /* Estilo para a seção de ondas */
+  section .wave {
+    position: absolute; /* Posicionamento absoluto */
+    bottom: 0; /* Alinha ao fundo */
+    left: 0; /* Alinha à esquerda */
+    width: 100%; /* Largura total */
+    height: 90px; /* Altura fixa */
+    background: url(../../../images/wave.png); /* Imagem de fundo */
+    filter: invert(32%) sepia(91%) saturate(3683%) hue-rotate(204deg) brightness(97%) contrast(101%);
+    background-size: 1000px 100px; /* Tamanho da imagem */
+  }
+  /* Animações das ondas */
+  section .wave.wave1 {
+    animation: animate 30s linear infinite; /* Animação contínua */
+    z-index: 1000; /* Camada superior */
+    opacity: 1; /* Opacidade total */
+    animation-delay: 0s; /* Sem atraso */
+    bottom: 0; /* Alinha ao fundo */
+  }
+  section .wave.wave2 {
+    animation: animate2 15s linear infinite; /* Animação contínua */
+    z-index: 999; /* Camada inferior à wave1 */
+    opacity: 0.5; /* Opacidade reduzida */
+    animation-delay: -5s; /* Atraso na animação */
+    bottom: 10px; /* Alinha 10px acima do fundo */
+  }
+  section .wave.wave3 {
+    animation: animate3 30s linear infinite; /* Animação contínua */
+    z-index: 997; /* Camada inferior à wave2 */
+    opacity: 0.7; /* Opacidade intermediária */
+    animation-delay: -2s; /* Atraso na animação */
+    bottom: 20px; /* Alinha 20px acima do fundo */
+  }
+  /* Animações */
+  @keyframes animate {
+    0% {background-position-x: 0;}
+    100% {background-position-x: 1000px;}
+  }
+  @keyframes animate2 {
+    0% {background-position-x: 0;}
+    100% {background-position-x: -1000px;}
+  }
+  @keyframes animate3 {
+    0% {background-position-x: 0;}
+    100% {background-position-x: 1000px;}
+  }
+  @keyframes animate4 {
+    0% {background-position-x: 0;}
+    100% {background-position-x: -1000px;}
+  }

@@ -1,0 +1,60 @@
+.planos-section {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.planos-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.plano-card {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 30px 20px;
+    width: 300px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.plano-card:hover {
+    transform: translateY(-10px);
+}
+
+.plano-card h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.plano-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.plano-card ul li {
+    margin-bottom: 10px;
+}
+
+.btn-assinar {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.btn-assinar:hover {
+    background-color: #0056b3;
+}
+
+/* Destaque para o plano intermediário */
+.plano-card.destaque {
+    border: 2px solid #007BFF;
+}

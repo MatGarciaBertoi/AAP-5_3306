@@ -1,0 +1,92 @@
+:root {
+    --azul: #1A73E8;
+    --cinza-claro: #F1F3F4;
+    --cinza-escuro: #202124;
+    --amarelo: #FFB400;
+  }
+
+.container h2 {
+    text-align: center;
+    color: #004080;
+    margin-bottom: 20px;
+}
+
+.detail-header p {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
+.detail-main ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.detail-main li {
+    margin-bottom: 12px;
+    padding: 10px;
+    border-left: 4px solid #007BFF;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+}
+
+.detail-main li strong {
+    display: inline-block;
+    width: 180px;
+    color: #222;
+}
+
+.detail-main a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.detail-main a:hover {
+    text-decoration: underline;
+}
+
+.detail-button button {
+    display: block;
+    margin: 20px auto 0 auto;
+    padding: 12px 24px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.detail-button button:hover {
+    background-color: #0056b3;
+}
+
+.btn-voltar {
+    background-color: #6c757d;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-voltar:hover {
+    background-color: #5a6268;
+    transform: scale(1.03);
+}
+
+.btn-voltar:active {
+    background-color: #545b62;
+}
+
+
+.btn-voltar a:hover {
+    background-color: #0056b3;
+}
