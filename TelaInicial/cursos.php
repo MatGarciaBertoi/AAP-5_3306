@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php
+session_start();
+include '../funcoes/conexao.php'; // Arquivo com a conexão ao banco
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -13,7 +16,7 @@
 
 <body>
     <div class="header-main">
-        <?php include 'partials/header.php'; ?> <!-- Inclui o header -->
+        <?php include 'partials/header.php'; ?>
     </div>
     <main>
         <div class="container">
@@ -25,60 +28,100 @@
                     <a href="planos.php" class="planos-btn">Veja os Planos</a>
                 </section>
 
-                <section class="courses">
-                    <div class="course-card">
-                        <h3>Curso de SEO</h3>
-                        <p>Otimização para mecanismos de busca e melhores práticas.</p>
-                    </div>
-                    <div class="course-card">
-                        <h3>Marketing de Conteúdo</h3>
-                        <p>Estratégias para engajar sua audiência e aumentar conversões.</p>
-                    </div>
-                    <div class="course-card">
-                        <h3>Marketing nas Redes Sociais</h3>
-                        <p>Planejamento e gestão de conteúdo para plataformas como Instagram, Facebook e Twitter.</p>
-                    </div>
-                    <div class="course-card">
-                        <h3>Email Marketing</h3>
-                        <p>Criação de campanhas de email para atrair e reter clientes.</p>
-                    </div>
-                    <div class="course-card">
-                        <h3>Copywriting</h3>
-                        <p>Escrita persuasiva para aumentar as vendas e o engajamento.</p>
-                    </div>
-                    <div class="course-card">
-                        <h3>Gestão de Tráfego Pago</h3>
-                        <p>Configuração de anúncios em Google Ads e redes sociais.</p>
-                    </div>
-                    <div class="course-card">
-                        <h3>Funil de Vendas</h3>
-                        <p>Desenvolvimento e otimização de funis de vendas para aumentar conversões.</p>
-                    </div>
-                    <div class="course-card">
-                        <h3>Google Analytics</h3>
-                        <p>Análise de dados para medir e otimizar o desempenho digital.</p>
-                    </div>
-                    <div class="course-card">
-                        <h3>Marketing de Afiliados</h3>
-                        <p>Estratégias para promover produtos de terceiros e ganhar comissões.</p>
-                    </div>
-                    <div class="course-card">
-                        <h3>Branding Digital</h3>
-                        <p>Construção e gestão de marcas no ambiente digital.</p>
-                    </div>
-                    <div class="course-card">
-                        <h3>Influência e Parcerias</h3>
-                        <p>Como trabalhar com influenciadores e criar parcerias estratégicas.</p>
-                    </div>
-                    <div class="course-card">
-                        <h3>Estratégias de Conversão</h3>
-                        <p>Técnicas para transformar visitantes em clientes fiéis.</p>
-                    </div>
+                <section class="filtros-cursos">
+                    <label for="filtroBusca">Buscar:</label>
+                    <input type="text" id="filtroBusca" placeholder="Digite o nome ou descrição...">
+                    <label for="filtroCategoria">Categoria:</label>
+                    <select id="filtroCategoria">
+                        <option value="todas">Todas</option>
+                        <option value="Marketing Digital">Marketing Digital</option>
+                        <option value="Vendas">Vendas</option>
+                        <option value="Negócios">Negócios</option>
+                    </select>
+
+                    <label for="filtroDificuldade">Dificuldade:</label>
+                    <select id="filtroDificuldade">
+                        <option value="todas">Todas</option>
+                        <option value="iniciante">Iniciante</option>
+                        <option value="intermediario">Intermediário</option>
+                        <option value="avancado">Avançado</option>
+                    </select>
+
                 </section>
+
+
+                <section class="courses">
+                    <?php
+                    $sql = "SELECT * FROM cursos";
+                    $result = $conexao->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while ($curso = $result->fetch_assoc()) {
+                            echo "<div class='course-card categoria-" . strtolower($curso['categoria']) . " dificuldade-" . strtolower($curso['dificuldade']) . "'>";
+
+                            // Imagem, se existir
+                            if (!empty($curso['imagem'])) {
+                                echo "<img src='../professor/cursos/funcoes/uploads/" . htmlspecialchars($curso['imagem']) . "' alt='Imagem do curso' class='course-img'>";
+                            }
+
+                            echo "<h3>" . htmlspecialchars($curso['nome']) . "</h3>";
+                            echo "<p class='course-desc'>" . htmlspecialchars($curso['descricao']) . "</p>";
+
+                            echo "<div class='course-meta'>";
+                            echo "<span class='categoria'>" . htmlspecialchars($curso['categoria']) . "</span>";
+
+                            $dificuldade = htmlspecialchars($curso['dificuldade']);
+                            echo "<span class='dificuldade $dificuldade'>" . ucfirst($dificuldade) . "</span>";
+                            echo "</div>"; // fecha .course-meta
+
+                            echo "</div>";
+                        }
+                    } else {
+                        echo "<p>Nenhum curso disponível no momento.</p>";
+                    }
+                    ?>
+                </section>
+
             </div>
         </div>
     </main>
-    <?php include 'partials/footer.php'; ?> <!-- Inclui o footer -->
+    <?php include 'partials/footer.php'; ?>
+
+    <script>
+        const filtroCategoria = document.getElementById('filtroCategoria');
+        const filtroDificuldade = document.getElementById('filtroDificuldade');
+        const filtroBusca = document.getElementById('filtroBusca');
+        const cards = document.querySelectorAll('.course-card');
+
+        function filtrarCursos() {
+            const categoriaSelecionada = filtroCategoria.value.toLowerCase();
+            const dificuldadeSelecionada = filtroDificuldade.value.toLowerCase();
+            const textoBusca = filtroBusca.value.toLowerCase();
+
+            cards.forEach(card => {
+                const categoriaClasse = card.classList.contains(`categoria-${categoriaSelecionada}`);
+                const dificuldadeClasse = card.classList.contains(`dificuldade-${dificuldadeSelecionada}`);
+
+                const mostrarCategoria = categoriaSelecionada === "todas" || categoriaClasse;
+                const mostrarDificuldade = dificuldadeSelecionada === "todas" || dificuldadeClasse;
+
+                const textoCard = card.textContent.toLowerCase();
+                const mostrarBusca = textoCard.includes(textoBusca);
+
+                if (mostrarCategoria && mostrarDificuldade && mostrarBusca) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        filtroCategoria.addEventListener('change', filtrarCursos);
+        filtroDificuldade.addEventListener('change', filtrarCursos);
+        filtroBusca.addEventListener('input', filtrarCursos);
+    </script>
+
+
 </body>
 
 </html>
