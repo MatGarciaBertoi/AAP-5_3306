@@ -44,6 +44,7 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Minhas Aulas - CW Cursos</title>
+    <link rel="shortcut icon" href="../../images/logotipocw.png" />
     <link rel="stylesheet" href="partials/style.css">
     <link rel="stylesheet" href="css/aulas.css">
 </head>

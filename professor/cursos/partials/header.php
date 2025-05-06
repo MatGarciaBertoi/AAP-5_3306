@@ -1,17 +1,35 @@
 <header>
     <div class="logo">
-        <a href="../../TelaInicial/index.php"><img src="../../images/logocwbranco_transparente.png" alt="Logo CW Cursos"></a>
+        <a href="../../TelaInicial/index.php">
+            <img src="../../images/logocwbranco_transparente.png" alt="Logo CW Cursos">
+        </a>
     </div>
     <nav class="nav-main">
         <ul>
             <li><a href="../index.php">Tela Inicial</a></li>
-            <li><a href="add_cursos.php">Criar Curso</a></li>
-            <li><a href="add_aula.php">Adicionar Aula</a></li>
-            <li><a href="meus_cursos.php">Meus Cursos</a></li>
-            <li><a href="minhas_aulas.php">Minhas Aulas</a></li>
+
+            <!-- Dropdown Cursos -->
+            <li class="dropdown">
+                <a href="#">Cursos ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="add_cursos.php">Criar Curso</a></li>
+                    <li><a href="meus_cursos.php">Meus Cursos</a></li>
+                </ul>
+            </li>
+
+            <!-- Dropdown Aulas -->
+            <li class="dropdown">
+                <a href="#">Aulas ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="add_aula.php">Adicionar Aula</a></li>
+                    <li><a href="minhas_aulas.php">Minhas Aulas</a></li>
+                </ul>
+            </li>
+
             <li><a href="../responder-perguntas.php">Responder Perguntas</a></li>
             <li><a href="../acompanhar-alunos.php">Acompanhar Alunos</a></li>
         </ul>
+
         <div class="btn-alunos">
             <div id="perfilAlunoBtn" class="perfil-aluno-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#333" viewBox="0 0 24 24">
@@ -45,6 +63,35 @@
             }
         });
     });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdowns = document.querySelectorAll(".dropdown");
+
+    dropdowns.forEach(dropdown => {
+      const trigger = dropdown.querySelector("a");
+
+      trigger.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        // Fecha outros dropdowns
+        dropdowns.forEach(d => {
+          if (d !== dropdown) d.classList.remove("open");
+        });
+
+        // Alterna o dropdown clicado
+        dropdown.classList.toggle("open");
+      });
+    });
+
+    // Fecha o dropdown se clicar fora
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".dropdown")) {
+        dropdowns.forEach(d => d.classList.remove("open"));
+      }
+    });
+  });
 </script>
 
 <!-- Chatra {literal} -->

@@ -5,10 +5,25 @@
     <nav class="nav-main">
         <ul>
             <li><a href="index.php">Tela Inicial</a></li>
-            <li><a href="cursos/add_cursos.php">Criar Curso</a></li>
-            <li><a href="cursos/add_aula.php">Adicionar Aula</a></li>
-            <li><a href="cursos/meus_cursos.php">Meus Cursos</a></li>
-            <li><a href="cursos/minhas_aulas.php">Minhas Aulas</a></li>
+
+            <!-- Dropdown Cursos -->
+            <li class="dropdown">
+                <a href="#">Cursos ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="cursos/add_cursos.php">Criar Curso</a></li>
+                    <li><a href="cursos/meus_cursos.php">Meus Cursos</a></li>
+                </ul>
+            </li>
+
+            <!-- Dropdown Aulas -->
+            <li class="dropdown">
+                <a href="#">Aulas ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="cursos/add_aula.php">Adicionar Aula</a></li>
+                    <li><a href="cursos/minhas_aulas.php">Minhas Aulas</a></li>
+                </ul>
+            </li>
+
             <li><a href="responder-perguntas.php">Responder Perguntas</a></li>
             <li><a href="acompanhar-alunos.php">Acompanhar Alunos</a></li>
         </ul>
@@ -45,6 +60,35 @@
             }
         });
     });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdowns = document.querySelectorAll(".dropdown");
+
+    dropdowns.forEach(dropdown => {
+      const trigger = dropdown.querySelector("a");
+
+      trigger.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        // Fecha outros dropdowns
+        dropdowns.forEach(d => {
+          if (d !== dropdown) d.classList.remove("open");
+        });
+
+        // Alterna o dropdown clicado
+        dropdown.classList.toggle("open");
+      });
+    });
+
+    // Fecha o dropdown se clicar fora
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".dropdown")) {
+        dropdowns.forEach(d => d.classList.remove("open"));
+      }
+    });
+  });
 </script>
 
 <!-- Chatra {literal} -->
