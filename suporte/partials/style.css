@@ -20,7 +20,7 @@ body {
 /* Estilos para o cabeçalho */
 
 header {
-    background-color: var(--azul); /* Fundo preto semitransparente */
+    background-color: var(--cinza-escuro); /* Fundo preto semitransparente */
     color: var(--cinza-claro); /* Cor do texto */
     padding: 1em 0; /* Espaçamento interno */
     text-align: center; /* Centraliza o texto */
@@ -98,7 +98,7 @@ header .btn-alunos a {
 }
 
 .planos-btn {
-    background-color: var(--azul);
+    background-color: var(--cinza-escuro);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -202,7 +202,7 @@ main {
 
 /* Estilos para o rodapé */
 footer {
-    background-color: var(--azul); /* Fundo preto semitransparente */
+    background-color: var(--cinza-escuro); /* Fundo preto semitransparente */
     color: var(--cinza-claro); /* Cor do texto */
     text-align: center; /* Centraliza o texto */
     padding: 1em 0; /* Espaçamento interno */

@@ -29,8 +29,6 @@ include '../funcoes/conexao.php'; // Arquivo com a conexão ao banco
                 </section>
 
                 <section class="filtros-cursos">
-                    <label for="filtroBusca">Buscar:</label>
-                    <input type="text" id="filtroBusca" placeholder="Digite o nome ou descrição...">
                     <label for="filtroCategoria">Categoria:</label>
                     <select id="filtroCategoria">
                         <option value="todas">Todas</option>
