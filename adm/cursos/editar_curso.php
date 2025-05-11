@@ -16,10 +16,18 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['tipo'])) {
 $id_usuario = $_SESSION['id'];
 $tipo_usuario = $_SESSION['tipo'];
 
-// Buscar curso
-$sql = "SELECT * FROM cursos WHERE id = ? AND criado_por_id = ? AND tipo_criador = ?";
-$stmt = $conexao->prepare($sql);
-$stmt->bind_param("iis", $id_curso, $id_usuario, $tipo_usuario);
+if ($tipo_usuario === 'administrador') {
+  // Administrador pode editar qualquer curso
+  $sql = "SELECT * FROM cursos WHERE id = ?";
+  $stmt = $conexao->prepare($sql);
+  $stmt->bind_param("i", $id_curso);
+} else {
+  // Professor ou outro tipo de usuário só pode editar seus próprios cursos
+  $sql = "SELECT * FROM cursos WHERE id = ? AND criado_por_id = ? AND tipo_criador = ?";
+  $stmt = $conexao->prepare($sql);
+  $stmt->bind_param("iis", $id_curso, $id_usuario, $tipo_usuario);
+}
+
 $stmt->execute();
 $result = $stmt->get_result();
 

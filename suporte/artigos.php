@@ -34,7 +34,7 @@
                 <div class="article-card">
                     <h3><i class="bi bi-person-lock"></i> Acesso e Login</h3>
                     <ul>
-                        <li><a href="#">Como redefinir minha senha?</a></li>
+                        <li><a href="artigos/redefinir_senha.php">Como redefinir minha senha?</a></li>
                         <li><a href="#">Esqueci meu e-mail de acesso</a></li>
                         <li><a href="#">Como mudar minha senha?</a></li>
                     </ul>

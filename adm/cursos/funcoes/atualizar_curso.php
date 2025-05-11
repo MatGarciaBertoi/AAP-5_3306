@@ -11,8 +11,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $imagem_atual = $_POST['imagem_atual'];
 
   // Verifica se o curso é do usuário
-  $stmt = $conexao->prepare("SELECT * FROM cursos WHERE id = ? AND criado_por_id = ? AND tipo_criador = ?");
-  $stmt->bind_param("iis", $id, $_SESSION['id'], $_SESSION['tipo']);
+  if ($_SESSION['tipo'] === 'administrador') {
+    // Administrador pode editar qualquer curso
+    $stmt = $conexao->prepare("SELECT * FROM cursos WHERE id = ?");
+    $stmt->bind_param("i", $id);
+  } else {
+    // Outros só podem editar os próprios cursos
+    $stmt = $conexao->prepare("SELECT * FROM cursos WHERE id = ? AND criado_por_id = ? AND tipo_criador = ?");
+    $stmt->bind_param("iis", $id, $_SESSION['id'], $_SESSION['tipo']);
+  }
+
   $stmt->execute();
   $res = $stmt->get_result();
 

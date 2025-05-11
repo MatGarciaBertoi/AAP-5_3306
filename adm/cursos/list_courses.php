@@ -18,12 +18,17 @@ if (!empty($termoBusca)) {
 $sql_admin .= " ORDER BY data_criacao DESC";
 $result_admin = $conexao->query($sql_admin);
 
-// Consulta: cursos dos DEMAIS
-$sql_outros = "SELECT * FROM cursos WHERE tipo_criador != 'administrador'";
+// Consulta: cursos dos DEMAIS (ex: professores)
+$sql_outros = "
+    SELECT c.*, p.nome AS nome_criador
+    FROM cursos c
+    LEFT JOIN usuarios p ON c.tipo_criador = 'professor' AND c.criado_por_id = p.id
+    WHERE c.tipo_criador != 'administrador'
+";
 if (!empty($termoBusca)) {
-    $sql_outros .= " AND nome LIKE '$termoBuscaSQL'";
+    $sql_outros .= " AND c.nome LIKE '$termoBuscaSQL'";
 }
-$sql_outros .= " ORDER BY data_criacao DESC";
+$sql_outros .= " ORDER BY c.data_criacao DESC";
 $result_outros = $conexao->query($sql_outros);
 ?>
 
@@ -82,11 +87,18 @@ $result_outros = $conexao->query($sql_outros);
                     <h3><?php echo htmlspecialchars($curso['nome']); ?></h3>
                     <p><strong>Categoria:</strong> <?php echo htmlspecialchars($curso['categoria']); ?></p>
                     <p><strong>Dificuldade:</strong> <?php echo ucfirst($curso['dificuldade']); ?></p>
-                    <p><strong>Criado por:</strong> <?php echo ucfirst($curso['tipo_criador']); ?> (ID: <?php echo $curso['criado_por_id']; ?>)</p>
+                    <p><strong>Criado por:</strong> 
+                        <?php 
+                            echo ucfirst($curso['tipo_criador']); 
+                            echo isset($curso['nome_criador']) && !empty($curso['nome_criador']) 
+                                ? " - " . htmlspecialchars($curso['nome_criador']) 
+                                : " (ID: " . $curso['criado_por_id'] . ")";
+                        ?>
+                    </p>
                     <p><strong>Criado em:</strong> <?php echo date('d/m/Y H:i', strtotime($curso['data_criacao'])); ?></p>
                     <div class="course-actions">
                         <a href="editar_curso.php?id=<?php echo $curso['id']; ?>" class="btn-edit">Editar</a>
-                        <a href="funcoes/excluir_curso.php?php echo $curso['id']; ?>" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir este curso?');">Excluir</a>
+                        <a href="funcoes/excluir_curso.php?id=<?php echo $curso['id']; ?>" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir este curso?');">Excluir</a>
                     </div>
                 </div>
             <?php endwhile; ?>
@@ -108,5 +120,4 @@ $result_outros = $conexao->query($sql_outros);
     </script>
 
 </body>
-
 </html>

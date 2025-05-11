@@ -23,14 +23,14 @@
         <section class="list-section">
             <div class="course-card">
                 <h3>João Silva</h3>
-                <p>Curso: Programação Web do Zero</p>
+                <p>Curso: Planejamento Estratégico para Negócios Digitais</p>
                 <p>Progresso: 75%</p>
                 <button class="btn-publicar">Ver Detalhes</button>
             </div>
 
             <div class="course-card">
                 <h3>Maria Oliveira</h3>
-                <p>Curso: Design Gráfico Moderno</p>
+                <p>Curso: Fundamentos do Marketing Digital</p>
                 <p>Progresso: 40%</p>
                 <button class="btn-publicar">Ver Detalhes</button>
             </div>

@@ -1,0 +1,61 @@
+/* Estilos gerais para o corpo da página */
+:root {
+    --azul: #1A73E8;
+    --cinza-claro: #F1F3F4;
+    --cinza-escuro: #202124;
+    --amarelo: #FFB400;
+  }
+
+.article-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: Arial, sans-serif;
+}
+
+.article-content {
+    background-color: #fff;
+    color: var(--cinza-escuro);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.article-content h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.article-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.article-content ol {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.article-content li {
+    margin-bottom: 10px;
+}
+
+.article-main a{
+    color: var(--cinza-escuro);
+}
+
+.btn-suporte {
+    display: inline-block;
+    background-color: #0056b3;
+    color: var(--cinza-claro);
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-suporte:hover {
+    background-color: #003d80;
+}

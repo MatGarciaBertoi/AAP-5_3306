@@ -74,10 +74,6 @@ END;
 </head>
 
 <body>
-    <div class="back-button">
-        <a href="aluno/signin.php"><i class="bi bi-arrow-left-circle"></i></a>
-    </div>
-
     <div class="container">
         <div class="card">
             <h1>Recuperar Senha</h1>
