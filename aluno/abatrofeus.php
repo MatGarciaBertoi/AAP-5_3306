@@ -20,30 +20,11 @@
 
             <div class="gallery"><!-- Galeria de certificados -->
 
-                <div class="certificate"><!-- Contêiner de um certificado -->
-                    <img src="../images/Marketing_inflencia.png" alt="Certificado de Curso 1"><!-- Imagem do certificado -->
-                    <p>Curso 1 - Marketing de influência</p><!-- Descrição do curso -->
-                </div>
-
-                <div class="certificate">
-                    <img src="../images/makt_afiliados.png" alt="Certificado de Curso 2">
-                    <p>Curso 2 - Marketing de Afiliados</p>
-                </div>
-
                 <div class="certificate">
                     <img src="../images/seo_certificado.png" alt="Certificado de Curso 3">
-                    <p>Curso 3 - SEO</p>
+                    <p>Curso 1 - SEO</p>
                 </div>
 
-                <div class="certificate">
-                    <img src="../images/Estratégias de Conversão e Funil de Vendas.png" alt="Certificado de Curso 4">
-                    <p>Curso 4 - Estratégias de Conversão e Funil de Vendas</p>
-                </div>
-
-                <div class="certificate">
-                    <img src="../images/Estratégias de Publicidade Online.png" alt="Certificado de Curso 5">
-                    <p>Curso 5 - Estratégias de Publicidade Online</p>
-                </div>
             </div>
         </div>
     </div>

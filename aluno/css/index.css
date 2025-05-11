@@ -52,10 +52,17 @@
     color: #002d72;
 }
 
-.course img {
+ .course img {
     width: 100%;
-    border-radius: 10px;
-    margin-bottom: 10px;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
 }
 
 .course a {
@@ -72,6 +79,16 @@
 
 .course a:hover {
     background-color: #c2d6ff;
+}
+
+.buttons button{
+    margin-top: 12px;
+    background-color:#dc3545;
+    color:white;
+    border:none;
+    padding:8px 16px;
+    border-radius:6px;
+    cursor:pointer;
 }
 
 @keyframes fadeIn {

@@ -1,0 +1,73 @@
+:root {
+    --azul: #1A73E8;
+    --cinza-claro: #F1F3F4;
+    --cinza-escuro: #202124;
+    --amarelo: #FFB400;
+  }  
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    margin: 0;
+    padding: 0;
+}
+
+.curso-detalhes .container {
+    max-width: 850px;
+    margin: 60px auto;
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.curso-detalhes .container:hover {
+    transform: scale(1.01);
+}
+
+.curso-detalhes h2 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+    color: #343a40;
+    border-bottom: 2px solid var(--azul);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.img-curso {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.curso-detalhes p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.curso-detalhes p strong {
+    color: #333;
+}
+
+.btn-assinar {
+    background-color: var(--azul);
+    color: #fff;
+    padding: 14px 24px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 174, 255, 0.3);
+}
+
+.btn-assinar:hover {
+    transform: scale(1.05);
+}

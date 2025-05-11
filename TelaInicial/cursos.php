@@ -55,9 +55,9 @@ include '../funcoes/conexao.php'; // Arquivo com a conexão ao banco
 
                     if ($result->num_rows > 0) {
                         while ($curso = $result->fetch_assoc()) {
+                            echo "<a href='detalhes_curso.php?curso_id=" . $curso['id'] . "' class='course-card-link'>";
                             echo "<div class='course-card categoria-" . strtolower($curso['categoria']) . " dificuldade-" . strtolower($curso['dificuldade']) . "'>";
 
-                            // Imagem, se existir
                             if (!empty($curso['imagem'])) {
                                 echo "<img src='../professor/cursos/funcoes/uploads/" . htmlspecialchars($curso['imagem']) . "' alt='Imagem do curso' class='course-img'>";
                             }
@@ -67,12 +67,12 @@ include '../funcoes/conexao.php'; // Arquivo com a conexão ao banco
 
                             echo "<div class='course-meta'>";
                             echo "<span class='categoria'>" . htmlspecialchars($curso['categoria']) . "</span>";
-
                             $dificuldade = htmlspecialchars($curso['dificuldade']);
                             echo "<span class='dificuldade $dificuldade'>" . ucfirst($dificuldade) . "</span>";
-                            echo "</div>"; // fecha .course-meta
+                            echo "</div>"; // .course-meta
 
                             echo "</div>";
+                            echo "</a>";
                         }
                     } else {
                         echo "<p>Nenhum curso disponível no momento.</p>";

@@ -13,9 +13,9 @@ $nome = $_SESSION['nome'];
 $usuario = $_SESSION['usuario'];
 
 // Busca os cursos que o aluno está inscrito
-$sql = "SELECT c.* FROM cursos c 
-        INNER JOIN cursos_aluno ca ON ca.curso_id = c.id 
-        WHERE ca.aluno_id = ?";
+$sql = "SELECT c.*, i.data_inscricao, i.id AS inscricao_id FROM cursos c 
+        INNER JOIN inscricoes i ON i.curso_id = c.id 
+        WHERE i.aluno_id = ?";
 $stmt = $conexao->prepare($sql);
 $stmt->bind_param("i", $aluno_id);
 $stmt->execute();
@@ -40,19 +40,29 @@ $result = $stmt->get_result();
     <div class="container">
         <main>
             <section class="welcome">
-                <h1>Bem-vindo, <?php echo htmlspecialchars($usuario); ?>!</h1> <!-- Mostra o nome do usuário logado -->
-                <p>Aqui você encontrará todas as informações sobre seus cursos, materiais e suporte.</p>
+                <h1>Bem-vindo, <?= htmlspecialchars($usuario); ?>!</h1>
+                <p>Aqui você encontrará todos os cursos que está matriculado.</p>
             </section>
+
             <section class="content">
                 <h2>Seus Cursos</h2>
                 <div class="courses">
                     <?php if ($result->num_rows > 0): ?>
                         <?php while ($curso = $result->fetch_assoc()): ?>
                             <div class="course">
-                                <h3><?php echo htmlspecialchars($curso['nome']); ?></h3>
-                                <img src="../images/<?php echo htmlspecialchars($curso['imagem']); ?>" alt="Imagem do curso">
-                                <p><?php echo htmlspecialchars($curso['descricao']); ?></p>
-                                <a href="abacursos/abacursos.php?curso_id=<?php echo $curso['id']; ?>">Acessar</a>
+                                <h3><?= htmlspecialchars($curso['nome']); ?></h3>
+                                <?php if (!empty($curso['imagem'])): ?>
+                                    <img src="../professor/cursos/funcoes/uploads/<?= htmlspecialchars($curso['imagem']); ?>" alt="Imagem do curso">
+                                <?php endif; ?>
+                                <p><?= htmlspecialchars($curso['descricao']); ?></p>
+                                <p><strong>Inscrito em:</strong> <?= date('d/m/Y H:i', strtotime($curso['data_inscricao'])); ?></p>
+                                <div class="buttons">
+                                    <a href="abacursos/abacursos.php?curso_id=<?= $curso['id']; ?>">Acessar</a>
+                                    <form action="funcoes/cancelar_inscricao.php" method="POST" onsubmit="return confirm('Tem certeza que deseja cancelar sua inscrição neste curso?');" style="margin-top:10px;">
+                                        <input type="hidden" name="inscricao_id" value="<?= $curso['inscricao_id']; ?>">
+                                        <button type="submit">Cancelar Inscrição</button>
+                                    </form>
+                                </div>
                             </div>
                         <?php endwhile; ?>
                     <?php else: ?>

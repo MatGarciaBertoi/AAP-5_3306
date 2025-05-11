@@ -67,6 +67,13 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.course-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+
 .course-card h3 {
     color: var(--azul);
     font-weight: 600;
@@ -156,4 +163,3 @@
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-
