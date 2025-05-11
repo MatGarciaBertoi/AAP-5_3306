@@ -30,7 +30,7 @@
                                 <li>Material de apoio</li>
                                 <li>Certificados digitais</li>
                             </ul>
-                            <a href="#" class="btn-assinar">Assinar</a>
+                            <a href="assinar_plano.php?plano=Essencial" class="btn-assinar">Assinar</a>
                         </div>
 
                         <div class="plano-card destaque">
@@ -41,7 +41,7 @@
                                 <li>Webinars exclusivos</li>
                                 <li>Suporte prioritário</li>
                             </ul>
-                            <a href="#" class="btn-assinar">Assinar</a>
+                            <a href="assinar_plano.php?plano=Profissional" class="btn-assinar">Assinar</a>
                         </div>
 
                         <div class="plano-card">
@@ -53,7 +53,7 @@
                                 <li>Consultoria personalizada</li>
                                 <li>Acesso antecipado a novos cursos</li>
                             </ul>
-                            <a href="#" class="btn-assinar">Assinar</a>
+                            <a href="assinar_plano.php?plano=Empreendedor" class="btn-assinar">Assinar</a>
                         </div>
 
                     </div>

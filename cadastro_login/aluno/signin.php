@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
             $_SESSION['id'] = $user['id'];
             $_SESSION['nome'] = $user['nome'];
             $_SESSION['usuario'] = $user['usuario'];
+            $_SESSION['email'] = $user['email']; // <-- ESTA LINHA FOI ADICIONADA
             $_SESSION['tipo'] = $user['tipo'];
             $_SESSION['status'] = $user['status'];
 

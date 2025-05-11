@@ -2,14 +2,26 @@
 session_start();
 include_once('../funcoes/conexao.php');
 
-// Verifica se o usuário está logado
-if (!isset($_SESSION['usuario'])) {
-    header('Location: signin.html'); // Redireciona para a página de login se não estiver logado
+// Verifica se o usuário está logado e se é aluno
+if (!isset($_SESSION['id']) || $_SESSION['tipo'] !== 'aluno') {
+    header('Location: http://localhost/AAP-CW_Cursos/cadastro_login/aluno/signin.php');
     exit();
 }
 
-$usuario = $_SESSION['usuario']; // Recupera o nome do usuário
+$aluno_id = $_SESSION['id'];
+$nome = $_SESSION['nome'];
+$usuario = $_SESSION['usuario'];
+
+// Busca os cursos que o aluno está inscrito
+$sql = "SELECT c.* FROM cursos c 
+        INNER JOIN cursos_aluno ca ON ca.curso_id = c.id 
+        WHERE ca.aluno_id = ?";
+$stmt = $conexao->prepare($sql);
+$stmt->bind_param("i", $aluno_id);
+$stmt->execute();
+$result = $stmt->get_result();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -34,18 +46,18 @@ $usuario = $_SESSION['usuario']; // Recupera o nome do usuário
             <section class="content">
                 <h2>Seus Cursos</h2>
                 <div class="courses">
-                    <div class="course">
-                        <h3>SEO</h3>
-                        <img src="../images/seoavançado.png" alt="Imagem do curso SEO">
-                        <p>Aprenda as melhores práticas de otimização para motores de busca.</p>
-                        <a href="abacursos/abacursos.php">Acessar</a>
-                    </div>
-                    <div class="course">
-                        <h3>Curso de Marketing de Redes Sociais</h3>
-                        <img src="../images/cursodeMidiasDigitais_curso.png" alt="Imagem do curso de Marketing de Redes Sociais">
-                        <p>Crie conteúdo que engaja e converte.</p>
-                        <a href="abacursos/abacursos.php">Acessar</a>
-                    </div>
+                    <?php if ($result->num_rows > 0): ?>
+                        <?php while ($curso = $result->fetch_assoc()): ?>
+                            <div class="course">
+                                <h3><?php echo htmlspecialchars($curso['nome']); ?></h3>
+                                <img src="../images/<?php echo htmlspecialchars($curso['imagem']); ?>" alt="Imagem do curso">
+                                <p><?php echo htmlspecialchars($curso['descricao']); ?></p>
+                                <a href="abacursos/abacursos.php?curso_id=<?php echo $curso['id']; ?>">Acessar</a>
+                            </div>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <p>Você ainda não está inscrito em nenhum curso.</p>
+                    <?php endif; ?>
                 </div>
             </section>
         </main>
