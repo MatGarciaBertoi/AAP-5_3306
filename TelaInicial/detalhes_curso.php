@@ -1,9 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION['id']) || $_SESSION['tipo'] !== 'aluno') {
-    header('Location: http://localhost/AAP-CW_Cursos/cadastro_login/aluno/signin.php');
-    exit;
-}
 
 require_once '../funcoes/conexao.php';
 
