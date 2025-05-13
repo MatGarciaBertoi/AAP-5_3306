@@ -116,7 +116,7 @@ if (isset($_POST['submit'])) {
 
 
                         <div class="label-float">
-                            <input type="password" name="senha" id="senha" placeholder=" " required />
+                            <input type="password" name="senha" id="senha" placeholder=" " maxlength="15" required />
                             <label id="labelSenha" for="senha">Senha</label>
                             <span class="mostrar-senha" onclick="toggleSenha('senha', this)">
                                 <i class="bi bi-eye" aria-hidden="true"></i>
@@ -125,7 +125,7 @@ if (isset($_POST['submit'])) {
                         </div>
 
                         <div class="label-float">
-                            <input type="password" name="confirmSenha" id="confirmSenha" placeholder=" " required />
+                            <input type="password" name="confirmSenha" id="confirmSenha" placeholder=" " maxlength="15" required />
                             <label id="labelConfirmSenha" for="confirmSenha">Confirmar Senha</label>
                             <span class="mostrar-senha" onclick="toggleSenha('confirmSenha', this)">
                                 <i class="bi bi-eye" aria-hidden="true"></i>

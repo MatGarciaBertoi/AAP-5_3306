@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 
                         <!-- Campo de senha com label flutuante -->
                         <div class="label-float">
-                            <input type="password" name="senha" id="senha" placeholder=" " required />
+                            <input type="password" name="senha" id="senha" placeholder=" " maxlength="15" required />
                             <label id="senhaLabel" for="senha">Senha</label>
                             <span class="mostrar-senha" onclick="toggleSenha('senha', this)">
                                 <i class="bi bi-eye" aria-hidden="true"></i>
