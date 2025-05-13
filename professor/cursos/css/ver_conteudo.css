@@ -1,0 +1,97 @@
+.tabs { 
+    display: flex; 
+    gap: 10px; 
+    margin-bottom: 20px; 
+}
+
+.tabs button { 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    background: #f0f0f0; 
+    border: none; 
+}
+
+.tabs button.active { 
+    background-color: #3498db; 
+    color: white; 
+}
+
+.tab-content { 
+    display: none; 
+}
+
+.tab-content.active { 
+    display: block; 
+}
+
+.item-card { 
+    background: #fafafa; 
+    border: 1px solid #ccc; 
+    padding: 10px; 
+    margin-bottom: 10px; 
+    border-radius: 6px; 
+}
+
+#btnNovaAvaliacao {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+#btnNovaAvaliacao:hover {
+    background-color: #218838;
+}
+
+/* Estilizando o formulário de nova avaliação */
+#formContainer {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+    margin-top: 20px;
+}
+
+#formContainer.active {
+    max-height: 500px;
+    opacity: 1;
+}
+
+#formNovaAvaliacao {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+#formNovaAvaliacao input,
+#formNovaAvaliacao textarea,
+#formNovaAvaliacao select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 14px;
+}
+
+#formNovaAvaliacao button[type="submit"] {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#formNovaAvaliacao button[type="submit"]:hover {
+    background-color: #0056b3;
+}

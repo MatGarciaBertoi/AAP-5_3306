@@ -2,52 +2,34 @@
 session_start();
 require_once '../../../funcoes/conexao.php';
 
-if (!isset($_SESSION['id'], $_SESSION['tipo'])) {
-    $_SESSION['mensagem'] = 'Você precisa estar logado para acessar esta página.';
-    $_SESSION['mensagem_tipo'] = 'erro';
-    header('Location: ../../login.php');
-    exit;
+if (!isset($_SESSION['id']) || !isset($_SESSION['tipo'])) {
+    die("Acesso negado.");
 }
 
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    $_SESSION['mensagem'] = 'Aula inválida.';
-    $_SESSION['mensagem_tipo'] = 'erro';
-    header('Location: ../minhas_aulas.php');
-    exit;
+$aula_id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+
+// Buscar aula para saber o curso_id
+$sqlBusca = "SELECT curso_id FROM aulas WHERE id = ?";
+$stmtBusca = $conexao->prepare($sqlBusca);
+$stmtBusca->bind_param("i", $aula_id);
+$stmtBusca->execute();
+$result = $stmtBusca->get_result();
+$aula = $result->fetch_assoc();
+
+if (!$aula) {
+    die("Aula não encontrada.");
 }
 
-$id_aula = $_GET['id'];
-
-// Verifica se a aula pertence ao usuário
-$sql = "
-    SELECT a.id FROM aulas a
-    JOIN cursos c ON a.curso_id = c.id
-    WHERE a.id = ? AND c.criado_por_id = ? AND c.tipo_criador = ?
-";
-$stmt = $conexao->prepare($sql);
-$stmt->bind_param("iis", $id_aula, $_SESSION['id'], $_SESSION['tipo']);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows === 0) {
-    $_SESSION['mensagem'] = 'Aula não encontrada ou acesso negado.';
-    $_SESSION['mensagem_tipo'] = 'erro';
-    header('Location: ../minhas_aulas.php');
-    exit;
-}
+$curso_id = $aula['curso_id'];
 
 // Excluir aula
-$delete = $conexao->prepare("DELETE FROM aulas WHERE id = ?");
-$delete->bind_param("i", $id_aula);
+$sqlExcluir = "DELETE FROM aulas WHERE id = ?";
+$stmtExcluir = $conexao->prepare($sqlExcluir);
+$stmtExcluir->bind_param("i", $aula_id);
 
-if ($delete->execute()) {
-    $_SESSION['mensagem'] = 'Aula excluída com sucesso.';
-    $_SESSION['mensagem_tipo'] = 'sucesso';
+if ($stmtExcluir->execute()) {
+    header("Location: ../ver_conteudo_curso.php?id=" . $curso_id);
+    exit;
 } else {
-    $_SESSION['mensagem'] = 'Erro ao excluir aula.';
-    $_SESSION['mensagem_tipo'] = 'erro';
+    echo "Erro ao excluir a aula.";
 }
-
-header('Location: ../minhas_aulas.php');
-exit;
-?>

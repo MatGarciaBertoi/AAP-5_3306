@@ -61,6 +61,7 @@ $resultado = $stmt->get_result();
             <p>Dificuldade: <?php echo ucfirst($curso['dificuldade']); ?></p>
             <p style="font-size: 0.9em; color: gray;">Criado em: <?php echo date('d/m/Y H:i', strtotime($curso['data_criacao'])); ?></p>
             <div style="display: flex; gap: 10px;">
+              <a href="ver_conteudo_curso.php?id=<?php echo $curso['id']; ?>" class="btn-publicar" style="background-color: #3498db;">Ver Conteúdo</a>
               <a href="editar_curso.php?id=<?php echo $curso['id']; ?>" class="btn-publicar">Editar</a>
               <a href="javascript:void(0);" onclick="confirmarExclusao(<?php echo $curso['id']; ?>)" class="btn-excluir" style="background-color: #e74c3c;">Excluir</a>
             </div>

@@ -12,8 +12,8 @@
             <li class="dropdown">
                 <a href="#">Cursos ▾</a>
                 <ul class="dropdown-menu">
-                    <li><a href="add_cursos.php">Criar Curso</a></li>
-                    <li><a href="meus_cursos.php">Meus Cursos</a></li>
+                    <li><a href="../cursos/add_cursos.php">Criar Curso</a></li>
+                    <li><a href="../cursos/meus_cursos.php">Meus Cursos</a></li>
                 </ul>
             </li>
 
@@ -21,8 +21,8 @@
             <li class="dropdown">
                 <a href="#">Aulas ▾</a>
                 <ul class="dropdown-menu">
-                    <li><a href="../aulas/add_aula.php">Adicionar Aula</a></li>
-                    <li><a href="../aulas/minhas_aulas.php">Minhas Aulas</a></li>
+                    <li><a href="add_aula.php">Adicionar Aula</a></li>
+                    <li><a href="minhas_aulas.php">Minhas Aulas</a></li>
                 </ul>
             </li>
 
