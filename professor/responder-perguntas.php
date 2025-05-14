@@ -15,7 +15,7 @@
 
     <?php include 'partials/header.php'; ?> <!-- Inclui o header -->
 
-    <div class="container">
+    <div class="container"> <!-- Esse ainda está fixo-->
         <div class="welcome-text">
             <h1>Responder Perguntas</h1>
             <p>Veja e responda dúvidas dos seus alunos ✏️</p>

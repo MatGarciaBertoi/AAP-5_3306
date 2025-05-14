@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Erro ao atualizar a aula.";
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Editar Aula</title>
     <link rel="stylesheet" href="partials/style.css">
 </head>
+
 <body>
     <?php include 'partials/header.php'; ?>
     <h2>Editar Aula</h2>
@@ -61,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="text" name="video_url" id="video_url" value="<?= htmlspecialchars($aula['video_url']) ?>"><br><br>
 
         <button type="submit">Salvar Alterações</button>
+        
     </form>
 </body>
 

@@ -19,8 +19,8 @@
             <li class="dropdown">
                 <a href="#">Aulas ▾</a>
                 <ul class="dropdown-menu">
-                    <li><a href="cursos/add_aula.php">Adicionar Aula</a></li>
-                    <li><a href="cursos/minhas_aulas.php">Minhas Aulas</a></li>
+                    <li><a href="aulas/add_aula.php">Adicionar Aula</a></li>
+                    <li><a href="aulas/minhas_aulas.php">Minhas Aulas</a></li>
                 </ul>
             </li>
 
