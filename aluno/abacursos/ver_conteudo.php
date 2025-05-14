@@ -30,6 +30,61 @@ $stmt->bind_param("ii", $aluno_id, $curso_id);
 $stmt->execute();
 $aulas = $stmt->get_result();
 
+// Verifica se todas as aulas estão concluídas
+$stmt = $conexao->prepare("SELECT COUNT(*) AS total_aulas FROM aulas WHERE curso_id = ?");
+$stmt->bind_param("i", $curso_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$total_aulas = $result->fetch_assoc()['total_aulas'];
+
+$stmt = $conexao->prepare("SELECT COUNT(*) AS aulas_concluidas FROM progresso_aula pa 
+                           JOIN aulas a ON a.id = pa.aula_id 
+                           WHERE pa.aluno_id = ? AND a.curso_id = ? AND pa.concluida = 1");
+$stmt->bind_param("ii", $aluno_id, $curso_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$aulas_concluidas = $result->fetch_assoc()['aulas_concluidas'];
+
+// Verifica se todas as atividades foram feitas
+$stmt = $conexao->prepare("SELECT COUNT(*) AS total_atividades 
+                           FROM avaliacoes 
+                           WHERE curso_id = ? AND tipo = 'Atividade'");
+$stmt->bind_param("i", $curso_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$total_atividades = $result->fetch_assoc()['total_atividades'];
+
+$stmt = $conexao->prepare("SELECT COUNT(*) AS atividades_feitas 
+                           FROM respostas_alunos ra 
+                           JOIN avaliacoes a ON a.id = ra.avaliacao_id 
+                           WHERE ra.aluno_id = ? AND a.curso_id = ? AND a.tipo = 'Atividade'");
+$stmt->bind_param("ii", $aluno_id, $curso_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$atividades_feitas = $result->fetch_assoc()['atividades_feitas'];
+
+// Verifica se a prova foi feita com nota >= 7
+$stmt = $conexao->prepare("SELECT nota 
+                           FROM respostas_alunos ra 
+                           JOIN avaliacoes a ON a.id = ra.avaliacao_id 
+                           WHERE ra.aluno_id = ? AND a.curso_id = ? AND a.tipo = 'Prova' 
+                           ORDER BY ra.data_envio DESC 
+                           LIMIT 1");
+$stmt->bind_param("ii", $aluno_id, $curso_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$nota_prova = 0;
+if ($row = $result->fetch_assoc()) {
+    $nota_prova = floatval($row['nota']);
+}
+
+// Verifica se pode liberar certificado com 70% ou mais na prova
+$certificado_liberado = (
+    $aulas_concluidas == $total_aulas &&
+    $atividades_feitas == $total_atividades &&
+    $nota_prova >= 7.0 // 70% de 10
+);
+
 // Busca avaliações
 $stmt = $conexao->prepare(
     "SELECT id, titulo, descricao, tipo, data_criacao 
@@ -40,6 +95,20 @@ $stmt = $conexao->prepare(
 $stmt->bind_param("i", $curso_id);
 $stmt->execute();
 $avaliacoes = $stmt->get_result();
+
+// Busca notas das avaliações já feitas
+$notas_avaliacoes = [];
+$stmt = $conexao->prepare(
+    "SELECT avaliacao_id, nota 
+     FROM respostas_alunos 
+     WHERE aluno_id = ?"
+);
+$stmt->bind_param("i", $aluno_id);
+$stmt->execute();
+$result_notas = $stmt->get_result();
+while ($row = $result_notas->fetch_assoc()) {
+    $notas_avaliacoes[$row['avaliacao_id']] = $row['nota'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -91,13 +160,37 @@ $avaliacoes = $stmt->get_result();
                         <h2><?= htmlspecialchars($avaliacao['titulo']); ?> (<?= $avaliacao['tipo']; ?>)</h2>
                         <p><?= nl2br(htmlspecialchars($avaliacao['descricao'])); ?></p>
                         <p><strong>Criada em:</strong> <?= date('d/m/Y', strtotime($avaliacao['data_criacao'])); ?></p>
-                        <a href="fazer_avaliacao.php?avaliacao_id=<?= $avaliacao['id']; ?>&curso_id=<?= $curso_id ?>" class="botao">Fazer Avaliação</a>
+
+                        <?php if (isset($notas_avaliacoes[$avaliacao['id']])): ?>
+                            <p><strong>Nota:</strong> <?= $notas_avaliacoes[$avaliacao['id']]; ?> / 10.00</p>
+                            <a href="fazer_avaliacao.php?avaliacao_id=<?= $avaliacao['id']; ?>&curso_id=<?= $curso_id ?>&refazer=1" class="botao">🔁 Refazer Avaliação</a>
+                        <?php else: ?>
+                            <a href="fazer_avaliacao.php?avaliacao_id=<?= $avaliacao['id']; ?>&curso_id=<?= $curso_id ?>" class="botao">Fazer Avaliação</a>
+                        <?php endif; ?>
                     </div>
                 <?php endwhile; ?>
             <?php else: ?>
                 <p>📭 Nenhuma avaliação disponível no momento.</p>
             <?php endif; ?>
         </div>
+
+        <?php if ($certificado_liberado): ?>
+            <div class="certificado">
+                <form action="gerar_certificado.php" method="POST" target="_blank">
+                    <input type="hidden" name="curso_id" value="<?= $curso_id ?>">
+                    <button type="submit" class="botao">🎓 Baixar Certificado</button>
+                </form>
+            </div>
+        <?php else: ?>
+            <div class="certificado">
+                <h2>Status do Certificado</h2>
+                <?php if ($certificado_liberado): ?>
+                    <p>🎉 Parabéns! Você concluiu todos os requisitos. <a href="gerar_certificado.php?curso_id=<?= $curso_id ?>">Clique aqui para gerar seu certificado.</a></p>
+                <?php else: ?>
+                    <p>🔒 Complete todas as aulas, atividades e tenha pelo menos 70% de aproveitamento na prova para liberar o certificado.</p>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
 
         <a href="abacursos.php?curso_id=<?= $curso_id ?>" class="voltar">🔙 Voltar</a>
     </div>
