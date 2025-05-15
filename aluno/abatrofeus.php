@@ -25,6 +25,7 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Meus Certificados - CW Cursos</title>
+    <link rel="shortcut icon" href="../images/logotipocw.png" />
     <link rel="stylesheet" href="css/abatrofeus.css">
     <link rel="stylesheet" href="partials/style.css">
 </head>
