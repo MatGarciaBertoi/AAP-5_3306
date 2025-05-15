@@ -38,10 +38,13 @@ if (isset($_POST['submit'])) {
     // Hash da senha para segurança
     $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
+    // Caminho da imagem padrão
+    $fotoPadrao = '/AAP-5_3306/funcoes/uploads/profile/default_profile.jpg';
+
     // Insere os dados no banco de dados
-    $insertQuery = "INSERT INTO usuarios (nome, usuario, email, senha, data_nascimento, tipo, status) VALUES (?, ?, ?, ?, ?, 'aluno', 'ativo')";
+    $insertQuery = "INSERT INTO usuarios (nome, usuario, email, senha, data_nascimento, tipo, status, photo) VALUES (?, ?, ?, ?, ?, 'aluno', 'ativo', ?)";
     $stmt = $conexao->prepare($insertQuery);
-    $stmt->bind_param("sssss", $nome, $usuario, $email, $senhaHash, $dataNascimento);
+    $stmt->bind_param("ssssss", $nome, $usuario, $email, $senhaHash, $dataNascimento, $fotoPadrao);
 
     if ($stmt->execute()) {
         // Aguarda um momento para garantir que o banco de dados seja atualizado corretamente

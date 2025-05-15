@@ -15,9 +15,12 @@ $usuario = $_SESSION['usuario'];
 // Busca os cursos que o aluno está inscrito
 $sql = "SELECT c.*, i.data_inscricao, i.id AS inscricao_id FROM cursos c 
         INNER JOIN inscricoes i ON i.curso_id = c.id 
-        WHERE i.aluno_id = ?";
+        WHERE i.aluno_id = ?
+        AND c.id NOT IN (
+            SELECT curso_id FROM cursos_concluidos WHERE aluno_id = ?
+        )";
 $stmt = $conexao->prepare($sql);
-$stmt->bind_param("i", $aluno_id);
+$stmt->bind_param("ii", $aluno_id, $aluno_id); // Agora são dois parâmetros
 $stmt->execute();
 $result = $stmt->get_result();
 ?>

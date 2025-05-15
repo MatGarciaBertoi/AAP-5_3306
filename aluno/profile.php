@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once('../funcoes/conexao.php');
+include_once('../funcoes/config.php');
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['usuario'])) {
@@ -10,17 +11,44 @@ if (!isset($_SESSION['usuario'])) {
 
 $usuario = $_SESSION['usuario'];
 
-// Consulta SQL para obter a foto de perfil e outros dados
-$sql = "SELECT photo, email, data_nascimento FROM usuarios WHERE usuario = ?";
+// Consulta única para pegar tudo do usuário
+$sql = "SELECT id, photo, email, data_nascimento FROM usuarios WHERE usuario = ?";
 $stmt = $conexao->prepare($sql);
+if (!$stmt) {
+    die("Erro ao preparar statement: " . $conexao->error);
+}
 $stmt->bind_param("s", $usuario);
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 
-$profile_photo = $row ? $row['photo'] : '../images/default_profile.jpg';
+if (!$row) {
+    die("Usuário não encontrado.");
+}
+
+$profile_photo = !empty($row['photo']) ? $row['photo'] : DEFAULT_PROFILE_PHOTO;
 $email = $row['email'];
 $data_nascimento = $row['data_nascimento'];
+$aluno_id = $row['id'];
+
+// Recupera o ID do aluno a partir do nome de usuário
+$alunoQuery = "SELECT id FROM usuarios WHERE usuario = ?";
+$stmtAluno = $conexao->prepare($alunoQuery);
+$stmtAluno->bind_param("s", $usuario);
+$stmtAluno->execute();
+$resultAluno = $stmtAluno->get_result();
+$alunoRow = $resultAluno->fetch_assoc();
+$aluno_id = $alunoRow['id'];
+
+// Busca cursos concluídos
+$sqlConcluidos = "SELECT c.nome, cc.data_conclusao FROM cursos c
+                  INNER JOIN cursos_concluidos cc ON cc.curso_id = c.id
+                  WHERE cc.aluno_id = ?";
+$stmtConcluidos = $conexao->prepare($sqlConcluidos);
+$stmtConcluidos->bind_param("i", $aluno_id);
+$stmtConcluidos->execute();
+$resultConcluidos = $stmtConcluidos->get_result();
+
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +79,11 @@ $data_nascimento = $row['data_nascimento'];
             <form action="../funcoes/usuario/upload_photo.php" method="post" enctype="multipart/form-data">
                 <input type="file" name="photo" id="upload" accept="image/*">
                 <label for="upload" class="upload-label">Carregar nova foto</label>
-                <input type="submit" value="Atualizar Foto" class="upload-btn">
+                <input type="submit" value="Salvar Foto" class="upload-btn">
+            </form>
+            <!-- Botão para remover a foto e voltar à padrão -->
+            <form action="../funcoes/usuario/remover_foto.php" method="post" onsubmit="return confirm('Tem certeza que deseja remover sua foto atual e voltar à padrão?');">
+                <input type="submit" value="Remover Foto" class="upload-btn" style="background-color: #e74c3c;">
             </form>
         </div>
 
@@ -71,10 +103,16 @@ $data_nascimento = $row['data_nascimento'];
         <!-- Conteúdo da aba "Cursos Concluídos" -->
         <div id="CursosConcluidos" class="tabcontent active">
             <div class="course-list">
-                <div class="course-item">
-                    <h3>SEO para Iniciantes</h3>
-                    <p>Concluído em: 25/04/2025</p>
-                </div>
+                <?php if ($resultConcluidos->num_rows > 0): ?>
+                    <?php while ($curso = $resultConcluidos->fetch_assoc()): ?>
+                        <div class="course-item">
+                            <h3><?= htmlspecialchars($curso['nome']); ?></h3>
+                            <p>Concluído em: <?= date('d/m/Y', strtotime($curso['data_conclusao'])); ?></p>
+                        </div>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <p>Você ainda não concluiu nenhum curso.</p>
+                <?php endif; ?>
             </div>
         </div>
 
