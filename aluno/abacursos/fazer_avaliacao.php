@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nota_total = 0;
     $total_multipla = 0;
 
+    foreach ($questoes as $q) {
         $id_questao = $q['id'];
         $tipo = $q['tipo'];
         $resposta_correta = trim($q['resposta_correta']);

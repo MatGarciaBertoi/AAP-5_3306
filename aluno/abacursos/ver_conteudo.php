@@ -85,6 +85,21 @@ $certificado_liberado = (
     $nota_prova >= 7.0 // 70% de 10
 );
 
+if ($certificado_liberado) {
+    // Verifica se já está registrado
+    $stmt = $conexao->prepare("SELECT id FROM cursos_concluidos WHERE aluno_id = ? AND curso_id = ?");
+    $stmt->bind_param("ii", $aluno_id, $curso_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Se ainda não existe, insere
+    if ($result->num_rows === 0) {
+        $stmt = $conexao->prepare("INSERT INTO cursos_concluidos (aluno_id, curso_id) VALUES (?, ?)");
+        $stmt->bind_param("ii", $aluno_id, $curso_id);
+        $stmt->execute();
+    }
+}
+
 // Busca avaliações
 $stmt = $conexao->prepare(
     "SELECT id, titulo, descricao, tipo, data_criacao 
