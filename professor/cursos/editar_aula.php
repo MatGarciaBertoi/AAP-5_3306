@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Editar Aula</title>
+    <link rel="shortcut icon" href="../../images/logotipocw.png" />
     <link rel="stylesheet" href="partials/style.css">
 </head>
 

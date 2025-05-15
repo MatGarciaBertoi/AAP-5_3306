@@ -34,6 +34,7 @@ $questoes = $stmtQuestoes->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Questões de <?php echo htmlspecialchars($avaliacao['titulo']); ?></title>
+    <link rel="shortcut icon" href="../../images/logotipocw.png" />
     <link rel="stylesheet" href="css/ver_conteudo.css">
     <link rel="stylesheet" href="partials/style.css">
 </head>

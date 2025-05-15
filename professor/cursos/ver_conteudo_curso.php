@@ -42,6 +42,7 @@ $avaliacoes = $stmtAval->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Conteúdo do Curso - <?php echo htmlspecialchars($curso['nome']); ?></title>
+     <link rel="shortcut icon" href="../../images/logotipocw.png" />
     <link rel="stylesheet" href="css/ver_conteudo.css">
     <link rel="stylesheet" href="partials/style.css">
 </head>

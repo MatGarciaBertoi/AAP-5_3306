@@ -29,6 +29,7 @@ $avaliacao_id = $questao['avaliacao_id'];
 <head>
     <meta charset="UTF-8">
     <title>Editar Questão</title>
+    <link rel="shortcut icon" href="../../images/logotipocw.png" />
     <link rel="stylesheet" href="partials/style.css">
 </head>
 

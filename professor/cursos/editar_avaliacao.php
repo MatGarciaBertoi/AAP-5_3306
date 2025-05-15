@@ -25,6 +25,7 @@ if (!$avaliacao) {
 <head>
     <meta charset="UTF-8">
     <title>Editar Avaliação</title>
+    <link rel="shortcut icon" href="../../images/logotipocw.png" />
     <link rel="stylesheet" href="partials/style.css">
 </head>
 <body>
