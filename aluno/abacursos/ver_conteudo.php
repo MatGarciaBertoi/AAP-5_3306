@@ -132,6 +132,7 @@ while ($row = $result_notas->fetch_assoc()) {
 <head>
     <meta charset="UTF-8">
     <title>Conteúdo do Curso</title>
+    <link rel="shortcut icon" href="../../images/logotipocw.png" />
     <link rel="stylesheet" href="css/ver_conteudo.css">
 </head>
 
@@ -188,6 +189,36 @@ while ($row = $result_notas->fetch_assoc()) {
                 <p>📭 Nenhuma avaliação disponível no momento.</p>
             <?php endif; ?>
         </div>
+
+        <?php if ($certificado_liberado): ?>
+            <?php
+            // Verifica se o aluno já enviou feedback
+            $stmt = $conexao->prepare("SELECT id FROM feedbacks WHERE aluno_id = ? AND curso_id = ?");
+            $stmt->bind_param("ii", $aluno_id, $curso_id);
+            $stmt->execute();
+            $res_feedback = $stmt->get_result();
+            $ja_enviou_feedback = $res_feedback->num_rows > 0;
+            ?>
+
+            <div class="feedback">
+                <h2>🗣️ Queremos saber sua opinião!</h2>
+
+                <?php if (isset($_SESSION['mensagem_feedback'])): ?>
+                    <p><?= $_SESSION['mensagem_feedback'];
+                        unset($_SESSION['mensagem_feedback']); ?></p>
+                <?php endif; ?>
+
+                <?php if (!$ja_enviou_feedback): ?>
+                    <form action="funcoes/enviar_feedback.php" method="POST">
+                        <input type="hidden" name="curso_id" value="<?= $curso_id ?>">
+                        <textarea name="comentario" rows="5" style="width: 100%;" placeholder="Deixe seu feedback sobre o curso..."></textarea><br>
+                        <button type="submit" class="botao">📨 Enviar Feedback</button>
+                    </form>
+                <?php else: ?>
+                    <p>✅ Você já enviou seu feedback. Obrigado por contribuir!</p>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
 
         <?php if ($certificado_liberado): ?>
             <div class="certificado">

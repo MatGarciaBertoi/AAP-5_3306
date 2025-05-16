@@ -37,16 +37,16 @@ $qr_path = '../../temp_qr.png';
 QRcode::png($verificacao_url, $qr_path, QR_ECLEVEL_L, 3);
 
 // Gera o PDF com FPDF
-class PDF extends FPDF {
-    function Header() {
+class PDF extends FPDF
+{
+    function Header()
+    {
         // Fundo personalizado
         $this->Image('../../images/fundo_certificado.png', 0, 0, 297, 210); // fundo para horizontal
-    
-        // Assinatura
-        $this->Image('../../images/matheus_assinatura.png', 120, 100, 60); // aumenta de 40 para 60 e reposiciona levemente
     }
 
-    function Footer() {
+    function Footer()
+    {
         $this->SetY(-30);
         $this->SetFont('Arial', 'I', 10);
         $this->Cell(0, 10, mb_convert_encoding('Emitido em ' . date('d/m/Y'), 'ISO-8859-1', 'UTF-8'), 0, 1, 'C');
@@ -54,7 +54,8 @@ class PDF extends FPDF {
     }
 
     // Borda
-    function FancyBorder() {
+    function FancyBorder()
+    {
         $this->SetLineWidth(1);
         $this->Rect(10, 10, 277, 190); // borda ajustada ao novo tamanho da página
     }
@@ -81,4 +82,3 @@ $pdf->Cell(0, 3, 'Socio Fundador da CW Cursos', 0, 1, 'C');
 $pdf->Output('I', 'certificado.pdf');
 unlink($qr_path);
 exit();
-?>

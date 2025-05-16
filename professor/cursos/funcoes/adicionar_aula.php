@@ -20,7 +20,7 @@ $stmt = $conexao->prepare($sql);
 $stmt->bind_param("isss", $curso_id, $titulo, $conteudo, $video_url);
 
 if ($stmt->execute()) {
-    header("Location: ../ver_conteudo_aula.php?id=$curso_id");
+    header("Location: ../ver_conteudo_curso.php?id=$curso_id");
     exit();
 } else {
     echo "Erro ao cadastrar aula: " . $stmt->error;
