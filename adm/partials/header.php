@@ -8,7 +8,6 @@
             <li><a href="cursos/cursos.php">Cursos</a></li>
             <li><a href="usuarios.php">Usuários</a></li>
             <li><a href="suporte.php">Suporte</a></li>
-            <li><a href="acessibilidade.php">Acessibilidade</a></li>
         </ul>
         <div class="btn-alunos">
             <div id="perfilAlunoBtn" class="perfil-aluno-btn">
@@ -26,6 +25,8 @@
         </div>
     </nav>
 </header>
+
+<?php include '../funcoes/usuario/acessibilidade.php'; ?>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

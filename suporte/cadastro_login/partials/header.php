@@ -32,6 +32,8 @@
      </nav>
  </div>
 
+ <?php include '../../funcoes/usuario/acessibilidade.php'; ?>
+
  <!-- Chatra {literal} -->
  <script>
      (function(d, w, c) {

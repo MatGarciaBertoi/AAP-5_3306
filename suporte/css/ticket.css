@@ -1,5 +1,6 @@
 /* Estilos para os títulos */
 h2 {
+    margin-top: 4rem;
     color: var(--azul); /* Cor azul */
 }
 

@@ -44,6 +44,8 @@
     </nav>
 </header>
 
+<?php include '../funcoes/usuario/acessibilidade.php'; ?>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const perfilBtn = document.getElementById('perfilAlunoBtn');
@@ -63,32 +65,32 @@
 </script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const dropdowns = document.querySelectorAll(".dropdown");
+    document.addEventListener("DOMContentLoaded", () => {
+        const dropdowns = document.querySelectorAll(".dropdown");
 
-    dropdowns.forEach(dropdown => {
-      const trigger = dropdown.querySelector("a");
+        dropdowns.forEach(dropdown => {
+            const trigger = dropdown.querySelector("a");
 
-      trigger.addEventListener("click", (e) => {
-        e.preventDefault();
+            trigger.addEventListener("click", (e) => {
+                e.preventDefault();
 
-        // Fecha outros dropdowns
-        dropdowns.forEach(d => {
-          if (d !== dropdown) d.classList.remove("open");
+                // Fecha outros dropdowns
+                dropdowns.forEach(d => {
+                    if (d !== dropdown) d.classList.remove("open");
+                });
+
+                // Alterna o dropdown clicado
+                dropdown.classList.toggle("open");
+            });
         });
 
-        // Alterna o dropdown clicado
-        dropdown.classList.toggle("open");
-      });
+        // Fecha o dropdown se clicar fora
+        document.addEventListener("click", (e) => {
+            if (!e.target.closest(".dropdown")) {
+                dropdowns.forEach(d => d.classList.remove("open"));
+            }
+        });
     });
-
-    // Fecha o dropdown se clicar fora
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest(".dropdown")) {
-        dropdowns.forEach(d => d.classList.remove("open"));
-      }
-    });
-  });
 </script>
 
 <!-- Chatra {literal} -->

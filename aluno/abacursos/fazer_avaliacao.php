@@ -125,75 +125,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Fazer Avaliação</title>
-    <style>
-        body {
-            font-family: Arial;
-            padding: 20px;
-            background: #f9f9f9;
-        }
-
-        .questao {
-            background: #fff;
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 6px;
-        }
-
-        label {
-            display: block;
-            margin-top: 8px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #0056b3;
-        }
-    </style>
+    <link rel="shortcut icon" href="../../images/logotipocw.png" />
+    <link rel="stylesheet" href="css/avaliacao.css">
+    <link rel="stylesheet" href="partials/style.css">
 </head>
 
 <body>
-    <h2>📝 Responder Avaliação</h2>
-    <form method="POST">
-        <?php foreach ($questoes as $q): ?>
-            <div class="questao">
-                <p><strong><?= htmlspecialchars($q['enunciado']) ?></strong></p>
+    <?php include 'partials/header.php'; ?> <!-- Inclui o header -->
+    <div class="container">
+        <h2>📝 Responder Avaliação</h2>
+        <form method="POST">
+            <?php foreach ($questoes as $q): ?>
+                <div class="questao">
+                    <p><strong><?= htmlspecialchars($q['enunciado']) ?></strong></p>
 
-                <?php
-                $resposta_anterior = $respostas_anteriores[$q['id']] ?? '';
-                ?>
-
-                <?php if ($q['tipo'] === 'multipla_escolha'): ?>
                     <?php
-                    $alternativas = json_decode($q['alternativas'], true);
-                    $letras = range('A', 'Z');
-                    $index = 0;
-                    foreach ($alternativas as $chave => $texto):
-                        $letra = is_string($chave) ? $chave : $letras[$index];
-                        $index++;
-                        $checked = ($resposta_anterior === $letra) ? 'checked' : '';
+                    $resposta_anterior = $respostas_anteriores[$q['id']] ?? '';
                     ?>
-                        <label>
-                            <input type="radio" name="respostas[<?= $q['id'] ?>]" value="<?= htmlspecialchars($letra) ?>" <?= $checked ?> required>
-                            <?= htmlspecialchars("{$letra}) {$texto}") ?>
-                        </label>
-                    <?php endforeach; ?>
-                <?php elseif ($q['tipo'] === 'dissertativa'): ?>
-                    <textarea name="respostas[<?= $q['id'] ?>]" rows="4" cols="50" required><?= htmlspecialchars($resposta_anterior) ?></textarea>
-                <?php endif; ?>
-            </div>
-        <?php endforeach; ?>
 
-        <button type="submit">Enviar Avaliação</button>
-    </form>
+                    <?php if ($q['tipo'] === 'multipla_escolha'): ?>
+                        <?php
+                        $alternativas = json_decode($q['alternativas'], true);
+                        $letras = range('A', 'Z');
+                        $index = 0;
+                        foreach ($alternativas as $chave => $texto):
+                            $letra = is_string($chave) ? $chave : $letras[$index];
+                            $index++;
+                            $checked = ($resposta_anterior === $letra) ? 'checked' : '';
+                        ?>
+                            <label>
+                                <input type="radio" name="respostas[<?= $q['id'] ?>]" value="<?= htmlspecialchars($letra) ?>" <?= $checked ?> required>
+                                <?= htmlspecialchars("{$letra}) {$texto}") ?>
+                            </label>
+                        <?php endforeach; ?>
+                    <?php elseif ($q['tipo'] === 'dissertativa'): ?>
+                        <textarea name="respostas[<?= $q['id'] ?>]" rows="4" cols="50" required><?= htmlspecialchars($resposta_anterior) ?></textarea>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+
+            <button type="submit">Enviar Avaliação</button>
+            <a href="ver_conteudo.php?curso_id=<?= $curso_id ?>" class="cancelar">Cancelar</a>
+        </form>
+    </div>
+    <?php include 'partials/footer.php'; ?> <!-- Inclui o footer -->
 </body>
 
 </html>

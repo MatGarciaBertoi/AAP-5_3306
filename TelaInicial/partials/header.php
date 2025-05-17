@@ -85,6 +85,9 @@
     </div>
 </header>
 
+<?php include '../funcoes/usuario/acessibilidade.php'; ?>
+
+<!--perfil-->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const perfilBtn = document.getElementById('perfilAlunoBtn');

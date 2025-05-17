@@ -72,11 +72,11 @@ if (isset($_POST['submit'])) {
     <link rel="shortcut icon" href="../../../images/logotipocw.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/cadastro.css">
-    <link rel="stylesheet" href="../partials/style.css">
+    <link rel="stylesheet" href="partials/style.css">
 </head>
 
 <body>
-    <?php include '../partials/header.php'; ?> <!-- Inclui o header -->
+    <?php include 'partials/header.php'; ?> <!-- Inclui o header -->
     <!-- Container principal -->
     <div class="container">
         <form action="cadastroAluno.php" method="POST"> <!-- Formulário de cadastro -->

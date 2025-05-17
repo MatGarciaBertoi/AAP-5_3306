@@ -50,14 +50,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Editar <?= ucfirst($type) ?></title>
-    <link rel="shortcut icon" href="../../../images/logotipocw.png" />
+    <link rel="shortcut icon" href="../../images/logotipocw.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/editar.css">
-    <link rel="stylesheet" href="../partials/style.css">
+    <link rel="stylesheet" href="partials/style.css">
 </head>
 
 <body>
-    <?php include '../partials/header.php'; ?>
+    <?php include 'partials/header.php'; ?>
     <div class="container">
         <div class="edit">
             <h2>Editar <?= ucfirst($type) ?></h2>
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
         </div>
     </div>
-    <?php include '../partials/footer.php'; ?>
+    <?php include 'partials/footer.php'; ?>
     <script>
         function toggleSenha() {
             const input = document.getElementById('senha');

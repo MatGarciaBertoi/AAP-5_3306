@@ -158,9 +158,11 @@ while ($row = $result_notas->fetch_assoc()) {
     <title>Conteúdo do Curso</title>
     <link rel="shortcut icon" href="../../images/logotipocw.png" />
     <link rel="stylesheet" href="css/ver_conteudo.css">
+    <link rel="stylesheet" href="partials/style.css">
 </head>
 
 <body>
+    <?php include 'partials/header.php'; ?> <!-- Inclui o header -->
     <div class="container">
         <h1>Conteúdo do Curso</h1>
 
@@ -283,6 +285,8 @@ while ($row = $result_notas->fetch_assoc()) {
         <a href="abacursos.php?curso_id=<?= $curso_id ?>" class="voltar">🔙 Voltar</a>
     </div>
 
+    <?php include 'partials/footer.php'; ?> <!-- Inclui o footer -->
+    
     <script>
         function mostrarAba(abaId) {
             const abas = document.querySelectorAll('.tab-content');

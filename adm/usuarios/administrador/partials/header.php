@@ -1,11 +1,13 @@
 <header>
     <div class="logo">
-        <a href="../TelaInicial/index.php"><img src="../images/logocwbranco_transparente.png" alt="Logo CW Cursos"></a>
+        <a href="../../../TelaInicial/index.php"><img src="../../../images/logocwbranco_transparente.png" alt="Logo CW Cursos"></a>
     </div>
     <nav class="nav-main">
         <ul>
-            <li><a href="areadoaluno.php">Meus Cursos</a></li>
-            <li><a href="abatrofeus.php">Galeria de certificados</a></li>
+            <li><a href="../../index.php">Dashboard</a></li>
+            <li><a href="../../cursos/cursos.php">Cursos</a></li>
+            <li><a href="../../usuarios.php">Usuários</a></li>
+            <li><a href="../../suporte.php">Suporte</a></li>
         </ul>
         <div class="btn-alunos">
             <div id="perfilAlunoBtn" class="perfil-aluno-btn">
@@ -17,14 +19,14 @@
             <!-- Container de opções -->
             <div id="perfilAlunoOpcoes" class="perfil-opcoes">
                 <a href="profile.php">Meu Perfil</a>
-                <a href="../suporte/suporte.php" target="_blank">Central de Ajuda</a>
-                <a href="../funcoes/sessoes/logout.php">Sair</a>
+                <a href="../../../suporte/suporte.php" target="_blank">Central de Ajuda</a>
+                <a href="../../../funcoes/sessoes/logout.php">Sair</a>
             </div>
         </div>
     </nav>
 </header>
 
-<?php include '../funcoes/usuario/acessibilidade.php'; ?>
+<?php include '../../../funcoes/usuario/acessibilidade.php'; ?>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

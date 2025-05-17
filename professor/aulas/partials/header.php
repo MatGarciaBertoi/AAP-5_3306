@@ -47,6 +47,8 @@
     </nav>
 </header>
 
+<?php include '../../funcoes/usuario/acessibilidade.php'; ?>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const perfilBtn = document.getElementById('perfilAlunoBtn');

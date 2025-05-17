@@ -15,10 +15,10 @@ $busca = $_GET['busca'] ?? '';
     <title><?= ucfirst($type) ?>es Cadastrados</title>
     <link rel="shortcut icon" href="../../../images/logotipocw.png" />
     <link rel="stylesheet" href="css/list.css">
-    <link rel="stylesheet" href="../partials/style.css">
+    <link rel="stylesheet" href="partials/style.css">
 </head>
 <body>
-    <?php include '../partials/header.php'; ?>
+    <?php include 'partials/header.php'; ?>
 
     <div class="container">
         <h2><?= ucfirst($type) ?>es Cadastrados</h2>

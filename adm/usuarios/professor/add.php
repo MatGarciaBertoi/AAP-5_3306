@@ -19,10 +19,10 @@ if ($type === 'professor' && $status === 'pendente') {
     <title>Professores Pendentes</title>
     <link rel="shortcut icon" href="../../../images/logotipocw.png" />
     <link rel="stylesheet" href="css/add.css">
-    <link rel="stylesheet" href="../partials/style.css">
+    <link rel="stylesheet" href="partials/style.css">
 </head>
 <body>
-    <?php include '../partials/header.php'; ?>
+    <?php include 'partials/header.php'; ?>
     <div class="container">
         <h2>Professores Pendentes</h2>
 

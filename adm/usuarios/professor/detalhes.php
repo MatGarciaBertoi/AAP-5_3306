@@ -87,11 +87,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rejeitar'])) {
     <title>Detalhes do Professor</title>
     <link rel="shortcut icon" href="../../../images/logotipocw.png" />
     <link rel="stylesheet" href="css/detalhes.css">
-    <link rel="stylesheet" href="../partials/style.css">
+    <link rel="stylesheet" href="partials/style.css">
 </head>
 
 <body>
-    <?php include '../partials/header.php'; ?>
+    <?php include 'partials/header.php'; ?>
     <div class="container">
         <div class="detail-header">
             <h2>Detalhes do Professor</h2>

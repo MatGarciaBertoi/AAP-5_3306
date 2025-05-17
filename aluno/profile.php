@@ -71,10 +71,11 @@ $resultProgresso = $stmtProgresso->get_result();
     <title>Perfil do Usuário - Cursos</title>
     <link rel="shortcut icon" href="../images/logotipocw.png" />
     <link rel="stylesheet" href="css/profile.css">
-    <link rel="stylesheet" href="partials/style.css">
 </head>
 
 <body>
+
+    <?php include '../funcoes/usuario/acessibilidade.php'; ?>
 
     <div class="profile-container">
         <!-- Ícone de engrenagem -->
@@ -222,6 +223,28 @@ $resultProgresso = $stmtProgresso->get_result();
                 document.getElementById("personalDataPanel").classList.toggle("open");
             }
         </script>
+
+        <!-- Chatra {literal} -->
+        <script>
+            (function(d, w, c) {
+                w.ChatraID = 'igHEh7N4PEvoDEkR7';
+                var s = d.createElement('script');
+                w[c] = w[c] || function() {
+                    (w[c].q = w[c].q || []).push(arguments);
+                };
+                s.async = true;
+                s.src = 'https://call.chatra.io/chatra.js';
+                if (d.head) d.head.appendChild(s);
+            })(document, window, 'Chatra');
+            window.ChatraSetup = {
+                colors: {
+                    buttonText: '#202124',
+                    /* chat button text color */
+                    buttonBg: '#F1F3F4' /* chat button background color */
+                }
+            };
+        </script>
+        <!-- /Chatra {/literal} -->
 </body>
 
 </html>
