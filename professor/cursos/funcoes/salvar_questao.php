@@ -10,9 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($tipo === 'multipla_escolha') {
         $alternativas = array_map('trim', $_POST['alternativas']);
         $alternativasJson = json_encode($alternativas, JSON_UNESCAPED_UNICODE);
+        $resposta_correta = strtoupper($resposta_correta); // Ex: A, B, C, D
     } else {
         $alternativasJson = null;
-        $resposta_correta = null; // A resposta será avaliada manualmente
+        // Aqui, a resposta_correta será o texto da resposta esperada (vindo do formulário)
     }
 
     $sql = "INSERT INTO questoes (avaliacao_id, enunciado, tipo, alternativas, resposta_correta) 

@@ -22,12 +22,10 @@ if (empty($enunciado) || empty($tipo)) {
 $alternativas_json = null;
 $resposta_correta = null;
 
-// Se for múltipla escolha, processar as alternativas
 if ($tipo === 'multipla_escolha') {
     $alternativas = $_POST['alternativas'] ?? [];
     $resposta_correta = strtoupper(trim($_POST['resposta_correta'] ?? ''));
 
-    // Mapeia as letras A, B, C, D para as alternativas
     $letras = ['A', 'B', 'C', 'D'];
     $alternativas_formatadas = [];
 
@@ -39,13 +37,17 @@ if ($tipo === 'multipla_escolha') {
         $alternativas_formatadas[$letra] = $texto;
     }
 
-    // Verifica se a resposta correta é válida
     if (!array_key_exists($resposta_correta, $alternativas_formatadas)) {
         die("A resposta correta deve ser uma letra entre A e D.");
     }
 
-    // Codifica as alternativas como JSON
     $alternativas_json = json_encode($alternativas_formatadas, JSON_UNESCAPED_UNICODE);
+} elseif ($tipo === 'dissertativa') {
+    $resposta_correta = trim($_POST['resposta_correta'] ?? '');
+    if ($resposta_correta === '') {
+        die("A resposta esperada não pode estar vazia para questões dissertativas.");
+    }
+    $alternativas_json = null; // Nenhuma alternativa é usada
 }
 
 // Atualizar no banco de dados

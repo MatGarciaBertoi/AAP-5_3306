@@ -63,26 +63,44 @@ $stmt->execute();
 $result = $stmt->get_result();
 $atividades_feitas = $result->fetch_assoc()['atividades_feitas'];
 
-// Verifica se a prova foi feita com nota >= 7
-$stmt = $conexao->prepare("SELECT nota 
-                           FROM respostas_alunos ra 
-                           JOIN avaliacoes a ON a.id = ra.avaliacao_id 
-                           WHERE ra.aluno_id = ? AND a.curso_id = ? AND a.tipo = 'Prova' 
-                           ORDER BY ra.data_envio DESC 
-                           LIMIT 1");
-$stmt->bind_param("ii", $aluno_id, $curso_id);
+// Verifica se todas as provas foram feitas e com nota >= 7
+$stmt = $conexao->prepare(
+    "SELECT a.id 
+     FROM avaliacoes a
+     WHERE a.curso_id = ? AND a.tipo = 'Prova'"
+);
+$stmt->bind_param("i", $curso_id);
 $stmt->execute();
-$result = $stmt->get_result();
-$nota_prova = 0;
-if ($row = $result->fetch_assoc()) {
-    $nota_prova = floatval($row['nota']);
+$result_provas = $stmt->get_result();
+
+$provas_feitas_com_nota = 0;
+$total_provas = $result_provas->num_rows;
+
+while ($prova = $result_provas->fetch_assoc()) {
+    $avaliacao_id = $prova['id'];
+
+    // Busca a nota do aluno para cada prova
+    $stmt2 = $conexao->prepare(
+        "SELECT nota FROM respostas_alunos 
+         WHERE aluno_id = ? AND avaliacao_id = ?"
+    );
+    $stmt2->bind_param("ii", $aluno_id, $avaliacao_id);
+    $stmt2->execute();
+    $res_nota = $stmt2->get_result();
+
+    if ($res_nota->num_rows > 0) {
+        $nota = floatval($res_nota->fetch_assoc()['nota']);
+        if ($nota >= 7.0) {
+            $provas_feitas_com_nota++;
+        }
+    }
+    $stmt2->close();
 }
 
-// Verifica se pode liberar certificado com 70% ou mais na prova
+// Verifica se pode liberar certificado
 $certificado_liberado = (
     $aulas_concluidas == $total_aulas &&
-    $atividades_feitas == $total_atividades &&
-    $nota_prova >= 7.0 // 70% de 10
+    $provas_feitas_com_nota == $total_provas
 );
 
 if ($certificado_liberado) {
@@ -105,7 +123,13 @@ $stmt = $conexao->prepare(
     "SELECT id, titulo, descricao, tipo, data_criacao 
      FROM avaliacoes 
      WHERE curso_id = ? 
-     ORDER BY data_criacao DESC"
+     ORDER BY 
+        CASE 
+            WHEN tipo = 'Atividade' THEN 1 
+            WHEN tipo = 'Prova' THEN 2 
+            ELSE 3 
+        END,
+        data_criacao DESC"
 );
 $stmt->bind_param("i", $curso_id);
 $stmt->execute();
@@ -177,14 +201,32 @@ while ($row = $result_notas->fetch_assoc()) {
                         <p><?= nl2br(htmlspecialchars($avaliacao['descricao'])); ?></p>
                         <p><strong>Criada em:</strong> <?= date('d/m/Y', strtotime($avaliacao['data_criacao'])); ?></p>
 
-                        <?php if (isset($notas_avaliacoes[$avaliacao['id']])): ?>
-                            <p><strong>Nota:</strong> <?= $notas_avaliacoes[$avaliacao['id']]; ?> / 10.00</p>
-                            <a href="fazer_avaliacao.php?avaliacao_id=<?= $avaliacao['id']; ?>&curso_id=<?= $curso_id ?>&refazer=1" class="botao">🔁 Refazer Avaliação</a>
+                        <?php
+                        // Verifica se o aluno já respondeu esta avaliação
+                        $fez_avaliacao = isset($notas_avaliacoes[$avaliacao['id']]);
+                        ?>
+
+                        <?php if ($avaliacao['tipo'] === 'Prova'): ?>
+                            <?php if ($fez_avaliacao): ?>
+                                <p><strong>Nota:</strong> <?= $notas_avaliacoes[$avaliacao['id']]; ?> / 10.00</p>
+                                <a href="fazer_avaliacao.php?avaliacao_id=<?= $avaliacao['id']; ?>&curso_id=<?= $curso_id ?>&refazer=1" class="botao">🔁 Refazer Avaliação</a>
+                            <?php else: ?>
+                                <a href="fazer_avaliacao.php?avaliacao_id=<?= $avaliacao['id']; ?>&curso_id=<?= $curso_id ?>" class="botao">Fazer Avaliação</a>
+                            <?php endif; ?>
+
+                        <?php elseif ($avaliacao['tipo'] === 'Atividade'): ?>
+                            <?php if ($fez_avaliacao): ?>
+                                <a href="fazer_avaliacao.php?avaliacao_id=<?= $avaliacao['id']; ?>&curso_id=<?= $curso_id ?>&refazer=1" class="botao">🔁 Refazer Atividade</a>
+                            <?php else: ?>
+                                <a href="fazer_avaliacao.php?avaliacao_id=<?= $avaliacao['id']; ?>&curso_id=<?= $curso_id ?>" class="botao">Fazer Atividade</a>
+                            <?php endif; ?>
+
                         <?php else: ?>
                             <a href="fazer_avaliacao.php?avaliacao_id=<?= $avaliacao['id']; ?>&curso_id=<?= $curso_id ?>" class="botao">Fazer Avaliação</a>
                         <?php endif; ?>
                     </div>
                 <?php endwhile; ?>
+
             <?php else: ?>
                 <p>📭 Nenhuma avaliação disponível no momento.</p>
             <?php endif; ?>

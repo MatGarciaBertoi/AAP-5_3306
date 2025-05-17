@@ -34,6 +34,11 @@ $stmtAval->bind_param("i", $curso_id);
 $stmtAval->execute();
 $avaliacoes = $stmtAval->get_result();
 
+$mensagemErro = '';
+if (isset($_GET['erro']) && $_GET['erro'] === 'ja_tem_prova') {
+    $mensagemErro = '⚠️ Este curso já possui uma prova criada por você.';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -42,13 +47,18 @@ $avaliacoes = $stmtAval->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Conteúdo do Curso - <?php echo htmlspecialchars($curso['nome']); ?></title>
-     <link rel="shortcut icon" href="../../images/logotipocw.png" />
+    <link rel="shortcut icon" href="../../images/logotipocw.png" />
     <link rel="stylesheet" href="css/ver_conteudo.css">
     <link rel="stylesheet" href="partials/style.css">
 </head>
 
 <body>
     <?php include 'partials/header.php'; ?>
+    <?php if ($mensagemErro): ?>
+        <div style="background-color: #ffdddd; color: #d8000c; padding: 10px; margin-bottom: 15px; border-left: 6px solid #f44336;">
+            <?= $mensagemErro ?>
+        </div>
+    <?php endif; ?>
     <h1><?php echo htmlspecialchars($curso['nome']); ?></h1>
     <p><?php echo htmlspecialchars($curso['descricao']); ?></p>
 

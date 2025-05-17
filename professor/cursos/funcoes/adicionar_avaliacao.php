@@ -21,6 +21,23 @@ if (empty($titulo) || empty($tipo) || empty($descricao)) {
     die("Todos os campos são obrigatórios.");
 }
 
+// Verificar se já existe uma prova criada por esse professor para este curso
+if ($tipo === 'Prova') {
+    $sqlCheck = "SELECT id FROM avaliacoes 
+                 WHERE curso_id = ? AND tipo = 'Prova' AND criado_por_id = ? AND tipo_criador = ?";
+    $stmtCheck = $conexao->prepare($sqlCheck);
+    $stmtCheck->bind_param("iis", $curso_id, $criado_por_id, $tipo_criador);
+    $stmtCheck->execute();
+    $resultadoCheck = $stmtCheck->get_result();
+
+    if ($resultadoCheck->num_rows > 0) {
+        // Redirecionar com mensagem de erro
+        header("Location: ../ver_conteudo_curso.php?id=" . $curso_id . "&erro=ja_tem_prova");
+        exit();
+    }
+}
+
+
 // Inserção com criador e tipo
 $sql = "INSERT INTO avaliacoes (curso_id, titulo, tipo, descricao, data_criacao, criado_por_id, tipo_criador)
         VALUES (?, ?, ?, ?, NOW(), ?, ?)";

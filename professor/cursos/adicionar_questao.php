@@ -65,6 +65,12 @@ $curso_id = $avaliacao['curso_id'];
             <input type="text" name="resposta_correta" maxlength="1"><br><br>
         </div>
 
+        <div id="resposta-dissertativa-box" style="display: none;">
+            <label>Resposta esperada:</label><br>
+            <textarea name="resposta_correta" rows="4" cols="60"></textarea><br><br>
+        </div>
+
+
         <button type="submit">Salvar Questão</button>
         <a href="ver_questoes.php?avaliacao_id=<?php echo $avaliacao_id; ?>" class="btn-voltar">Voltar</a>
     </form>
@@ -72,11 +78,18 @@ $curso_id = $avaliacao['curso_id'];
     <script>
         function toggleAlternativas() {
             const tipo = document.getElementById("tipo").value;
-            document.getElementById("alternativas-box").style.display =
-                tipo === "multipla_escolha" ? "block" : "none";
+            const alternativasBox = document.getElementById("alternativas-box");
+            const respostaDissertativaBox = document.getElementById("resposta-dissertativa-box");
+
+            if (tipo === "multipla_escolha") {
+                alternativasBox.style.display = "block";
+                respostaDissertativaBox.style.display = "none";
+            } else if (tipo === "dissertativa") {
+                alternativasBox.style.display = "none";
+                respostaDissertativaBox.style.display = "block";
+            }
         }
 
-        // Executa ao carregar a página, caso o valor já esteja preenchido
         window.onload = toggleAlternativas;
     </script>
 </body>

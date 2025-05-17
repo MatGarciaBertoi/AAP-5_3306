@@ -45,11 +45,12 @@ $avaliacao_id = $questao['avaliacao_id'];
         <textarea name="enunciado" rows="5" cols="60" required><?php echo htmlspecialchars($questao['enunciado'] ?? ''); ?></textarea><br><br>
 
         <label>Tipo de questão:</label>
-        <select name="tipo" id="tipo" required onchange="toggleAlternativas()">
+        <select name="tipo" id="tipo" required onchange="toggleCampos()">
             <option value="dissertativa" <?php if (($questao['tipo'] ?? '') === 'dissertativa') echo 'selected'; ?>>Dissertativa</option>
             <option value="multipla_escolha" <?php if (($questao['tipo'] ?? '') === 'multipla_escolha') echo 'selected'; ?>>Múltipla Escolha</option>
         </select><br><br>
 
+        <!-- Múltipla Escolha -->
         <div id="alternativas-box" style="display: none;">
             <label>Alternativas:</label><br>
             <?php
@@ -58,13 +59,20 @@ $avaliacao_id = $questao['avaliacao_id'];
                 $alternativas = json_decode($questao['alternativas'], true) ?? [];
             }
             $letras = ['A', 'B', 'C', 'D'];
-            foreach ($letras as $letra):
+            foreach ($letras as $index => $letra):
+                $valor = $alternativas[$index] ?? ''; // Corrigido para index numérico
             ?>
-                <input type="text" name="alternativas[]" placeholder="Alternativa <?php echo $letra; ?>" value="<?php echo htmlspecialchars($alternativas[$letra] ?? ''); ?>"><br>
+                <input type="text" name="alternativas[]" placeholder="Alternativa <?php echo $letra; ?>" value="<?php echo htmlspecialchars($valor); ?>"><br>
             <?php endforeach; ?>
             <br>
             <label>Resposta correta (letra):</label><br>
             <input type="text" name="resposta_correta" maxlength="1" value="<?php echo htmlspecialchars($questao['resposta_correta'] ?? ''); ?>"><br><br>
+        </div>
+
+        <!-- Dissertativa -->
+        <div id="resposta-dissertativa-box" style="display: none;">
+            <label>Resposta esperada:</label><br>
+            <textarea name="resposta_correta" rows="4" cols="60"><?php echo htmlspecialchars($questao['resposta_correta'] ?? ''); ?></textarea><br><br>
         </div>
 
         <button type="submit">Salvar Alterações</button>
@@ -72,12 +80,13 @@ $avaliacao_id = $questao['avaliacao_id'];
     </form>
 
     <script>
-        function toggleAlternativas() {
+        function toggleCampos() {
             const tipo = document.getElementById("tipo").value;
             document.getElementById("alternativas-box").style.display = tipo === "multipla_escolha" ? "block" : "none";
+            document.getElementById("resposta-dissertativa-box").style.display = tipo === "dissertativa" ? "block" : "none";
         }
 
-        window.onload = toggleAlternativas;
+        window.onload = toggleCampos;
     </script>
 </body>
 

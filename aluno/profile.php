@@ -48,9 +48,11 @@ $sqlProgresso = "
         c.nome AS curso_nome,
         COUNT(a.id) AS total_aulas,
         SUM(CASE WHEN pa.concluida = 1 THEN 1 ELSE 0 END) AS aulas_concluidas
-    FROM cursos c
+    FROM inscricoes i
+    JOIN cursos c ON i.curso_id = c.id
     JOIN aulas a ON c.id = a.curso_id
-    LEFT JOIN progresso_aula pa ON pa.aula_id = a.id AND pa.aluno_id = ?
+    LEFT JOIN progresso_aula pa ON pa.aula_id = a.id AND pa.aluno_id = i.aluno_id
+    WHERE i.aluno_id = ?
     GROUP BY c.id, c.nome
 ";
 $stmtProgresso = $conexao->prepare($sqlProgresso);
