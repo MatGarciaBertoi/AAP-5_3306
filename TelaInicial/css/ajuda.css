@@ -95,3 +95,16 @@
     border-radius: 8px; /* Bordas arredondadas */
     border: 1px solid var(--azul); /* Borda cinza */
 }
+
+.central-header-main{
+    margin-top: 2rem;
+}
+
+.central-header-main h1{
+    margin-bottom: 1rem;
+}
+
+.central-header-main a{
+    text-decoration: none;
+    color: var(--azul);
+}

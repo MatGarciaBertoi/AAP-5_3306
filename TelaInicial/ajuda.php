@@ -69,6 +69,12 @@
                         <a href="#chatraChatExpanded">Chatbot</a>.
                     </p>
                 </div>
+                <div class="central-header-main">
+                    <h1>Quer nos enviar sugestões?</h1>
+                    <p>
+                        Você pode dar sugestões para a gente atráves do nosso <a href="formsSatisfacao.php" target="_blank">Formulário</a>.
+                    </p>
+                </div>
                 <div class="central-main">
                     <div class="central-subtitle">
                         <h2>Contamos também com outros canais:</h2>

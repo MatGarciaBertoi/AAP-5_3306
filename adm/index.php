@@ -30,8 +30,8 @@
                     <div class="dashboard-item"><strong>Dashboard:</strong> Visão geral e navegação rápida entre as seções.</div>
                     <div class="dashboard-item"><strong>Cursos:</strong> Adicione, edite ou remova cursos, incluindo descrição, duração, imagem e vídeo.</div>
                     <div class="dashboard-item"><strong>Usuários:</strong> Gerencie alunos, professores e administradores, controlando acessos e atualizações de dados.</div>
+                    <div class="dashboard-item"><strong>Formulários de Satisfação:</strong> Analise todos os formulários de satisfação enviados pelos usuários da plataforma.</div>
                     <div class="dashboard-item"><strong>Suporte:</strong> Visualize e responda mensagens de usuários, acompanhando suas dúvidas e sugestões.</div>
-                    <div class="dashboard-item"><strong>Acessibilidade:</strong> Configure recursos como aumento de fonte e ativação de legendas para maior inclusão.</div>
                 </div>
 
                 <p class="final-text">

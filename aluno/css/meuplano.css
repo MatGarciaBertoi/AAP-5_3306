@@ -1,6 +1,29 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(90deg, #000000, #0346cc);
+    color: #333;
+    line-height: 1.6;
+}
+
+.content-main {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
 .content-main{
     display: flex;
     justify-content: center;
+    flex-direction: column;
+}
+
+.plano-container{
+    display: flex;
+    align-items: center;
     flex-direction: column;
 }
 

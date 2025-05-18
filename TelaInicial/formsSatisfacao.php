@@ -1,23 +1,29 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Satisfação e Preferências</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="../images/logotipocw.png" />
+    <link rel="stylesheet" href="css/forms.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Formulário de Satisfação e Preferências</h1>
-        <form action="#" method="post">
+        <form action="funcoes/processa_formulario.php" method="post">
             <!-- Informações Básicas -->
             <section class="section">
                 <h2>Informações Básicas</h2>
                 <label for="name">Nome Completo:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" required
+                    value="<?php echo isset($_SESSION['nome']) ? htmlspecialchars($_SESSION['nome']) : ''; ?>">
 
                 <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" required
+                    value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>">
 
                 <label>Qual é o seu nível de experiência com a nossa plataforma?</label>
                 <select id="experience" name="experience">
@@ -90,6 +96,9 @@
                     <input type="text" id="course_type_other" name="course_type_other">
                 </div>
 
+                <label>Você gostaria de ver mais cursos sobre algum tema específico? Se sim, qual?</label>
+                <input type="text" id="specific_theme" name="specific_theme">
+
                 <label>Quais são suas principais motivações para usar nossa plataforma? (Você pode selecionar mais de uma)</label>
                 <div class="checkbox-group">
                     <input type="checkbox" id="habilidades" name="motivations" value="habilidades">
@@ -105,17 +114,12 @@
                     <input type="text" id="motivations_other" name="motivations_other">
                 </div>
 
-                <label>Você gostaria de ver mais cursos sobre algum tema específico? Se sim, qual?</label>
-                <input type="text" id="specific_theme" name="specific_theme">
-
                 <label>Quais recursos você considera mais importantes em um curso online? (Você pode selecionar mais de um)</label>
                 <div class="checkbox-group">
                     <input type="checkbox" id="conteudo" name="resources" value="conteudo">
                     <label for="conteudo">Conteúdo atualizado</label>
                     <input type="checkbox" id="videoaulas" name="resources" value="videoaulas">
                     <label for="videoaulas">Qualidade das videoaulas</label>
-                    <input type="checkbox" id="material" name="resources" value="material">
-                    <label for="material">Material complementar (e-books, artigos, etc.)</label>
                     <input type="checkbox" id="interatividade" name="resources" value="interatividade">
                     <label for="interatividade">Interatividade e fóruns de discussão</label>
                     <input type="checkbox" id="certificacao" name="resources" value="certificacao">
@@ -155,4 +159,5 @@
         </form>
     </div>
 </body>
+
 </html>
