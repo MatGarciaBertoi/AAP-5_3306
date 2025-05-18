@@ -1,62 +1,66 @@
 <?php
-session_start();
-include_once('../../funcoes/conexao.php');
+include_once('../../funcoes/sessoes/check_aluno.php');
+require_once '../../funcoes/conexao.php';
 
-if (!isset($_SESSION['id']) || $_SESSION['tipo'] !== 'aluno') {
-    header('Location: ../../cadastro_login/usuario/signin.php');
-    exit;
-}
-
-// Verificar campos obrigatórios
-if (empty($_POST['nome']) || empty($_POST['email']) || empty($_POST['cpf']) || empty($_POST['celular']) || empty($_POST['forma_pagamento']) || empty($_POST['plano'])) {
-    header('Location: ../assinar_plano.php?msg=campos_obrigatorios');
-    exit;
-}
-
-// Captura os dados do formulário
 $aluno_id = $_SESSION['id'];
-$plano = $_POST['plano'];
-$data_assinatura = date('Y-m-d H:i:s');
+$plano_nome = $_POST['plano'] ?? '';
+$nome = $_POST['nome'] ?? '';
+$email = $_POST['email'] ?? '';
+$celular = $_POST['celular'] ?? '';
+$cpf = $_POST['cpf'] ?? '';
+$forma_pagamento = $_POST['forma_pagamento'] ?? '';
 
-// Definindo a expiração para 30 dias depois da assinatura (opcional)
+$data_assinatura = date('Y-m-d H:i:s');
 $data_expiracao = date('Y-m-d H:i:s', strtotime('+30 days'));
 
-// Verifica se o aluno já tem uma assinatura
-$sqlCheck = "SELECT id FROM assinaturas WHERE aluno_id = ?";
-$stmtCheck = $conexao->prepare($sqlCheck);
-$stmtCheck->bind_param("i", $aluno_id);
-$stmtCheck->execute();
-$result = $stmtCheck->get_result();
-
-if ($result->num_rows > 0) {
-    // Já tem assinatura, atualizar
-    $row = $result->fetch_assoc();
-    $assinatura_id = $row['id'];
-
-    $sqlUpdate = "UPDATE assinaturas SET plano = ?, data_assinatura = ?, data_expiracao = ? WHERE id = ?";
-    $stmtUpdate = $conexao->prepare($sqlUpdate);
-    $stmtUpdate->bind_param("sssi", $plano, $data_assinatura, $data_expiracao, $assinatura_id);
-
-    if ($stmtUpdate->execute()) {
-        header('Location: ../meuplano.php');
-        exit;
-    } else {
-        header('Location: ../assinar_plano.php?msg=erro_ao_assinar');
-        exit;
-    }
-
-} else {
-    // Não tem assinatura, inserir nova
-    $sqlInsert = "INSERT INTO assinaturas (aluno_id, plano, data_assinatura, data_expiracao) VALUES (?, ?, ?, ?)";
-    $stmtInsert = $conexao->prepare($sqlInsert);
-    $stmtInsert->bind_param("isss", $aluno_id, $plano, $data_assinatura, $data_expiracao);
-
-    if ($stmtInsert->execute()) {
-        header('Location: ../meuplano.php');
-        exit;
-    } else {
-        header('Location: ../assinar_plano.php?msg=erro_ao_assinar');
-        exit;
-    }
+// Validação básica
+if (!$plano_nome || !$nome || !$email || !$celular || !$cpf || !$forma_pagamento) {
+    header("Location: ../assinar_plano.php?msg=campos_obrigatorios&plano=" . urlencode($plano_nome));
+    exit;
 }
+
+// Buscar o ID do plano pelo nome
+$sql_plano = "SELECT id FROM planos WHERE nome = ? AND ativo = 1";
+$stmt = $conexao->prepare($sql_plano);
+$stmt->bind_param("s", $plano_nome);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 0) {
+    header("Location: ../assinar_plano.php?msg=erro_plano_invalido&plano=" . urlencode($plano_nome));
+    exit;
+}
+
+$row = $result->fetch_assoc();
+$plano_id = $row['id'];
+
+// Expira assinatura anterior, se houver (atualiza para data atual)
+$sql_expira = "UPDATE assinaturas 
+               SET data_expiracao = NOW()
+               WHERE aluno_id = ? AND (data_expiracao IS NULL OR data_expiracao > NOW())";
+$stmt = $conexao->prepare($sql_expira);
+$stmt->bind_param("i", $aluno_id);
+$stmt->execute(); // mesmo que não exista, segue o fluxo
+
+// Insere nova assinatura
+$sql_insert_assinatura = "INSERT INTO assinaturas (aluno_id, plano_id, data_assinatura, data_expiracao) 
+                          VALUES (?, ?, ?, ?)";
+$stmt = $conexao->prepare($sql_insert_assinatura);
+$stmt->bind_param("iiss", $aluno_id, $plano_id, $data_assinatura, $data_expiracao);
+
+if (!$stmt->execute()) {
+    header("Location: ../assinar_plano.php?msg=erro_ao_assinar&plano=" . urlencode($plano_nome));
+    exit;
+}
+
+// Registra o pagamento
+$sql_insert_pagamento = "INSERT INTO pagamentos (aluno_id, plano_id, nome, email, celular, cpf, forma_pagamento, data_pagamento) 
+                         VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+$stmt = $conexao->prepare($sql_insert_pagamento);
+$stmt->bind_param("iissssss", $aluno_id, $plano_id, $nome, $email, $celular, $cpf, $forma_pagamento, $data_assinatura);
+$stmt->execute(); // pagamento não bloqueante
+
+// Redireciona com sucesso
+header("Location: ../meuplano.php?msg=assinatura_sucesso");
+exit;
 ?>

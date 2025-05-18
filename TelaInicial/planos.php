@@ -1,4 +1,18 @@
-<?php session_start(); ?>
+<?php 
+session_start();
+
+include_once '../funcoes/conexao.php';
+
+// Consulta os planos ativos
+$sql = "SELECT * FROM planos WHERE ativo = 1";
+$result = mysqli_query($conexao, $sql);
+
+// Verifica se houve erro na consulta
+if (!$result) {
+    die("Erro ao buscar planos: " . mysqli_error($conexao));
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -22,42 +36,20 @@
                     <h2>Escolha seu Plano</h2>
                     <div class="planos-container">
 
-                        <div class="plano-card">
-                            <h3>Essencial</h3>
-                            <p>Ideal para quem quer acesso completo aos nossos cursos.</p>
-                            <ul>
-                                <li>Acesso ilimitado a todos os cursos</li>
-                                <li>Material de apoio</li>
-                                <li>Certificados digitais</li>
-                            </ul>
-                            <p class="preco">R$ 20,00/mês</p>
-                            <a href="assinar_plano.php?plano=Essencial" class="btn-assinar">Assinar</a>
-                        </div>
-
-                        <div class="plano-card destaque">
-                            <h3>Profissional</h3>
-                            <p>Para quem busca suporte e aprendizado contínuo.</p>
-                            <ul>
-                                <li>Todos os benefícios do Essencial +</li>
-                                <li>Webinars exclusivos</li>
-                                <li>Suporte prioritário</li>
-                            </ul>
-                            <p class="preco">R$ 30,00/mês</p>
-                            <a href="assinar_plano.php?plano=Profissional" class="btn-assinar">Assinar</a>
-                        </div>
-
-                        <div class="plano-card">
-                            <h3>Empreendedor</h3>
-                            <p>Para quem quer escalar seus resultados com acompanhamento especial.</p>
-                            <ul>
-                                <li>Todos os benefícios do Profissional +</li>
-                                <li>Mentorias ao vivo</li>
-                                <li>Consultoria personalizada</li>
-                                <li>Acesso antecipado a novos cursos</li>
-                            </ul>
-                            <p class="preco">R$ 40,00/mês</p>
-                            <a href="assinar_plano.php?plano=Empreendedor" class="btn-assinar">Assinar</a>
-                        </div>
+                        <?php while ($plano = mysqli_fetch_assoc($result)): ?>
+                            <div class="plano-card">
+                                <h3><?= $plano['nome'] ?></h3>
+                                <p><?= $plano['descricao'] ?></p>
+                                <ul>
+                                    <?php
+                                    $beneficios = explode("\n", $plano['beneficios']);
+                                    foreach ($beneficios as $b) echo "<li>$b</li>";
+                                    ?>
+                                </ul>
+                                <p class="preco">R$ <?= number_format($plano['preco'], 2, ',', '.') ?>/mês</p>
+                                <a href="assinar_plano.php?plano=<?= urlencode($plano['nome']) ?>" class="btn-assinar">Assinar</a>
+                            </div>
+                        <?php endwhile; ?>
 
                     </div>
                 </section>

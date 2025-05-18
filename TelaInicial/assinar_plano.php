@@ -5,9 +5,10 @@ if (!isset($_SESSION['id']) || $_SESSION['tipo'] !== 'aluno') {
     exit;
 }
 
-$plano = $_GET['plano'] ?? 'Essencial'; // pega o plano selecionado
+$plano = $_GET['plano'] ?? 'Essencial';
 
 // Recupera os dados do aluno da sessão
+$alunoId = $_SESSION['id'];
 $nomeAluno = $_SESSION['nome'] ?? '';
 $emailAluno = $_SESSION['email'] ?? '';
 ?>
@@ -25,7 +26,7 @@ $emailAluno = $_SESSION['email'] ?? '';
 
 <body>
     <div class="header-main">
-        <?php include 'partials/header.php'; ?> <!-- Inclui o header -->
+        <?php include 'partials/header.php'; ?>
     </div>
     <main class="assinar-main">
         <?php
@@ -43,6 +44,7 @@ $emailAluno = $_SESSION['email'] ?? '';
         <h2>Assinar Plano: <?= htmlspecialchars($plano) ?></h2>
 
         <form action="funcoes/processa_pagamento.php" method="POST">
+            <input type="hidden" name="aluno_id" value="<?= htmlspecialchars($alunoId) ?>">
             <input type="hidden" name="plano" value="<?= htmlspecialchars($plano) ?>">
 
             <label>Nome completo:</label><br>
@@ -67,7 +69,7 @@ $emailAluno = $_SESSION['email'] ?? '';
             <button type="submit">Finalizar Compra</button>
         </form>
     </main>
-    <?php include 'partials/footer.php'; ?> <!-- Inclui o footer -->
+    <?php include 'partials/footer.php'; ?>
 </body>
 
 </html>

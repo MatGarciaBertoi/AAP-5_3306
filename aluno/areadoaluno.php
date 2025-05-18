@@ -49,7 +49,7 @@ $result = $stmt->get_result();
                             <div class="course">
                                 <h3><?= htmlspecialchars($curso['nome']); ?></h3>
                                 <?php if (!empty($curso['imagem'])): ?>
-                                    <img src="../professor/cursos/funcoes/uploads/<?= htmlspecialchars($curso['imagem']); ?>" alt="Imagem do curso">
+                                    <img src="../<?= htmlspecialchars($curso['imagem']); ?>" alt="Imagem do curso">
                                 <?php endif; ?>
                                 <p><?= htmlspecialchars($curso['descricao']); ?></p>
                                 <p><strong>Inscrito em:</strong> <?= date('d/m/Y H:i', strtotime($curso['data_inscricao'])); ?></p>

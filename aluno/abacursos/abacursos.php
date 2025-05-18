@@ -48,7 +48,7 @@ $curso = $result->fetch_assoc();
     <div class="container">
         <h1><?= htmlspecialchars($curso['nome']); ?></h1>
         <?php if (!empty($curso['imagem'])): ?>
-            <img src="../../professor/cursos/funcoes/uploads/<?= htmlspecialchars($curso['imagem']); ?>" alt="Imagem do curso">
+            <img src="../../<?= htmlspecialchars($curso['imagem']); ?>" alt="Imagem do curso">
         <?php endif; ?>
 
         <p><strong>Descrição do curso:</strong></p>
