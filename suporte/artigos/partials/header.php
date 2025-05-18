@@ -44,7 +44,7 @@
      </nav>
  </div>
 
-<?php include '../funcoes/usuario/acessibilidade.php'; ?>
+<?php include '../../funcoes/usuario/acessibilidade.php'; ?>
 
  <script>
      document.addEventListener('DOMContentLoaded', function() {

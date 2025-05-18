@@ -35,41 +35,41 @@
                     <h3><i class="bi bi-person-lock"></i> Acesso e Login</h3>
                     <ul>
                         <li><a href="artigos/redefinir_senha.php">Como redefinir minha senha?</a></li>
-                        <li><a href="#">Esqueci meu e-mail de acesso</a></li>
-                        <li><a href="#">Como mudar minha senha?</a></li>
+                        <li><a href="artigos/esqueci_email.php">Esqueci meu e-mail de acesso</a></li>
+                        <li><a href="artigos/mudar_senha.php">Como mudar minha senha?</a></li>
                     </ul>
                 </div>
 
                 <div class="article-card">
                     <h3><i class="bi bi-book"></i> Cursos e Aulas</h3>
                     <ul>
-                        <li><a href="#">Como acessar meus cursos?</a></li>
-                        <li><a href="#">Problemas para assistir às aulas</a></li>
-                        <li><a href="#">Como enviar atividades no curso?</a></li>
+                        <li><a href="artigos/acessar_cursos.php">Como acessar meus cursos?</a></li>
+                        <li><a href="artigos/problemas_assistir_aulas.php">Problemas para assistir às aulas</a></li>
+                        <li><a href="artigos/enviar_atividades.php">Como enviar atividades no curso?</a></li>
                     </ul>
                 </div>
 
                 <div class="article-card">
                     <h3><i class="bi bi-credit-card"></i> Pagamentos</h3>
                     <ul>
-                        <li><a href="#">Formas de pagamento aceitas</a></li>
-                        <li><a href="#">Como verificar pendências financeiras?</a></li>
+                        <li><a href="artigos/formas_pagamento.php">Formas de pagamento aceitas</a></li>
+                        <li><a href="artigos/pendencias_financeiras.php">Como verificar pendências financeiras?</a></li>
                     </ul>
                 </div>
 
                 <div class="article-card">
                     <h3><i class="bi bi-award"></i> Certificados</h3>
                     <ul>
-                        <li><a href="#">Como emitir meu certificado?</a></li>
-                        <li><a href="#">Requisitos para emissão do certificado</a></li>
+                        <li><a href="artigos/emitir_certificado.php">Como emitir meu certificado?</a></li>
+                        <li><a href="artigos/requisitos_certificado.php">Requisitos para emissão do certificado</a></li>
                     </ul>
                 </div>
 
                 <div class="article-card">
                     <h3><i class="bi bi-gear"></i> Suporte Técnico</h3>
                     <ul>
-                        <li><a href="#">O vídeo da aula não carrega, o que fazer?</a></li>
-                        <li><a href="#">Problemas de login ou travamento</a></li>
+                        <li><a href="artigos/video_nao_carrega.php">O vídeo da aula não carrega, o que fazer?</a></li>
+                        <li><a href="artigos/problemas_login_travamento.php">Problemas de login ou travamento</a></li>
                     </ul>
                 </div>
 
