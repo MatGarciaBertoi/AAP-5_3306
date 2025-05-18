@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['id']) || $_SESSION['tipo'] !== 'aluno') {
-    header('Location: http://localhost/AAP-5_3306/cadastro_login/aluno/signin.php');
+    header('Location: http://localhost/AAP-5_3306/cadastro_login/usuario/signin.php');
     exit;
 }
 
@@ -28,6 +28,18 @@ $emailAluno = $_SESSION['email'] ?? '';
         <?php include 'partials/header.php'; ?> <!-- Inclui o header -->
     </div>
     <main class="assinar-main">
+        <?php
+        $msg = $_GET['msg'] ?? '';
+        $mensagens = [
+            'campos_obrigatorios' => 'Todos os campos são obrigatórios.',
+            'assinatura_existente' => 'Você já possui uma assinatura ativa.',
+            'erro_ao_assinar' => 'Erro ao processar sua assinatura. Tente novamente.',
+        ];
+        if ($msg && isset($mensagens[$msg])) {
+            echo "<div class='mensagem-erro'>{$mensagens[$msg]}</div>";
+        }
+        ?>
+
         <h2>Assinar Plano: <?= htmlspecialchars($plano) ?></h2>
 
         <form action="funcoes/processa_pagamento.php" method="POST">

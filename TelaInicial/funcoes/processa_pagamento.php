@@ -1,11 +1,6 @@
 <?php
-session_start();
+include_once('../../funcoes/sessoes/check_aluno.php');
 require_once '../../funcoes/conexao.php';
-
-if (!isset($_SESSION['id']) || $_SESSION['tipo'] !== 'aluno') {
-    header('Location: ../../cadastro_login/aluno/signin.php');
-    exit;
-}
 
 $aluno_id = $_SESSION['id'];
 $plano = $_POST['plano'] ?? '';
@@ -21,7 +16,7 @@ $data_expiracao = date('Y-m-d H:i:s', strtotime('+30 days'));
 
 // Validação básica
 if (!$plano || !$nome || !$email || !$celular || !$cpf || !$forma_pagamento) {
-    echo "Todos os campos são obrigatórios.";
+    header("Location: ../assinar_plano.php?msg=campos_obrigatorios&plano=" . urlencode($plano));
     exit;
 }
 
@@ -35,7 +30,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    echo "Você já possui uma assinatura ativa.";
+    header("Location: ../assinar_plano.php?msg=assinatura_existente&plano=" . urlencode($plano));
     exit;
 }
 
@@ -46,10 +41,10 @@ $stmt = $conexao->prepare($sql_insert);
 $stmt->bind_param("isss", $aluno_id, $plano, $data_assinatura, $data_expiracao);
 
 if ($stmt->execute()) {
-    // Redireciona para cursos com mensagem de sucesso
     header("Location: ../cursos.php?msg=assinatura_sucesso");
     exit;
 } else {
-    echo "Erro ao processar sua assinatura.";
+    header("Location: ../assinar_plano.php?msg=erro_ao_assinar&plano=" . urlencode($plano));
+    exit;
 }
 ?>

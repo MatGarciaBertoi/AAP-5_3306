@@ -40,6 +40,12 @@ $curso = $result->fetch_assoc();
     </div>
     <main class="curso-detalhes">
         <div class="container">
+            <?php if (isset($_GET['erro'])): ?>
+                <div class="mensagem-erro"><?= htmlspecialchars($_GET['erro']) ?></div>
+            <?php elseif (isset($_GET['sucesso'])): ?>
+                <div class="mensagem-sucesso"><?= htmlspecialchars($_GET['sucesso']) ?></div>
+            <?php endif; ?>
+
             <h2><?= htmlspecialchars($curso['nome']) ?></h2>
 
             <?php if (!empty($curso['imagem'])): ?>

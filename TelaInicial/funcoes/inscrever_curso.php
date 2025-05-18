@@ -1,17 +1,12 @@
 <?php
-session_start();
+include_once('../../funcoes/sessoes/check_aluno.php');
 require_once '../../funcoes/conexao.php';
-
-if (!isset($_SESSION['id']) || $_SESSION['tipo'] !== 'aluno') {
-    header('Location: ../../cadastro_login/aluno/signin.php');
-    exit;
-}
 
 $aluno_id = $_SESSION['id'];
 $curso_id = $_POST['curso_id'] ?? null;
 
 if (!$curso_id) {
-    echo "ID do curso não informado.";
+    header("Location: ../detalhes_curso.php?curso_id=$curso_id&erro=ID do curso não informado.");
     exit;
 }
 
@@ -26,8 +21,9 @@ $stmt->bind_param("i", $aluno_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
+
 if ($result->num_rows === 0) {
-    echo "Você precisa ter uma assinatura ativa para se inscrever em um curso.";
+    header("Location: ../detalhes_curso.php?curso_id=$curso_id&erro=Você precisa ter uma assinatura ativa para se inscrever em um curso.");
     exit;
 }
 
@@ -38,7 +34,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    echo "Você já está inscrito neste curso.";
+    header("Location: ../detalhes_curso.php?curso_id=$curso_id&erro=Você já está inscrito neste curso.");
     exit;
 }
 
@@ -47,9 +43,10 @@ $stmt = $conexao->prepare("INSERT INTO inscricoes (aluno_id, curso_id, data_insc
 $stmt->bind_param("ii", $aluno_id, $curso_id);
 
 if ($stmt->execute()) {
-    header("Location: ../cursos.php?msg=inscricao_sucesso");
+    header("Location: ../detalhes_curso.php?curso_id=$curso_id&sucesso=Inscrição realizada com sucesso!");
     exit;
 } else {
-    echo "Erro ao se inscrever no curso.";
+    header("Location: ../detalhes_curso.php?curso_id=$curso_id&erro=Erro ao se inscrever no curso.");
+    exit;
 }
 ?>
