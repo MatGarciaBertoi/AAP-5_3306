@@ -197,18 +197,58 @@ main{
     padding: 0 40px;
 }
 
+/* Estilo base da search-bar */
 .search-bar {
-    flex-grow: 1;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .search-bar input {
-    width: 80%;
-    max-width: 400px;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    transition: 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+.search-bar input:focus {
+    border-color: var(--azul);
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+}
+
+.search-results {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0 0;
+    display: none;
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.search-results li {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.search-results li:hover {
+    background-color: var(--cinza-claro);
 }
 
 header {
@@ -415,9 +455,33 @@ section .wave.wave3 {
     top: 7rem;
     left: 10px;
     padding: 8px;
-}
+    }
 .painel-acessibilidade {
     top: 10rem;
     left: 15px;
+    }
+.search-bar {
+    max-width: 90%;
+    margin: 10px auto;
+    }
+
+.search-bar input {
+    font-size: 0.95rem;
+    padding: 8px 12px;
+    }
+
+.search-results li {
+        font-size: 0.95rem;
+    }
 }
+
+@media (max-width: 480px) {
+    .search-bar input {
+        font-size: 0.9rem;
+        padding: 7px 10px;
+    }
+
+    .search-results {
+        max-height: 250px;
+    }
 }

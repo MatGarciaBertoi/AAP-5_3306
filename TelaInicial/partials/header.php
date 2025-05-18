@@ -4,7 +4,8 @@
                 <img src="../images/logocwpreto_transparente.png" alt="Logo da CW Cursos" />
             </a></div>
         <div class="search-bar">
-            <input type="text" placeholder="O que você gostaria de aprender?">
+            <input type="text" id="searchInput" placeholder="O que você gostaria de aprender?" autocomplete="off" />
+            <ul id="searchResults" class="search-results"></ul>
         </div>
 
         <nav class="nav-botoes">
@@ -101,6 +102,59 @@
         document.addEventListener('click', function(event) {
             if (!perfilBtn.contains(event.target) && !opcoes.contains(event.target)) {
                 opcoes.classList.remove('show');
+            }
+        });
+    });
+</script>
+
+<!--Barra de Pesquisa-->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const input = document.getElementById('searchInput');
+        const results = document.getElementById('searchResults');
+
+        // Supondo que você tenha um array JS com os cursos (id, nome, link)
+        const cursos = Array.from(document.querySelectorAll('.course-card')).map(card => {
+            return {
+                id: card.dataset.id, // ou algum atributo data-id no HTML
+                titulo: card.querySelector('h3').innerText,
+                link: card.closest('.course-card-link').href
+            };
+        });
+
+        input.addEventListener('input', () => {
+            const termo = input.value.trim().toLowerCase();
+            if (!termo) {
+                results.style.display = 'none';
+                results.innerHTML = '';
+                return;
+            }
+
+            const filtrados = cursos.filter(curso =>
+                curso.titulo.toLowerCase().includes(termo)
+            );
+
+            if (filtrados.length === 0) {
+                results.innerHTML = '<li>Nenhum curso encontrado</li>';
+            } else {
+                results.innerHTML = filtrados.map(curso => `
+        <li data-link="${curso.link}">${curso.titulo}</li>
+      `).join('');
+            }
+            results.style.display = 'block';
+        });
+
+        // Clique no item do resultado leva para o curso
+        results.addEventListener('click', (e) => {
+            if (e.target.tagName === 'LI' && e.target.dataset.link) {
+                window.location.href = e.target.dataset.link;
+            }
+        });
+
+        // Fecha dropdown se clicar fora
+        document.addEventListener('click', (e) => {
+            if (!input.contains(e.target) && !results.contains(e.target)) {
+                results.style.display = 'none';
             }
         });
     });

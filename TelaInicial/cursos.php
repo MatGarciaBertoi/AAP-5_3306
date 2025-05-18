@@ -33,13 +33,11 @@ include '../funcoes/conexao.php'; // Arquivo com a conexão ao banco
                     <select id="filtroCategoria">
                         <option value="todas">Todas</option>
                         <?php
-                        // Buscar os valores ENUM da coluna 'categoria' da tabela 'cursos'
                         $sql_enum = "SHOW COLUMNS FROM cursos LIKE 'categoria'";
                         $res_enum = $conexao->query($sql_enum);
-
                         if ($res_enum && $res_enum->num_rows > 0) {
                             $row_enum = $res_enum->fetch_assoc();
-                            $enum_str = $row_enum['Type']; // exemplo: enum('op1','op2')
+                            $enum_str = $row_enum['Type'];
                             preg_match_all("/'([^']+)'/", $enum_str, $matches);
                             foreach ($matches[1] as $categoria) {
                                 echo "<option value=\"" . htmlspecialchars($categoria) . "\">" . htmlspecialchars($categoria) . "</option>";
@@ -59,6 +57,7 @@ include '../funcoes/conexao.php'; // Arquivo com a conexão ao banco
                 </section>
 
 
+
                 <section class="courses">
                     <?php
                     $sql = "SELECT * FROM cursos";
@@ -67,7 +66,10 @@ include '../funcoes/conexao.php'; // Arquivo com a conexão ao banco
                     if ($result->num_rows > 0) {
                         while ($curso = $result->fetch_assoc()) {
                             echo "<a href='detalhes_curso.php?curso_id=" . $curso['id'] . "' class='course-card-link'>";
-                            echo "<div class='course-card categoria-" . strtolower($curso['categoria']) . " dificuldade-" . strtolower($curso['dificuldade']) . "'>";
+                            $categoriaClasse = 'categoria-' . preg_replace('/[^a-z0-9]+/i', '', strtolower(str_replace([' ', 'á', 'ã', 'é', 'ê', 'í', 'ó', 'ô', 'ú', 'ç'], ['', 'a', 'a', 'e', 'e', 'i', 'o', 'o', 'u', 'c'], $curso['categoria'])));
+                            $dificuldadeClasse = 'dificuldade-' . strtolower($curso['dificuldade']);
+                            echo "<div class='course-card $categoriaClasse $dificuldadeClasse'>";
+
 
                             if (!empty($curso['imagem'])) {
                                 echo "<img src='../" . htmlspecialchars($curso['imagem']) . "' alt='Imagem do curso' class='course-img'>";
@@ -99,35 +101,30 @@ include '../funcoes/conexao.php'; // Arquivo com a conexão ao banco
     <script>
         const filtroCategoria = document.getElementById('filtroCategoria');
         const filtroDificuldade = document.getElementById('filtroDificuldade');
-        const filtroBusca = document.getElementById('filtroBusca');
-        const cards = document.querySelectorAll('.course-card');
+        const cards = document.querySelectorAll('.course-card-link');
 
         function filtrarCursos() {
-            const categoriaSelecionada = filtroCategoria.value.toLowerCase();
+            const categoriaSelecionada = filtroCategoria.value.toLowerCase().replace(/[^a-z0-9]/g, '');
             const dificuldadeSelecionada = filtroDificuldade.value.toLowerCase();
-            const textoBusca = filtroBusca.value.toLowerCase();
 
-            cards.forEach(card => {
+            cards.forEach(cardLink => {
+                const card = cardLink.querySelector('.course-card');
                 const categoriaClasse = card.classList.contains(`categoria-${categoriaSelecionada}`);
                 const dificuldadeClasse = card.classList.contains(`dificuldade-${dificuldadeSelecionada}`);
 
                 const mostrarCategoria = categoriaSelecionada === "todas" || categoriaClasse;
                 const mostrarDificuldade = dificuldadeSelecionada === "todas" || dificuldadeClasse;
 
-                const textoCard = card.textContent.toLowerCase();
-                const mostrarBusca = textoCard.includes(textoBusca);
-
-                if (mostrarCategoria && mostrarDificuldade && mostrarBusca) {
-                    card.style.display = "block";
+                if (mostrarCategoria && mostrarDificuldade) {
+                    cardLink.style.display = "block"; // esconder ou mostrar o <a>
                 } else {
-                    card.style.display = "none";
+                    cardLink.style.display = "none";
                 }
             });
         }
 
         filtroCategoria.addEventListener('change', filtrarCursos);
         filtroDificuldade.addEventListener('change', filtrarCursos);
-        filtroBusca.addEventListener('input', filtrarCursos);
     </script>
 
 
