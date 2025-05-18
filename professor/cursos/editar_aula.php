@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmtUpdate->bind_param("sssi", $titulo, $conteudo, $video_url, $aula_id);
 
     if ($stmtUpdate->execute()) {
-        header("Location: ver_conteudo.php?id=" . $aula['curso_id']);
+        header("Location: ver_conteudo_curso.php?id=" . $aula['curso_id']);
         exit;
     } else {
         echo "Erro ao atualizar a aula.";

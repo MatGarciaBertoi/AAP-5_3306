@@ -15,6 +15,22 @@ if (!$curso_id) {
     exit;
 }
 
+// Verifica se o aluno possui uma assinatura válida (ativa)
+$sql_verifica_assinatura = "
+    SELECT * FROM assinaturas 
+    WHERE aluno_id = ? 
+    AND (data_expiracao IS NULL OR data_expiracao >= NOW())
+";
+$stmt = $conexao->prepare($sql_verifica_assinatura);
+$stmt->bind_param("i", $aluno_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 0) {
+    echo "Você precisa ter uma assinatura ativa para se inscrever em um curso.";
+    exit;
+}
+
 // Verifica se já está inscrito
 $stmt = $conexao->prepare("SELECT * FROM inscricoes WHERE aluno_id = ? AND curso_id = ?");
 $stmt->bind_param("ii", $aluno_id, $curso_id);

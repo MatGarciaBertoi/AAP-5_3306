@@ -40,45 +40,56 @@ $questoes = $stmtQuestoes->get_result();
 </head>
 
 <body>
-     <?php include 'partials/header.php'; ?>
-    <h1>Questões de "<?php echo htmlspecialchars($avaliacao['titulo'] ?? ''); ?> "</h1>
+    <?php include 'partials/header.php'; ?>
+    <div class="container">
+        <h1>Questões de "<?php echo htmlspecialchars($avaliacao['titulo'] ?? ''); ?> "</h1>
 
-    <a href="adicionar_questao.php?avaliacao_id=<?php echo $avaliacao_id; ?>" style="margin-bottom: 15px; display: inline-block; background-color: #2ecc71; color: white; padding: 10px; border-radius: 4px; text-decoration: none;">+ Adicionar Nova Questão</a>
+        <a href="adicionar_questao.php?avaliacao_id=<?php echo $avaliacao_id; ?>" style="margin-bottom: 15px; display: inline-block; background-color: #2ecc71; color: white; padding: 10px; border-radius: 4px; text-decoration: none;">+ Adicionar Nova Questão</a>
 
-    <?php if ($questoes->num_rows > 0): ?>
-        <?php while ($q = $questoes->fetch_assoc()): ?>
-            <div class="item-card">
-                <strong>Enunciado:</strong>
-                <p><?php echo nl2br(htmlspecialchars($q['enunciado'] ?? '')); ?></p>
+        <?php if ($questoes->num_rows > 0): ?>
+            <?php while ($q = $questoes->fetch_assoc()): ?>
+                <div class="item-card">
+                    <strong>Enunciado:</strong>
+                    <p><?php echo nl2br(htmlspecialchars($q['enunciado'] ?? '')); ?></p>
 
-                <p><strong>Tipo:</strong> <?php echo $q['tipo'] == 'multipla_escolha' ? 'Múltipla escolha' : 'Dissertativa'; ?></p>
+                    <p><strong>Tipo:</strong> <?php echo $q['tipo'] == 'multipla_escolha' ? 'Múltipla escolha' : 'Dissertativa'; ?></p>
 
-                <?php if ($q['tipo'] === 'multipla_escolha' && $q['alternativas']): ?>
-                    <p><strong>Alternativas:</strong></p>
-                    <ul>
-                        <?php
-                        $alternativas = json_decode($q['alternativas'], true);
-                        foreach ($alternativas as $letra => $texto): ?>
-                            <li><?php echo $letra . ') ' . htmlspecialchars($texto); ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                    <p><strong>Resposta correta:</strong> <?php echo $letra . ') ' . htmlspecialchars($texto); ?></p>
-                <?php elseif ($q['tipo'] === 'dissertativa'): ?>
-                    <p><strong>Resposta esperada:</strong> <?php echo nl2br(htmlspecialchars($q['resposta_correta'] ?? '')); ?></p>
-                <?php endif; ?>
+                    <?php if ($q['tipo'] === 'multipla_escolha' && $q['alternativas']): ?>
+                        <p><strong>Alternativas:</strong></p>
+                        <ul>
+                            <?php
+                            $alternativas = json_decode($q['alternativas'], true);
+                            foreach ($alternativas as $letra => $texto): ?>
+                                <li><?php echo $letra . ') ' . htmlspecialchars($texto); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                        <p><strong>Resposta correta:</strong>
+                            <?php
+                            $alternativa_correta_letra = $q['resposta_correta']; // ex: 'b'
+                            if (isset($alternativas[$alternativa_correta_letra])) {
+                                echo $alternativa_correta_letra . ') ' . htmlspecialchars($alternativas[$alternativa_correta_letra]);
+                            } else {
+                                echo 'Não definida';
+                            }
+                            ?>
+                        </p>
+                    <?php elseif ($q['tipo'] === 'dissertativa'): ?>
+                        <p><strong>Resposta esperada:</strong> <?php echo nl2br(htmlspecialchars($q['resposta_correta'] ?? '')); ?></p>
+                    <?php endif; ?>
 
-                <div style="margin-top: 10px;">
-                    <a href="editar_questao.php?id=<?php echo $q['id']; ?>" style="color: blue; margin-right: 15px;">Editar</a>
-                    <a href="funcoes/remover_questao.php?id=<?php echo $q['id']; ?>" style="color: red;" onclick="return confirm('Tem certeza que deseja excluir esta questão?');">Remover</a>
+                    <div style="margin-top: 10px;">
+                        <a href="editar_questao.php?id=<?php echo $q['id']; ?>" style="color: blue; margin-right: 15px;">Editar</a>
+                        <a href="funcoes/remover_questao.php?id=<?php echo $q['id']; ?>" style="color: red;" onclick="return confirm('Tem certeza que deseja excluir esta questão?');">Remover</a>
+                    </div>
                 </div>
-            </div>
-        <?php endwhile; ?>
-    <?php else: ?>
-        <p>Nenhuma questão cadastrada ainda para esta avaliação.</p>
-    <?php endif; ?>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p>Nenhuma questão cadastrada ainda para esta avaliação.</p>
+        <?php endif; ?>
 
-    <br>
-    <a href="ver_conteudo_curso.php?id=<?php echo $avaliacao['curso_id']; ?>" style="text-decoration: none; color: gray;">← Voltar para o curso</a>
+        <br>
+        <a href="ver_conteudo_curso.php?id=<?php echo $avaliacao['curso_id']; ?>" style="text-decoration: none; color: gray;">← Voltar para o curso</a>
+    </div>
 </body>
 
 </html>

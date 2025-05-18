@@ -32,9 +32,20 @@ include '../funcoes/conexao.php'; // Arquivo com a conexão ao banco
                     <label for="filtroCategoria">Categoria:</label>
                     <select id="filtroCategoria">
                         <option value="todas">Todas</option>
-                        <option value="Marketing Digital">Marketing Digital</option>
-                        <option value="Vendas">Vendas</option>
-                        <option value="Negócios">Negócios</option>
+                        <?php
+                        // Buscar os valores ENUM da coluna 'categoria' da tabela 'cursos'
+                        $sql_enum = "SHOW COLUMNS FROM cursos LIKE 'categoria'";
+                        $res_enum = $conexao->query($sql_enum);
+
+                        if ($res_enum && $res_enum->num_rows > 0) {
+                            $row_enum = $res_enum->fetch_assoc();
+                            $enum_str = $row_enum['Type']; // exemplo: enum('op1','op2')
+                            preg_match_all("/'([^']+)'/", $enum_str, $matches);
+                            foreach ($matches[1] as $categoria) {
+                                echo "<option value=\"" . htmlspecialchars($categoria) . "\">" . htmlspecialchars($categoria) . "</option>";
+                            }
+                        }
+                        ?>
                     </select>
 
                     <label for="filtroDificuldade">Dificuldade:</label>

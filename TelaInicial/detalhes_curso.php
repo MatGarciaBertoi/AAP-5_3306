@@ -35,8 +35,9 @@ $curso = $result->fetch_assoc();
 </head>
 
 <body>
-    <?php include 'partials/header.php'; ?>
-
+    <div class="header-main">
+        <?php include 'partials/header.php'; ?>
+    </div>
     <main class="curso-detalhes">
         <div class="container">
             <h2><?= htmlspecialchars($curso['nome']) ?></h2>

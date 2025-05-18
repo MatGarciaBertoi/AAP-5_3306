@@ -5,13 +5,6 @@
     --amarelo: #FFB400;
   }  
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to right, #f8f9fa, #e9ecef);
-    margin: 0;
-    padding: 0;
-}
-
 .curso-detalhes .container {
     max-width: 850px;
     margin: 60px auto;

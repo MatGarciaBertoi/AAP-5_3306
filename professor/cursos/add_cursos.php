@@ -37,12 +37,21 @@
       <form class="course-form" id="course-form" action="funcoes/salvar_curso.php" method="POST" enctype="multipart/form-data">
         <div class="form-group">
           <label for="nome-curso">Nome do Curso</label>
-          <input type="text" id="nome-curso" name="nome-curso" placeholder="Ex: Programação para Iniciantes" required>
+          <input type="text" id="nome-curso" name="nome-curso" placeholder="Ex: Introdução ao Marketing" required>
         </div>
 
         <div class="form-group">
           <label for="categoria">Categoria</label>
-          <input type="text" id="categoria" name="categoria" placeholder="Ex: Tecnologia, Design, Negócios" required>
+          <select id="categoria" name="categoria" required>
+            <option value="">Selecione</option>
+            <option value="Marketing de afiliados">Marketing de afiliados</option>
+            <option value="Marketing de conteúdo">Marketing de conteúdo</option>
+            <option value="Marketing por e-mail">Marketing por e-mail</option>
+            <option value="Marketing de mídia social">Marketing de mídia social</option>
+            <option value="Análise de Marketing">Análise de Marketing</option>
+            <option value="Otimização de mecanismos de busca (SEO)">Otimização de mecanismos de busca (SEO)</option>
+            <option value="Tráfego Pago">Tráfego Pago</option>
+          </select>
         </div>
 
         <div class="form-group">
@@ -96,28 +105,28 @@
     });
   </script>
 
-<script>
-  const inputImagem = document.getElementById('imagem');
-  const preview = document.getElementById('preview-imagem');
+  <script>
+    const inputImagem = document.getElementById('imagem');
+    const preview = document.getElementById('preview-imagem');
 
-  inputImagem.addEventListener('change', function () {
-    const file = this.files[0];
+    inputImagem.addEventListener('change', function() {
+      const file = this.files[0];
 
-    if (file) {
-      const reader = new FileReader();
+      if (file) {
+        const reader = new FileReader();
 
-      reader.onload = function (e) {
-        preview.src = e.target.result;
-        preview.style.display = 'block';
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+        }
+
+        reader.readAsDataURL(file);
+      } else {
+        preview.src = "#";
+        preview.style.display = 'none';
       }
-
-      reader.readAsDataURL(file);
-    } else {
-      preview.src = "#";
-      preview.style.display = 'none';
-    }
-  });
-</script>
+    });
+  </script>
 
 </body>
 
