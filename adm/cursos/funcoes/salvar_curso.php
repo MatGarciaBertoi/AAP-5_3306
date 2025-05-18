@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $criado_por_id = $_SESSION['id'];
     $tipo_criador = $_SESSION['tipo'];
 
-    // Lista de categorias permitidas conforme ENUM no banco
     $categorias_permitidas = [
         'Marketing de Afiliados',
         'Marketing de Conteúdo',
@@ -60,13 +59,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    if (!is_dir(__DIR__ . '/uploads')) {
-        mkdir(__DIR__ . '/uploads', 0755, true);
+    // Define diretório de destino da imagem
+    $diretorio_relativo = '../../../funcoes/uploads/cursos/';
+    $diretorio_absoluto = realpath($diretorio_relativo);
+
+    if (!$diretorio_absoluto) {
+        if (!mkdir($diretorio_relativo, 0755, true)) {
+            $_SESSION['mensagem'] = "Falha ao criar diretório de upload.";
+            $_SESSION['mensagem_tipo'] = "erro";
+            header("Location: ../cursos.php");
+            exit;
+        }
+        $diretorio_absoluto = realpath($diretorio_relativo);
     }
 
     $extensao = pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION);
     $imagem_nome = uniqid('curso_') . "." . $extensao;
-    $caminho_destino = __DIR__ . '/uploads/' . $imagem_nome;
+    $caminho_destino = $diretorio_absoluto . '/' . $imagem_nome;
 
     if (!move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_destino)) {
         $_SESSION['mensagem'] = "Falha ao enviar a imagem.";
@@ -75,11 +84,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // Caminho a ser salvo no banco (relativo ao projeto)
+    $caminho_imagem_no_banco = 'funcoes/uploads/cursos/' . $imagem_nome;
+
     $sql = "INSERT INTO cursos (nome, categoria, descricao, imagem, dificuldade, criado_por_id, tipo_criador) 
             VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conexao->prepare($sql);
-    $stmt->bind_param("sssssis", $nome, $categoria, $descricao, $imagem_nome, $dificuldade, $criado_por_id, $tipo_criador);
+    $stmt->bind_param("sssssis", $nome, $categoria, $descricao, $caminho_imagem_no_banco, $dificuldade, $criado_por_id, $tipo_criador);
 
     if ($stmt->execute()) {
         $_SESSION['mensagem'] = "Curso criado com sucesso!";
@@ -94,6 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     header("Location: ../cursos.php");
     exit;
+
 } else {
     $_SESSION['mensagem'] = "Requisição inválida.";
     $_SESSION['mensagem_tipo'] = "erro";

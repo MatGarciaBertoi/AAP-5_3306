@@ -26,10 +26,10 @@ if ($stmt_select->num_rows > 0) {
     $stmt_select->fetch();
 
     // Caminho completo para a imagem
-    $caminho_imagem = 'uploads/' . $imagem;
+    $caminho_imagem = '../../../' . $imagem;
 
     // Exclui a imagem, se existir
-    if (file_exists($caminho_imagem)) {
+    if (!empty($imagem) && file_exists($caminho_imagem)) {
         unlink($caminho_imagem);
     }
 

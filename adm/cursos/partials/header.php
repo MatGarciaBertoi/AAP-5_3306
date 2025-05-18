@@ -20,7 +20,7 @@
             <div id="perfilAlunoOpcoes" class="perfil-opcoes">
                 <a href="profile.php">Meu Perfil</a>
                 <a href="../suporte/suporte.php" target="_blank">Central de Ajuda</a>
-                <a href="../funcoes/sessoes/logout.php">Sair</a>
+                <a href="../../funcoes/sessoes/logout.php">Sair</a>
             </div>
         </div>
     </nav>

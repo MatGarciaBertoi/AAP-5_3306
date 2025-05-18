@@ -64,15 +64,16 @@ $curso = $result->fetch_assoc();
         <label for="categoria">Categoria</label>
         <select id="categoria" name="categoria" required>
           <option value="">Selecione</option>
-          <option value="Marketing de Afiliados">Marketing de Afiliados</option>
-          <option value="Marketing de Conteúdo">Marketing de Conteúdo</option>
-          <option value="E-mail Marketing">E-mail Marketing</option>
-          <option value="Social Media">Social Media</option>
-          <option value="Análise de Marketing">Análise de Marketing</option>
-          <option value="SEO">SEO</option>
-          <option value="Tráfego Pago">Tráfego Pago</option>
+          <option value="Marketing de Afiliados" <?php if ($curso['categoria'] == 'Marketing de Afiliados') echo 'selected'; ?>>Marketing de Afiliados</option>
+          <option value="Marketing de Conteúdo" <?php if ($curso['categoria'] == 'Marketing de Conteúdo') echo 'selected'; ?>>Marketing de Conteúdo</option>
+          <option value="E-mail Marketing" <?php if ($curso['categoria'] == 'E-mail Marketing') echo 'selected'; ?>>E-mail Marketing</option>
+          <option value="Social Media" <?php if ($curso['categoria'] == 'Social Media') echo 'selected'; ?>>Social Media</option>
+          <option value="Análise de Marketing" <?php if ($curso['categoria'] == 'Análise de Marketing') echo 'selected'; ?>>Análise de Marketing</option>
+          <option value="SEO" <?php if ($curso['categoria'] == 'SEO') echo 'selected'; ?>>SEO</option>
+          <option value="Tráfego Pago" <?php if ($curso['categoria'] == 'Tráfego Pago') echo 'selected'; ?>>Tráfego Pago</option>
         </select>
       </div>
+
 
       <div class="form-group">
         <label for="descricao">Descrição</label>
@@ -81,7 +82,7 @@ $curso = $result->fetch_assoc();
 
       <div class="form-group">
         <label>Imagem Atual</label><br>
-        <img src="funcoes/uploads/<?php echo htmlspecialchars($curso['imagem']); ?>" alt="Imagem atual" style="max-width: 200px; border-radius: 8px;"><br><br>
+        <img src="../../<?php echo htmlspecialchars($curso['imagem']); ?>" alt="Imagem atual" style="max-width: 200px; border-radius: 8px;"><br><br>
 
         <label for="imagem">Alterar Imagem de Capa (opcional)</label>
         <input type="file" id="imagem" name="imagem" accept="image/*">

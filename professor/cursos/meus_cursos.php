@@ -55,7 +55,7 @@ $resultado = $stmt->get_result();
       <?php if ($resultado->num_rows > 0): ?>
         <?php while ($curso = $resultado->fetch_assoc()): ?>
           <div class="course-card">
-            <img src="funcoes/uploads/<?php echo htmlspecialchars($curso['imagem']); ?>" alt="Imagem do curso" style="max-width:100%; border-radius: 8px;" />
+            <img src="../../<?php echo htmlspecialchars($curso['imagem']); ?>" alt="Imagem atual" style="max-width:100%; border-radius: 8px;">
             <h3><?php echo htmlspecialchars($curso['nome']); ?></h3>
             <p>Categoria: <?php echo htmlspecialchars($curso['categoria']); ?></p>
             <p>Dificuldade: <?php echo ucfirst($curso['dificuldade']); ?></p>

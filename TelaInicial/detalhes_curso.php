@@ -43,7 +43,7 @@ $curso = $result->fetch_assoc();
             <h2><?= htmlspecialchars($curso['nome']) ?></h2>
 
             <?php if (!empty($curso['imagem'])): ?>
-                <img src="../professor/cursos/funcoes/uploads/<?= htmlspecialchars($curso['imagem']) ?>" alt="Imagem do curso" class="img-curso">
+                <img src="../<?= htmlspecialchars($curso['imagem']) ?>" alt="Imagem do curso" class="img-curso">
             <?php endif; ?>
 
             <p><strong>Categoria:</strong> <?= htmlspecialchars($curso['categoria']) ?></p>

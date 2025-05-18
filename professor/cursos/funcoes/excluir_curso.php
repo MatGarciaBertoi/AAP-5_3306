@@ -32,9 +32,9 @@ $stmt = $conexao->prepare("DELETE FROM cursos WHERE id = ?");
 $stmt->bind_param("i", $id_curso);
 $stmt->execute();
 
-// Remove a imagem do servidor
-$caminho_imagem = "uploads/" . $imagem;
-if (file_exists($caminho_imagem)) {
+// Remove a imagem do servidor (se existir)
+$caminho_imagem = '../../../' . $imagem;
+if (!empty($imagem) && file_exists($caminho_imagem)) {
   unlink($caminho_imagem);
 }
 

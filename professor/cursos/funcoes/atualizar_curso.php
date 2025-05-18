@@ -26,15 +26,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Upload de imagem (se enviado)
   if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
     $ext = pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION);
-    $novoNome = uniqid() . '.' . $ext;
-    $caminhoUpload = 'uploads/' . $novoNome;
+    $novoNome = 'funcoes/uploads/cursos/' . uniqid() . '.' . $ext;
+    $caminhoUpload = '../../../' . $novoNome;
 
     // Move nova imagem
     if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminhoUpload)) {
       $imagem_final = $novoNome;
 
       // Exclui a imagem antiga (se existir)
-      $caminhoAntigo = 'uploads/' . $imagem_atual;
+      $caminhoAntigo = '../../../' . $imagem_atual;
       if (!empty($imagem_atual) && file_exists($caminhoAntigo)) {
         unlink($caminhoAntigo);
       }

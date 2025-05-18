@@ -79,7 +79,8 @@ $curso = $result->fetch_assoc();
 
       <div class="form-group">
         <label>Imagem Atual</label><br>
-        <img src="funcoes/uploads/<?php echo htmlspecialchars($curso['imagem']); ?>" alt="Imagem atual" style="max-width: 200px; border-radius: 8px;"><br><br>
+        <img src="../../<?php echo htmlspecialchars($curso['imagem']); ?>" alt="Imagem atual" style="max-width: 200px; border-radius: 8px;">
+        <br><br>
 
         <label for="imagem">Alterar Imagem de Capa (opcional)</label>
         <input type="file" id="imagem" name="imagem" accept="image/*">

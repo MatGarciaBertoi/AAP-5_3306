@@ -70,7 +70,7 @@ include '../funcoes/conexao.php'; // Arquivo com a conexão ao banco
                             echo "<div class='course-card categoria-" . strtolower($curso['categoria']) . " dificuldade-" . strtolower($curso['dificuldade']) . "'>";
 
                             if (!empty($curso['imagem'])) {
-                                echo "<img src='../professor/cursos/funcoes/uploads/" . htmlspecialchars($curso['imagem']) . "' alt='Imagem do curso' class='course-img'>";
+                                echo "<img src='../" . htmlspecialchars($curso['imagem']) . "' alt='Imagem do curso' class='course-img'>";
                             }
 
                             echo "<h3>" . htmlspecialchars($curso['nome']) . "</h3>";
