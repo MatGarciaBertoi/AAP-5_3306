@@ -29,6 +29,12 @@ function validarCPF($cpf)
 
 // Se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Verifica aceite dos termos
+    if (!isset($_POST['termo']) || $_POST['termo'] !== 'on') {
+        die("Você precisa aceitar os Termos de Uso e a Política de Privacidade para continuar.");
+    }
+
     // Limpeza dos dados
     $nome = limpar($_POST['nome']);
     $cpf = limpar($_POST['cpf']);
@@ -79,7 +85,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Erro ao salvar o currículo.");
     }
 
-
     // Inserção no banco
     $sql = "INSERT INTO professores_voluntarios (nome, cpf, rg, data_nascimento, endereco, email, telefone, linkedin, experiencia, area_conhecimento, disponibilidade, curriculo) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -109,24 +114,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Formulário de Inscrição - Professor Voluntário</title>
     <link rel="shortcut icon" href="../../images/logotipocw.png" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="forms.css">
-    <link rel="stylesheet" href="partials/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="forms.css" />
+    <link rel="stylesheet" href="partials/style.css" />
 </head>
 
 <body>
     <div class="header-main">
-        <?php include 'partials/header.php'; ?> <!-- Inclui o header -->
+        <?php include 'partials/header.php'; ?>
     </div>
     <div class="container">
         <div class="container-main">
             <div class="card-image">
-                <img src="../../images/homem-mulher-discutindo.png" alt="Mulher de oculos sorrindo">
+                <img src="../../images/homem-mulher-discutindo.png" alt="Mulher de oculos sorrindo" />
             </div>
             <div class="container-card">
                 <div class="card">
@@ -136,42 +141,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <h3>Dados Pessoais</h3>
 
                         <div class="label-float">
-                            <input type="text" id="nome" name="nome" required>
+                            <input type="text" id="nome" name="nome" required />
                             <label for="nome">Nome Completo</label>
                         </div>
 
                         <div class="label-float">
-                            <input type="text" id="cpf" name="cpf" maxlength="11" pattern="\d{11}" inputmode="numeric" title="Digite apenas números (11 dígitos)" required>
+                            <input type="text" id="cpf" name="cpf" maxlength="11" pattern="\d{11}" inputmode="numeric" title="Digite apenas números (11 dígitos)" required />
                             <label for="cpf">CPF</label>
                         </div>
 
                         <div class="label-float">
-                            <input type="text" id="rg" name="rg" maxlength="9" pattern="\d{7,9}" inputmode="numeric" title="Digite entre 7 e 9 dígitos numéricos" required>
+                            <input type="text" id="rg" name="rg" maxlength="9" pattern="\d{7,9}" inputmode="numeric" title="Digite entre 7 e 9 dígitos numéricos" required />
                             <label for="rg">RG</label>
                         </div>
 
                         <div class="label-float">
-                            <input type="date" id="data_nascimento" name="data_nascimento" required>
+                            <input type="date" id="data_nascimento" name="data_nascimento" required />
                             <label for="data_nascimento">Data de Nascimento</label>
                         </div>
 
                         <div class="label-float">
-                            <input type="text" id="endereco" name="endereco" required>
+                            <input type="text" id="endereco" name="endereco" required />
                             <label for="endereco">Endereço Completo</label>
                         </div>
 
                         <div class="label-float">
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" required />
                             <label for="email">Email</label>
                         </div>
 
                         <div class="label-float">
-                            <input type="tel" id="telefone" name="telefone" maxlength="11" pattern="\d{10,11}" inputmode="numeric" title="Digite DDD + número (10 ou 11 dígitos)" required>
+                            <input type="tel" id="telefone" name="telefone" maxlength="11" pattern="\d{10,11}" inputmode="numeric" title="Digite DDD + número (10 ou 11 dígitos)" required />
                             <label for="telefone">Telefone</label>
                         </div>
 
                         <div class="label-float">
-                            <input type="url" id="linkedin" name="linkedin" required>
+                            <input type="url" id="linkedin" name="linkedin" required />
                             <label for="linkedin">LinkedIn</label>
                         </div>
 
@@ -184,12 +189,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
 
                         <div class="label-float">
-                            <input type="text" id="area_conhecimento" name="area_conhecimento" required>
+                            <input type="text" id="area_conhecimento" name="area_conhecimento" required />
                             <label for="area_conhecimento">Áreas de Conhecimento em Marketing</label>
                         </div>
 
                         <div class="label-float">
-                            <input type="text" id="disponibilidade" name="disponibilidade" required>
+                            <input type="text" id="disponibilidade" name="disponibilidade" required />
                             <label for="disponibilidade">Disponibilidade de Horas por Semana para Produção de Conteúdo</label>
                         </div>
 
@@ -198,47 +203,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         <div class="custom-file">
                             <span for="curriculo">Currículo (em PDF)</span>
-                            <input type="file" id="curriculo" name="curriculo" accept=".pdf" required>
+                            <input type="file" id="curriculo" name="curriculo" accept=".pdf" required />
                         </div>
 
-
-                        <div class="dados">
-                            <!-- Termos de Uso LGPD -->
-                            <p class="lgpd">
-                                Seus dados serão tratados de acordo com a <strong>Lei Geral de Proteção de Dados Pessoais (LGPD)</strong>.
-                                Ao enviar este formulário, você concorda com o uso das informações para fins de avaliação e contato.
-                            </p>
+                        <div class="label-float-checkbox" style="margin-bottom: 1rem;">
+                            <input type="checkbox" name="termo" id="termo" required />
+                            <label for="termo" style="display: inline;">
+                                Eu li e concordo com os
+                                <a href="../termos-de-uso.php" target="_blank">Termos de Uso</a> e a
+                                <a href="../politica-de-privacidade.php" target="_blank">Política de Privacidade</a>.
+                            </label>
                         </div>
 
-                        <!-- Botão de submit centralizado -->
-                        <div class="justify-center">
-                            <button type="submit">Enviar Inscrição</button>
-                        </div>
+                        <button type="submit">Enviar</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <?php include 'partials/footer.php'; ?> <!-- Inclui o footer -->
-    <!-- Script para bloquear letras e permitir apenas números -->
-    <script>
-        function somenteNumeros(event) {
-            const tecla = event.key;
-            // Permite apenas dígitos (0-9), backspace, delete, setas e tab
-            if (!/[\d]/.test(tecla) &&
-                tecla !== "Backspace" &&
-                tecla !== "Delete" &&
-                tecla !== "ArrowLeft" &&
-                tecla !== "ArrowRight" &&
-                tecla !== "Tab") {
-                event.preventDefault();
-            }
-        }
-
-        document.getElementById("cpf").addEventListener("keydown", somenteNumeros);
-        document.getElementById("rg").addEventListener("keydown", somenteNumeros);
-        document.getElementById("telefone").addEventListener("keydown", somenteNumeros);
-    </script>
 </body>
 
 </html>

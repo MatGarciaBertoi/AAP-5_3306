@@ -79,6 +79,19 @@ body.contraste-negativo svg {
     fill: currentColor !important;
 }
 
+ /* Estilo para links */
+ header a {
+     color: var(--cinza-escuro); /* Cor do texto */
+     font-weight: bold; /* Texto em negrito */
+     text-decoration: none; /* Remove sublinhado */
+     transition: all .3s ease-out; /* Transição suave */
+ }
+
+ /* Estilo para links quando o mouse está sobre eles */
+ header a:hover {
+     color: var(--amarelo); /* Cor do texto */
+ }
+
 /* Ícone de acessibilidade */
 .icone-acessibilidade {
     position: fixed;

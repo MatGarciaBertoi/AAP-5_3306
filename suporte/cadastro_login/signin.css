@@ -116,19 +116,6 @@
      font-size: 14pt; /* Tamanho da fonte */
      text-align: center; /* Centraliza o texto */
  }
-
- /* Estilo para links */
- a {
-     color: var(--cinza-escuro); /* Cor do texto */
-     font-weight: bold; /* Texto em negrito */
-     text-decoration: none; /* Remove sublinhado */
-     transition: all .3s ease-out; /* Transição suave */
- }
-
- /* Estilo para links quando o mouse está sobre eles */
- a:hover {
-     color: var(--amarelo); /* Cor do texto */
- }
  
  .mostrar-senha {
     position: absolute;

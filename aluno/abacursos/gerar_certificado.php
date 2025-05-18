@@ -1,13 +1,8 @@
 <?php
 require('../../lib/vendor/setasign/fpdf/fpdf.php');
 require('../../lib/vendor/phpqrcode/qrlib.php');
-session_start();
+include_once('../../funcoes/sessoes/check_aluno.php');
 include_once('../../funcoes/conexao.php');
-
-if (!isset($_SESSION['id']) || $_SESSION['tipo'] !== 'aluno') {
-    header('Location: ../cadastro_login/aluno/signin.php');
-    exit();
-}
 
 $aluno_id = $_SESSION['id'];
 $curso_id = isset($_POST['curso_id']) ? intval($_POST['curso_id']) : 0;

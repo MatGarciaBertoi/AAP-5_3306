@@ -64,6 +64,33 @@
         margin-bottom: 5%; /* Margem inferior */
     }
 
+        /* Remove pointer-events só dos labels flutuantes que não são checkbox */
+.label-float:not(.checkbox) label {
+    pointer-events: none;
+}
+
+/* Outros estilos para label permanecem */
+.label-float label {
+    color: var(--cinza-escuro);
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 13px;
+    transition: all .3s ease-out;
+}
+
+.label-float-checkbox{
+    display: flex;
+    align-items: center;
+}
+
+.label-float-checkbox input{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
     /* Estilo para os inputs focados */
     .label-float input:focus {
         border-bottom: 2px solid var(--azul); /* Borda inferior quando focado */
@@ -188,15 +215,6 @@
     .custom-file input[type="file"]:hover {
         background-color: #f0f0f0;
         border-color: var(--azul);
-    }
-    
-
-    /* Aviso LGPD */
-    .lgpd {
-        font-size: 14px;
-        color: #666666;
-        text-align: center;
-        margin-top: 10px;
     }
 
     .back-button{

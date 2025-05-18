@@ -16,11 +16,11 @@
 
 /* Cartão de cadastro */
 .card {
-    background-color: #ffffff80; /* Fundo branco semitransparente */
+    background-color: transparent; /* Fundo branco semitransparente */
     padding: 30px; /* Espaçamento interno */
     border-radius: 4%; /* Bordas arredondadas */
     box-shadow: 3px 3px 1px 0px #00000060; /* Sombra */
-    width: 300px; /* Largura fixa */
+    width: 100%; /* Largura fixa */
 }
 
 /* Estilo para o título */
@@ -29,6 +29,30 @@ h1 {
     margin-bottom: 20px; /* Margem inferior */
     color: var(--azul); /* Cor do texto */
 }
+
+ /* Estilo para parágrafos */
+ p {
+    color: var(--azul); /* Cor do texto */
+    font-size: 14pt; /* Tamanho da fonte */
+    text-align: center; /* Centraliza o texto */
+}
+
+.signup-button {
+    margin-top: 1.2rem;
+}
+ 
+ /* Estilo para links */
+ .card a {
+     color: var(--cinza-escuro); /* Cor do texto */
+     font-weight: bold; /* Texto em negrito */
+     text-decoration: none; /* Remove sublinhado */
+     transition: all .3s ease-out; /* Transição suave */
+ }
+
+ /* Estilo para links quando o mouse está sobre eles */
+ a:hover {
+     color: var(--amarelo); /* Cor do texto */
+ }
 
 /* Estilo para os inputs dentro do label-float */
 .label-float input {
@@ -58,15 +82,36 @@ h1 {
     border-bottom: 2px solid var(--azul); /* Borda inferior quando focado */
 }
 
-/* Estilo para os labels */
+/* Remove pointer-events só dos labels flutuantes que não são checkbox */
+.label-float:not(.checkbox) label {
+    pointer-events: none;
+}
+
+/* Outros estilos para label permanecem */
 .label-float label {
-    color: var(--cinza-escuro); /* Cor do texto */
-    pointer-events: none; /* Desabilita eventos do mouse */
-    position: absolute; /* Posicionamento absoluto */
-    top: 0; /* Alinha ao topo */
-    left: 0; /* Alinha à esquerda */
-    margin-top: 13px; /* Margem superior */
-    transition: all .3s ease-out; /* Transição suave */
+    color: var(--cinza-escuro);
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 13px;
+    transition: all .3s ease-out;
+}
+
+.label-float-checkbox{
+    display: flex;
+    align-items: center;
+}
+
+.label-float-checkbox label{
+    color: var(--cinza-escuro);
+}
+
+
+.label-float-checkbox input{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    cursor: pointer;
 }
 
 /* Estilo para labels quando o input está focado ou preenchido */

@@ -1,13 +1,8 @@
 <?php
-session_start();
+include_once('../../funcoes/sessoes/check_aluno.php');
 include_once('../../funcoes/conexao.php');
 include_once('funcoes/verificar_inscricao.php');
 include_once('funcoes/funcoes.php');
-
-if (!isset($_SESSION['id']) || $_SESSION['tipo'] !== 'aluno') {
-    header('Location: ../cadastro_login/aluno/signin.php');
-    exit();
-}
 
 $curso_id = isset($_GET['curso_id']) ? intval($_GET['curso_id']) : 0;
 $aluno_id = $_SESSION['id'];

@@ -3,21 +3,20 @@
         <div class="logo"><a href="../../TelaInicial/index.php">
                 <img src="../../images/logocwpreto_transparente.png" alt="Logo da CW Cursos" />
             </a></div>
-        <div class="search-bar">
-            <input type="text" placeholder="O que você gostaria de aprender?">
-        </div>
 
         <nav class="nav-botoes">
             <?php if (isset($_SESSION['id']) && $_SESSION['tipo'] === 'aluno'): ?>
                 <a href="../../aluno/areadoaluno.php" class="planos-btn">Área do Aluno</a>
             <?php else: ?>
                 <a href="signin.php" class="planos-btn">Seja um Professor</a>
-                <a href="../aluno/signin.php" class="planos-btn">Entrar</a>
-                <a href="../aluno/signup.php" class="planos-btn">Cadastrar-se</a>
+                <a href="../usuario/signin.php" class="planos-btn">Entrar</a>
+                <a href="../usuario/signup.php" class="planos-btn">Cadastrar-se</a>
             <?php endif; ?>
         </nav>
     </div>
 </header>
+
+<?php include '../../funcoes/usuario/acessibilidade.php'; ?>
 
 <!-- Chatra {literal} -->
 <script>

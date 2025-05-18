@@ -3,9 +3,6 @@
         <div class="logo"><a href="../../TelaInicial/index.php">
                 <img src="../../images/logocwpreto_transparente.png" alt="Logo da CW Cursos" />
             </a></div>
-        <div class="search-bar">
-            <input type="text" placeholder="O que você gostaria de aprender?">
-        </div>
 
         <nav class="nav-botoes">
             <?php if (isset($_SESSION['id']) && $_SESSION['tipo'] === 'aluno'): ?>

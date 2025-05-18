@@ -77,6 +77,19 @@ body.contraste-negativo svg {
     fill: currentColor !important;
 }
 
+ /* Estilo para links */
+ a {
+     color: var(--cinza-escuro); /* Cor do texto */
+     font-weight: bold; /* Texto em negrito */
+     text-decoration: none; /* Remove sublinhado */
+     transition: all .3s ease-out; /* Transição suave */
+ }
+
+ /* Estilo para links quando o mouse está sobre eles */
+ a:hover {
+     color: var(--amarelo); /* Cor do texto */
+ }
+
 /* Ícone de acessibilidade */
 .icone-acessibilidade {
     position: fixed;
@@ -136,7 +149,7 @@ body.contraste-negativo svg {
 /* Estilos para o cabeçalho */
 
 header {
-    background-color: var(--azul); /* Fundo preto semitransparente */
+    background-color: var(--cinza-escuro); /* Fundo preto semitransparente */
     color: var(--cinza-claro); /* Cor do texto */
     padding: 1em 0; /* Espaçamento interno */
     text-align: center; /* Centraliza o texto */
@@ -248,8 +261,12 @@ main {
 
 /* Estilos para o rodapé */
 footer {
-    background-color: var(--azul); /* Fundo preto semitransparente */
+    background-color: var(--cinza-escuro); /* Fundo preto semitransparente */
     color: var(--cinza-claro); /* Cor do texto */
     text-align: center; /* Centraliza o texto */
     padding: 1em 0; /* Espaçamento interno */
+}
+
+footer p {
+    color: var(--cinza-claro);
 }

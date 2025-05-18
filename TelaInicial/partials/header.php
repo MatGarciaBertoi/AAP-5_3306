@@ -40,8 +40,8 @@
                 </div>
             <?php else: ?>
                 <a href="../cadastro_login/professor/signin.php" class="planos-btn">Seja um Professor</a>
-                <a href="../cadastro_login/aluno/signin.php" class="planos-btn">Entrar</a>
-                <a href="../cadastro_login/aluno/signup.php" class="planos-btn">Cadastrar-se</a>
+                <a href="../cadastro_login/usuario/signin.php" class="planos-btn">Entrar</a>
+                <a href="../cadastro_login/usuario/signup.php" class="planos-btn">Cadastrar-se</a>
             <?php endif; ?>
         </nav>
 

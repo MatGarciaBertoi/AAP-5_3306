@@ -1,13 +1,7 @@
 <?php
-session_start();
+include_once('../funcoes/sessoes/check_aluno.php');
 include_once('../funcoes/conexao.php');
 include_once('../funcoes/config.php');
-
-// Verifica se o usuário está logado
-if (!isset($_SESSION['usuario'])) {
-    header('Location: http://localhost/AAP-CW_Cursos/cadastro_login/aluno/signin.php');
-    exit();
-}
 
 $usuario = $_SESSION['usuario'];
 

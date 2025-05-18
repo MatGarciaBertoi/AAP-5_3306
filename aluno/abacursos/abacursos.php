@@ -1,5 +1,5 @@
 <?php
-session_start();
+include_once('../../funcoes/sessoes/check_aluno.php');
 include_once('../../funcoes/conexao.php');
 
 if (!isset($_SESSION['id']) || $_SESSION['tipo'] !== 'aluno') {

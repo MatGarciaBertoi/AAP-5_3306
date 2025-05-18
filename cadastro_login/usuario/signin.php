@@ -23,26 +23,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         // Verifica se a senha está correta
         if (password_verify($senha, $user['senha'])) {
 
-            // Inicia as variáveis de sessão
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['nome'] = $user['nome'];
-            $_SESSION['usuario'] = $user['usuario'];
-            $_SESSION['email'] = $user['email']; // <-- ESTA LINHA FOI ADICIONADA
-            $_SESSION['tipo'] = $user['tipo'];
-            $_SESSION['status'] = $user['status'];
-
-            // Redireciona para a página conforme o tipo de usuário
-            if ($user['tipo'] === 'administrador') {
-                header("Location: http://localhost/AAP-5_3306/adm/index.php");
-                exit;
-            } elseif ($user['tipo'] === 'professor') {
-                header("Location: http://localhost/AAP-5_3306/professor/index.php");
-                exit;
-            } elseif ($user['tipo'] === 'aluno') {
-                header("Location: http://localhost/AAP-5_3306/TelaInicial/index.php");
-                exit;
+            // Verifica se o status da conta é bloqueado
+            if ($user['status'] === 'bloqueado') {
+                $mensagemErro = "Sua conta está bloqueada. Por favor, entre em contato com o suporte.";
             } else {
-                $mensagemErro = "Tipo de usuário desconhecido.";
+                // Inicia as variáveis de sessão
+                $_SESSION['id'] = $user['id'];
+                $_SESSION['nome'] = $user['nome'];
+                $_SESSION['usuario'] = $user['usuario'];
+                $_SESSION['email'] = $user['email'];
+                $_SESSION['tipo'] = $user['tipo'];
+                $_SESSION['status'] = $user['status'];
+
+                // Redireciona para a página conforme o tipo de usuário
+                if ($user['tipo'] === 'administrador') {
+                    header("Location: http://localhost/AAP-5_3306/adm/index.php");
+                    exit;
+                } elseif ($user['tipo'] === 'professor') {
+                    header("Location: http://localhost/AAP-5_3306/professor/index.php");
+                    exit;
+                } elseif ($user['tipo'] === 'aluno') {
+                    header("Location: http://localhost/AAP-5_3306/TelaInicial/index.php");
+                    exit;
+                } else {
+                    $mensagemErro = "Tipo de usuário desconhecido.";
+                }
             }
         } else {
             $mensagemErro = "Senha incorreta.";
