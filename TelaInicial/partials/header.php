@@ -34,7 +34,7 @@
                     <!-- Container de opções -->
                     <div id="perfilAlunoOpcoes" class="perfil-opcoes">
                         <a href="../<?= $_SESSION['tipo'] ?>/profile.php">Conta</a>
-                        <a href="configuracoes.php">Minhas Compras</a>
+                        <a href="../aluno/meuplano.php">Meu Plano</a>
                         <a href="../funcoes/sessoes/logout.php">Sair</a>
                     </div>
                 </div>

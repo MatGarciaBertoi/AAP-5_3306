@@ -1,0 +1,75 @@
+.content-main{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.planos-section{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.plano-container, .planos-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.plano-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.plano-card.destaque {
+    border: 2px solid #2196F3;
+    background-color: #E3F2FD;
+}
+
+.btn-assinar {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #2196F3;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Botões de ação */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 5rem;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.action-buttons a,
+.action-buttons button {
+    background: #34495e;
+    color: white;
+    padding: 10px 16px;
+    text-decoration: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-weight: bold;
+}
+
+.action-buttons a:hover,
+.action-buttons button:hover {
+    background: #2c3e50;
+}
+
+.btn-sair {
+    background-color: #e74c3c !important;
+}
+
+.btn-sair:hover {
+    background-color: #c0392b !important;
+}

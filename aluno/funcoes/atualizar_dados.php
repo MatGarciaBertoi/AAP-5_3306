@@ -3,7 +3,7 @@ session_start();
 include_once('../../funcoes/conexao.php');
 
 if (!isset($_SESSION['usuario'])) {
-    header('Location: ../../cadastro_login/aluno/signin.php');
+    header('Location: ../../cadastro_login/usuario/signin.php');
     exit();
 }
 

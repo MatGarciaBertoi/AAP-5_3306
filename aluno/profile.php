@@ -143,6 +143,7 @@ $resultProgresso = $stmtProgresso->get_result();
         <!-- Botões -->
         <div class="action-buttons">
             <a href="areadoaluno.php">Ir para Área do Aluno</a>
+            <a href="../TelaInicial/index.php">Ir para Menu Inicial</a>
             <form action="../funcoes/sessoes/logout.php" method="post">
                 <button type="submit" class="btn-sair">Sair da Conta</button>
             </form>

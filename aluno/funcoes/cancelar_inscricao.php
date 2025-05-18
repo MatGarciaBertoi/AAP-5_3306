@@ -4,7 +4,7 @@ include_once('../../funcoes/conexao.php');
 
 // Garante que só alunos possam cancelar
 if (!isset($_SESSION['id']) || $_SESSION['tipo'] !== 'aluno') {
-    header('Location: http://localhost/AAP-CW_Cursos/cadastro_login/aluno/signin.php');
+    header('Location: http://localhost/AAP-CW_Cursos/cadastro_login/usuario/signin.php');
     exit();
 }
 
