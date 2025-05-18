@@ -1,52 +1,55 @@
 <?php
 session_start();
+require_once '../../funcoes/conexao.php';
+
 if (!isset($_SESSION['id']) || $_SESSION['tipo'] !== 'aluno') {
-    header('Location: http://localhost/AAP-CW_Cursos/cadastro_login/aluno/signin.php');
+    header('Location: ../../cadastro_login/aluno/signin.php');
     exit;
 }
 
-include_once('../../funcoes/conexao.php'); // Caminho da sua conexão, ajuste se necessário
+$aluno_id = $_SESSION['id'];
+$plano = $_POST['plano'] ?? '';
+$nome = $_POST['nome'] ?? '';
+$email = $_POST['email'] ?? '';
+$celular = $_POST['celular'] ?? '';
+$cpf = $_POST['cpf'] ?? '';
+$forma_pagamento = $_POST['forma_pagamento'] ?? '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Dados do formulário
-    $aluno_id = $_SESSION['id'];
-    $plano = $_POST['plano'] ?? '';
-    $nome = $_POST['nome'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $celular = $_POST['celular'] ?? '';
-    $cpf = $_POST['cpf'] ?? '';
-    $forma_pagamento = $_POST['forma_pagamento'] ?? '';
+// Simulando duração da assinatura (30 dias, por exemplo)
+$data_assinatura = date('Y-m-d H:i:s');
+$data_expiracao = date('Y-m-d H:i:s', strtotime('+30 days'));
 
-    // Validação simples
-    if ($plano && $nome && $email && $celular && $cpf && $forma_pagamento) {
-        // Prepara o insert (ajuste o nome da tabela e colunas conforme o seu banco)
-        $query = "INSERT INTO pagamentos (aluno_id, plano, nome, email, celular, cpf, forma_pagamento, data_pagamento) 
-                  VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
-
-        $stmt = $conexao->prepare($query);
-        $stmt->bind_param("issssss", $aluno_id, $plano, $nome, $email, $celular, $cpf, $forma_pagamento);
-
-        if ($stmt->execute()) {
-            // Redireciona ou exibe mensagem de sucesso
-            header('Location: sucesso_assinatura.php'); // Crie essa página se quiser
-            exit;
-        } else {
-            $erro = "Erro ao processar pagamento. Tente novamente.";
-        }
-
-        $stmt->close();
-    } else {
-        $erro = "Todos os campos são obrigatórios.";
-    }
-
-    $conexao->close();
-} else {
-    $erro = "Acesso inválido.";
+// Validação básica
+if (!$plano || !$nome || !$email || !$celular || !$cpf || !$forma_pagamento) {
+    echo "Todos os campos são obrigatórios.";
+    exit;
 }
 
-// Em caso de erro:
-if (isset($erro)) {
-    echo "<p style='color:red; text-align:center;'>$erro</p>";
-    echo "<p style='text-align:center;'><a href='assinar_plano.php'>Voltar</a></p>";
+// Verifica se já existe uma assinatura ativa
+$sql_check = "SELECT * FROM assinaturas 
+              WHERE aluno_id = ? 
+              AND (data_expiracao IS NULL OR data_expiracao >= NOW())";
+$stmt = $conexao->prepare($sql_check);
+$stmt->bind_param("i", $aluno_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    echo "Você já possui uma assinatura ativa.";
+    exit;
+}
+
+// Insere a nova assinatura
+$sql_insert = "INSERT INTO assinaturas (aluno_id, plano, data_assinatura, data_expiracao) 
+               VALUES (?, ?, ?, ?)";
+$stmt = $conexao->prepare($sql_insert);
+$stmt->bind_param("isss", $aluno_id, $plano, $data_assinatura, $data_expiracao);
+
+if ($stmt->execute()) {
+    // Redireciona para cursos com mensagem de sucesso
+    header("Location: ../cursos.php?msg=assinatura_sucesso");
+    exit;
+} else {
+    echo "Erro ao processar sua assinatura.";
 }
 ?>

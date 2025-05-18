@@ -44,12 +44,12 @@
           <label for="categoria">Categoria</label>
           <select id="categoria" name="categoria" required>
             <option value="">Selecione</option>
-            <option value="Marketing de afiliados">Marketing de afiliados</option>
-            <option value="Marketing de conteúdo">Marketing de conteúdo</option>
-            <option value="Marketing por e-mail">Marketing por e-mail</option>
-            <option value="Marketing de mídia social">Marketing de mídia social</option>
+            <option value="Marketing de Afiliados">Marketing de Afiliados</option>
+            <option value="Marketing de Conteúdo">Marketing de Conteúdo</option>
+            <option value="E-mail Marketing">E-mail Marketing</option>
+            <option value="Social Media">Social Media</option>
             <option value="Análise de Marketing">Análise de Marketing</option>
-            <option value="Otimização de mecanismos de busca (SEO)">Otimização de mecanismos de busca (SEO)</option>
+            <option value="SEO">SEO</option>
             <option value="Tráfego Pago">Tráfego Pago</option>
           </select>
         </div>

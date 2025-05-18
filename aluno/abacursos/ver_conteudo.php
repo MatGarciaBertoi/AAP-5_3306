@@ -138,11 +138,17 @@ $avaliacoes = $stmt->get_result();
 // Busca notas das avaliações já feitas
 $notas_avaliacoes = [];
 $stmt = $conexao->prepare(
-    "SELECT avaliacao_id, nota 
-     FROM respostas_alunos 
-     WHERE aluno_id = ?"
+    "SELECT ra.avaliacao_id, ra.nota
+     FROM respostas_alunos ra
+     INNER JOIN (
+         SELECT avaliacao_id, MAX(data_envio) AS ultima_tentativa
+         FROM respostas_alunos
+         WHERE aluno_id = ?
+         GROUP BY avaliacao_id
+     ) ultimas ON ra.avaliacao_id = ultimas.avaliacao_id AND ra.data_envio = ultimas.ultima_tentativa
+     WHERE ra.aluno_id = ?"
 );
-$stmt->bind_param("i", $aluno_id);
+$stmt->bind_param("ii", $aluno_id, $aluno_id);
 $stmt->execute();
 $result_notas = $stmt->get_result();
 while ($row = $result_notas->fetch_assoc()) {
@@ -286,7 +292,7 @@ while ($row = $result_notas->fetch_assoc()) {
     </div>
 
     <?php include 'partials/footer.php'; ?> <!-- Inclui o footer -->
-    
+
     <script>
         function mostrarAba(abaId) {
             const abas = document.querySelectorAll('.tab-content');

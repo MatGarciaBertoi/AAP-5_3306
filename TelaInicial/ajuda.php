@@ -43,7 +43,7 @@
                 <div class="faq-item">
                     <button class="faq-question">Como posso entrar em contato com o suporte?<i class="bi bi-caret-down"></i></button>
                     <div class="faq-answer hidden">
-                        <p>Você pode entrar em contato conosco através da seção de contato abaixo ou enviando um email para suporte@plataformadecursos.com.</p>
+                        <p>Você pode entrar em contato conosco através da seção de contato abaixo ou enviando um email para <strong>suportecwcursos@gmail.com</strong></p>
                     </div>
                 </div>
                 <!-- Pergunta e resposta sobre acesso pelo celular -->

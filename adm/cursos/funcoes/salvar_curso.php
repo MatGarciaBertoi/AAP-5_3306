@@ -11,15 +11,35 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['tipo'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $nome = $_POST['nome-curso'] ?? '';
+    $nome = trim($_POST['nome-curso'] ?? '');
     $categoria = $_POST['categoria'] ?? '';
-    $descricao = $_POST['descricao'] ?? '';
+    $descricao = trim($_POST['descricao'] ?? '');
     $dificuldade = $_POST['dificuldade'] ?? '';
     $criado_por_id = $_SESSION['id'];
     $tipo_criador = $_SESSION['tipo'];
 
+    // Lista de categorias permitidas conforme ENUM no banco
+    $categorias_permitidas = [
+        'Marketing de Afiliados',
+        'Marketing de Conteúdo',
+        'E-mail Marketing',
+        'Social Media',
+        'Análise de Marketing',
+        'SEO',
+        'Tráfego Pago'
+    ];
+
+    $dificuldades_permitidas = ['iniciante', 'intermediario', 'avancado'];
+
     if (empty($nome) || empty($categoria) || empty($descricao) || empty($dificuldade)) {
         $_SESSION['mensagem'] = "Preencha todos os campos obrigatórios.";
+        $_SESSION['mensagem_tipo'] = "erro";
+        header("Location: ../cursos.php");
+        exit;
+    }
+
+    if (!in_array($categoria, $categorias_permitidas) || !in_array($dificuldade, $dificuldades_permitidas)) {
+        $_SESSION['mensagem'] = "Categoria ou dificuldade inválida.";
         $_SESSION['mensagem_tipo'] = "erro";
         header("Location: ../cursos.php");
         exit;

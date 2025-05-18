@@ -62,7 +62,16 @@ $curso = $result->fetch_assoc();
 
       <div class="form-group">
         <label for="categoria">Categoria</label>
-        <input type="text" id="categoria" name="categoria" value="<?php echo htmlspecialchars($curso['categoria']); ?>" required>
+        <select id="categoria" name="categoria" required>
+          <option value="">Selecione</option>
+          <option value="Marketing de Afiliados">Marketing de Afiliados</option>
+          <option value="Marketing de Conteúdo">Marketing de Conteúdo</option>
+          <option value="E-mail Marketing">E-mail Marketing</option>
+          <option value="Social Media">Social Media</option>
+          <option value="Análise de Marketing">Análise de Marketing</option>
+          <option value="SEO">SEO</option>
+          <option value="Tráfego Pago">Tráfego Pago</option>
+        </select>
       </div>
 
       <div class="form-group">
