@@ -39,7 +39,7 @@
 
             <!-- Container de opções -->
             <div id="perfilAlunoOpcoes" class="perfil-opcoes">
-                <a href="#">Meu Perfil</a>
+                <a href="../profile">Meu Perfil</a>
                 <a href="../../suporte/suporte.php" target="_blank">Central de Ajuda</a>
                 <a href="../../funcoes/sessoes/logout.php">Sair</a>
             </div>

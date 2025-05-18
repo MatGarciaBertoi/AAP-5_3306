@@ -1,10 +1,6 @@
 <?php
-session_start();
+include_once('../funcoes/sessoes/check_professor.php');
 require_once '../funcoes/conexao.php';
-
-if (!isset($_SESSION['id']) || $_SESSION['tipo'] !== 'professor') {
-  die("Acesso negado.");
-}
 
 $professor_id = $_SESSION['id'];
 
@@ -79,11 +75,6 @@ $total_alunos = $resultAlunos['total_alunos'] ?? 0;
       </div>
     </section>
 
-    <section class="notifications"> <!-- Esse ainda está fixo-->
-      <h3>Notificações</h3>
-      <p>🚧 Manutenção agendada para 01/05 às 02:00 AM.</p>
-      <p>📢 Nova ferramenta de agendamento de aulas disponível!</p>
-    </section>
 
   </div>
   <?php include 'partials/footer.php'; ?> <!-- Inclui o footer -->

@@ -5,4 +5,3 @@
     header('Location: ../../cadastro_login/usuario/signin.php');
     exit();
 }
-?>

@@ -30,6 +30,7 @@
                                 <li>Material de apoio</li>
                                 <li>Certificados digitais</li>
                             </ul>
+                            <p class="preco">R$ 20,00/mês</p>
                             <a href="assinar_plano.php?plano=Essencial" class="btn-assinar">Assinar</a>
                         </div>
 
@@ -41,6 +42,7 @@
                                 <li>Webinars exclusivos</li>
                                 <li>Suporte prioritário</li>
                             </ul>
+                            <p class="preco">R$ 30,00/mês</p>
                             <a href="assinar_plano.php?plano=Profissional" class="btn-assinar">Assinar</a>
                         </div>
 
@@ -53,6 +55,7 @@
                                 <li>Consultoria personalizada</li>
                                 <li>Acesso antecipado a novos cursos</li>
                             </ul>
+                            <p class="preco">R$ 40,00/mês</p>
                             <a href="assinar_plano.php?plano=Empreendedor" class="btn-assinar">Assinar</a>
                         </div>
 

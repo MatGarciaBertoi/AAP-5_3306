@@ -33,8 +33,10 @@
 
                     <!-- Container de opções -->
                     <div id="perfilAlunoOpcoes" class="perfil-opcoes">
-                        <a href="../<?= $_SESSION['tipo'] ?>/profile.php">Conta</a>
-                        <a href="../aluno/meuplano.php">Meu Plano</a>
+                        <a href="../<?= $_SESSION['tipo'] ?>/profile.php">Meu Perfil</a>
+                        <?php if ($_SESSION['tipo'] === 'aluno'): ?>
+                            <a href="../aluno/meuplano.php">Meu Plano</a>
+                        <?php endif; ?>
                         <a href="../funcoes/sessoes/logout.php">Sair</a>
                     </div>
                 </div>
