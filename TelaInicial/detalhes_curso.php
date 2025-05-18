@@ -3,7 +3,7 @@ session_start();
 
 require_once '../funcoes/conexao.php';
 
-$cursoId = $_GET['curso_id'] ?? null;
+$cursoId = $_GET['curso_id'] ?? null;  // <-- Usar 'curso_id' aqui, como na aba cursos.php
 
 if (!$cursoId) {
     echo "Curso não encontrado.";

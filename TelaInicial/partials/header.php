@@ -112,15 +112,24 @@
     document.addEventListener('DOMContentLoaded', () => {
         const input = document.getElementById('searchInput');
         const results = document.getElementById('searchResults');
+        let cursos = [];
 
-        // Supondo que você tenha um array JS com os cursos (id, nome, link)
-        const cursos = Array.from(document.querySelectorAll('.course-card')).map(card => {
-            return {
-                id: card.dataset.id, // ou algum atributo data-id no HTML
-                titulo: card.querySelector('h3').innerText,
-                link: card.closest('.course-card-link').href
-            };
-        });
+        // Função para carregar cursos via fetch
+        async function carregarCursos() {
+            try {
+                const resposta = await fetch('funcoes/obter_cursos.php');
+                if (resposta.ok) {
+                    cursos = await resposta.json();
+                } else {
+                    console.error('Erro ao carregar cursos');
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+            }
+        }
+
+        // Carrega cursos assim que a página carregar
+        carregarCursos();
 
         input.addEventListener('input', () => {
             const termo = input.value.trim().toLowerCase();
@@ -131,27 +140,25 @@
             }
 
             const filtrados = cursos.filter(curso =>
-                curso.titulo.toLowerCase().includes(termo)
+                curso.nome.toLowerCase().includes(termo)
             );
 
             if (filtrados.length === 0) {
                 results.innerHTML = '<li>Nenhum curso encontrado</li>';
             } else {
                 results.innerHTML = filtrados.map(curso => `
-        <li data-link="${curso.link}">${curso.titulo}</li>
-      `).join('');
+                <li data-link="${curso.link}">${curso.nome} <small style="color:#777;">(${curso.categoria})</small></li>
+            `).join('');
             }
             results.style.display = 'block';
         });
 
-        // Clique no item do resultado leva para o curso
         results.addEventListener('click', (e) => {
             if (e.target.tagName === 'LI' && e.target.dataset.link) {
                 window.location.href = e.target.dataset.link;
             }
         });
 
-        // Fecha dropdown se clicar fora
         document.addEventListener('click', (e) => {
             if (!input.contains(e.target) && !results.contains(e.target)) {
                 results.style.display = 'none';
