@@ -36,6 +36,18 @@ if ($result->num_rows === 0) {
 }
 
 $curso = $result->fetch_assoc();
+
+// Obtendo ENUM de categoria dinamicamente
+$enum_categoria = [];
+$result_enum = $conexao->query("SHOW COLUMNS FROM cursos LIKE 'categoria'");
+if ($result_enum && $row = $result_enum->fetch_assoc()) {
+  preg_match("/^enum\((.*)\)$/", $row['Type'], $matches);
+  if (isset($matches[1])) {
+    $enum_categoria = array_map(function ($value) {
+      return trim($value, "'");
+    }, explode(",", $matches[1]));
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -69,8 +81,16 @@ $curso = $result->fetch_assoc();
 
       <div class="form-group">
         <label for="categoria">Categoria</label>
-        <input type="text" id="categoria" name="categoria" value="<?php echo htmlspecialchars($curso['categoria']); ?>" required>
+        <select id="categoria" name="categoria" required>
+          <?php
+          foreach ($enum_categoria as $categoria) {
+            $selected = ($curso['categoria'] === $categoria) ? 'selected' : '';
+            echo "<option value=\"$categoria\" $selected>$categoria</option>";
+          }
+          ?>
+        </select>
       </div>
+
 
       <div class="form-group">
         <label for="descricao">Descrição</label>
