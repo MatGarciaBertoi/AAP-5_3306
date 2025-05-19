@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 
                 // Redireciona para a página conforme o tipo de usuário
                 if ($user['tipo'] === 'administrador') {
-                    header("Location: http://localhost/AAP-5_3306/adm/index.php");
+                    header("Location: http://localhost/AAP-5_3306/administrador/index.php");
                     exit;
                 } elseif ($user['tipo'] === 'professor') {
                     header("Location: http://localhost/AAP-5_3306/professor/index.php");

@@ -26,6 +26,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['aprovar'])) {
     $nome = $professor['nome'];
     $data_nascimento = $professor['data_nascimento'];
 
+    $cpf = $professor['cpf'];
+    $rg = $professor['rg'];
+    $endereco = $professor['endereco'];
+    $telefone = $professor['telefone'];
+    $linkedin = $professor['linkedin'];
+    $experiencia = $professor['experiencia'];
+    $area_conhecimento = $professor['area_conhecimento'];
+    $disponibilidade = $professor['disponibilidade'];
+
     $base_email = preg_replace('/[^a-z0-9]/i', '', strtolower(explode('@', $professor['email'])[0]));
     do {
         $numero = rand(100, 999);
@@ -38,9 +47,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['aprovar'])) {
 
     $senha_padrao = password_hash("cwprof1234", PASSWORD_DEFAULT);
     $usuario = $base_email . $numero;
+    $fotoPadrao = '/AAP-5_3306/funcoes/uploads/profile/default_profile.jpg';
+    $aceitouTermos = 1;
 
-    $insert = $conexao->prepare("INSERT INTO usuarios (nome, usuario, email, senha, data_nascimento, tipo, status) VALUES (?, ?, ?, ?, ?, 'professor', 'ativo')");
-    $insert->bind_param("sssss", $nome, $usuario, $email_cw, $senha_padrao, $data_nascimento);
+    $insert = $conexao->prepare("
+        INSERT INTO usuarios (
+            nome, usuario, email, senha, data_nascimento, tipo, status, photo, aceitou_termos,
+            cpf, rg, endereco, telefone, linkedin, experiencia, area_conhecimento, disponibilidade
+        ) VALUES (?, ?, ?, ?, ?, 'professor', 'ativo', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ");
+
+    $insert->bind_param(
+        "ssssssissssssss",
+        $nome,
+        $usuario,
+        $email_cw,
+        $senha_padrao,
+        $data_nascimento,
+        $fotoPadrao,
+        $aceitouTermos,
+        $cpf,
+        $rg,
+        $endereco,
+        $telefone,
+        $linkedin,
+        $experiencia,
+        $area_conhecimento,
+        $disponibilidade
+    );
 
     if ($insert->execute()) {
         $delete = $conexao->prepare("DELETE FROM professores_voluntarios WHERE id = ?");
@@ -61,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rejeitar'])) {
     $curriculo_absoluto = $_SERVER['DOCUMENT_ROOT'] . $curriculo_relativo;
 
     // Segurança: verifica se o caminho está dentro da pasta de currículos
-    $caminho_pasta_permitida = realpath($_SERVER['DOCUMENT_ROOT'] . "/AAP-5_3306/adm/usuarios/professor/uploads/curriculos");
+    $caminho_pasta_permitida = realpath($_SERVER['DOCUMENT_ROOT'] . "/AAP-5_3306/administrador/usuarios/professor/uploads/curriculos");
 
     if (file_exists($curriculo_absoluto) && strpos(realpath($curriculo_absoluto), $caminho_pasta_permitida) === 0) {
         unlink($curriculo_absoluto);

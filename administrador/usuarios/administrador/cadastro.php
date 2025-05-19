@@ -38,10 +38,15 @@ if (isset($_POST['submit'])) {
     // Hash da senha para segurança
     $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
+    // Caminho da imagem padrão
+    $fotoPadrao = '/AAP-5_3306/funcoes/uploads/profile/default_profile.jpg';
+
+    $aceitouTermos = 1; // Como já validou o checkbox, pode setar 1 direto
+
     // Insere os dados no banco de dados
-    $insertQuery = "INSERT INTO usuarios (nome, usuario, email, senha, data_nascimento, tipo, status) VALUES (?, ?, ?, ?, ?, 'administrador', 'ativo')";
+    $insertQuery = "INSERT INTO usuarios (nome, usuario, email, senha, data_nascimento, tipo, status, photo, aceitou_termos) VALUES (?, ?, ?, ?, ?, 'administrador', 'ativo', ?, ?)";
     $stmt = $conexao->prepare($insertQuery);
-    $stmt->bind_param("sssss", $nome, $usuario, $email, $senhaHash, $dataNascimento);
+    $stmt->bind_param("ssssssi", $nome, $usuario, $email, $senhaHash, $dataNascimento, $fotoPadrao, $aceitouTermos);
 
     if ($stmt->execute()) {
         // Aguarda um momento para garantir que o banco de dados seja atualizado corretamente
@@ -50,7 +55,7 @@ if (isset($_POST['submit'])) {
         // Exibe mensagem de sucesso e redireciona para home.html
         echo "<script>
                     alert('Usuário cadastrado com sucesso!');
-                    window.location.href = 'http://localhost/AAP-5_3306/adm/usuarios.php';
+                    window.location.href = 'http://localhost/AAP-5_3306/administrador/usuarios.php';
                     </script>";
     } else {
         echo "<script>alert('Erro ao cadastrar o usuário.');</script>";
@@ -65,6 +70,7 @@ if (isset($_POST['submit'])) {
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

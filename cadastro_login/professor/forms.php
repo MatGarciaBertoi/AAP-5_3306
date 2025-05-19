@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $verificar->close();
 
     // Caminho absoluto no servidor (para salvar o arquivo fisicamente)
-    $caminho_fisico = $_SERVER['DOCUMENT_ROOT'] . "/AAP-5_3306/adm/usuarios/professor/uploads/curriculos/";
+    $caminho_fisico = $_SERVER['DOCUMENT_ROOT'] . "/AAP-5_3306/administrador/usuarios/professor/uploads/curriculos/";
     $curriculo_tipo = strtolower(pathinfo($_FILES["curriculo"]["name"], PATHINFO_EXTENSION));
 
     if ($_FILES["curriculo"]["error"] !== UPLOAD_ERR_OK) {
@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome_arquivo = uniqid("curriculo_", true) . ".pdf";
 
     // Caminho para o navegador (este será salvo no banco e usado no link)
-    $curriculo_path = "/AAP-5_3306/adm/usuarios/professor/uploads/curriculos/" . $nome_arquivo;
+    $curriculo_path = "/AAP-5_3306/administrador/usuarios/professor/uploads/curriculos/" . $nome_arquivo;
 
     if (!move_uploaded_file($_FILES["curriculo"]["tmp_name"], $caminho_fisico . $nome_arquivo)) {
         die("Erro ao salvar o currículo.");

@@ -1,5 +1,5 @@
 <?php
-include_once('../funcoes/sessoes/check_professor.php');
+include_once('../funcoes/sessoes/check_administrador.php');
 include_once('../funcoes/conexao.php');
 include_once('../funcoes/config.php');
 

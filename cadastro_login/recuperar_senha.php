@@ -30,7 +30,7 @@ if (isset($_POST['SendRecupSenha'])) {
             // Carrega e configura o PHPMailer
             $mail = require __DIR__ . "/../lib/phpmailer/mailer.php";
 
-            $mail->setFrom("cwcursos21@gmail.com"); // Remetente
+            $mail->setFrom("suportecwcursos@gmail.com"); // Remetente
             $mail->addAddress($email);              // Destinatário
             $mail->Subject = "CW Cursos - Alterar Senha"; // Assunto do email
 

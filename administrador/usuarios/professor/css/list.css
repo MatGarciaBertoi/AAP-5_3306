@@ -49,6 +49,12 @@ td, th {
     background-color: #218838;
 }
 
+.btn-acao{
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
 .btn-acao {
     margin-right: 6px;
     padding: 4px 8px;

@@ -6,7 +6,14 @@ function listarUsuarios($conexao, $type, $busca = '')
 
     if (!empty($busca)) {
         $busca = mysqli_real_escape_string($conexao, $busca);
-        $query .= " AND (nome LIKE '%$busca%' OR email LIKE '%$busca%' OR usuario LIKE '%$busca%')";
+        $query .= " AND (nome LIKE '%$busca%' OR email LIKE '%$busca%' OR usuario LIKE '%$busca%' OR cpf LIKE  '%$busca%'";
+
+        // Incluir CPF apenas se for professor
+        if ($type === 'professor') {
+            $query .= " OR cpf LIKE '%$busca%'";
+        }
+
+        $query .= ")";
     }
 
     $query .= " ORDER BY nome ASC";
@@ -19,8 +26,13 @@ function listarUsuarios($conexao, $type, $busca = '')
                     <th>Foto</th>
                     <th>Nome</th>
                     <th>Usuário</th>
-                    <th>Email</th>
-                    <th>Data de Nascimento</th>
+                    <th>Email</th>';
+
+        if ($type === 'professor') {
+            echo '<th>CPF</th>';
+        }
+
+        echo '      <th>Data de Nascimento</th>
                     <th>Status</th>
                     <th>Ações</th>
                 </tr>
@@ -32,6 +44,7 @@ function listarUsuarios($conexao, $type, $busca = '')
             $nome = htmlspecialchars($row['nome']);
             $usuario = htmlspecialchars($row['usuario']);
             $email = htmlspecialchars($row['email']);
+            $cpf = htmlspecialchars($row['cpf'] ?? '');
             $dataNascimento = date('d/m/Y', strtotime($row['data_nascimento']));
             $status = ucfirst($row['status']);
             $photo = htmlspecialchars($row['photo']);
@@ -44,8 +57,13 @@ function listarUsuarios($conexao, $type, $busca = '')
                 <td><img src='$photo' alt='Foto' width='40' height='40' style='border-radius: 50%;'></td>
                 <td>$nome</td>
                 <td>$usuario</td>
-                <td>$email</td>
-                <td>$dataNascimento</td>
+                <td>$email</td>";
+
+            if ($type === 'professor') {
+                echo "<td>$cpf</td>";
+            }
+
+            echo "  <td>$dataNascimento</td>
                 <td>$status</td>
                 <td>
                     <a href='../funcoes/editar.php?id=$id&type=$type' class='btn-acao'>Editar</a>
