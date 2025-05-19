@@ -299,6 +299,7 @@ while ($row = $result_notas->fetch_assoc()) {
             document.getElementById(abaId).classList.add('active');
             event.target.classList.add('active');
         }
+        
     </script>
 </body>
 
