@@ -6,31 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Política de Privacidade - CW Cursos</title>
     <link rel="shortcut icon" href="../images/logotipocw.png" />
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        h1,
-        h2 {
-            color: #0056b3;
-        }
-
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="css/termos.css">
 </head>
+<?php include '../funcoes/usuario/acessibilidade.php'; ?>
 
 <body>
     <h1>Política de Privacidade da CW Cursos</h1>

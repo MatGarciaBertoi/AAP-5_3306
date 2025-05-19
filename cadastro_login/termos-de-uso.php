@@ -5,14 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="../images/logotipocw.png" />
     <title>Termos de Uso - CW Cursos</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; color: #333; }
-        h1, h2 { color: #0056b3; }
-        a { color: #007bff; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        h2 { margin-top: 2rem; }
-    </style>
+    <link rel="stylesheet" href="css/termos.css">
 </head>
+<?php include '../funcoes/usuario/acessibilidade.php'; ?>
 <body>
     <h1>Termos de Uso do CW Cursos</h1>
 
