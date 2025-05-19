@@ -48,24 +48,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Editar Aula</title>
     <link rel="shortcut icon" href="../../images/logotipocw.png" />
     <link rel="stylesheet" href="partials/style.css">
+    <link rel="stylesheet" href="css/editar_aula.css">
 </head>
 
 <body>
     <?php include 'partials/header.php'; ?>
-    <h2>Editar Aula</h2>
-    <form method="POST">
-        <label for="titulo">Título:</label><br>
-        <input type="text" name="titulo" id="titulo" value="<?= htmlspecialchars($aula['titulo']) ?>" required><br><br>
+    <div class="container">
+        <h2>Editar Aula</h2>
+        <form method="POST">
+            <label for="titulo">Título:</label><br>
+            <input type="text" name="titulo" id="titulo" value="<?= htmlspecialchars($aula['titulo']) ?>" required><br><br>
 
-        <label for="conteudo">Conteúdo:</label><br>
-        <textarea name="conteudo" id="conteudo" rows="6" required><?= htmlspecialchars($aula['conteudo']) ?></textarea><br><br>
+            <label for="conteudo">Conteúdo:</label><br>
+            <textarea name="conteudo" id="conteudo" rows="6" required><?= htmlspecialchars($aula['conteudo']) ?></textarea><br><br>
 
-        <label for="video_url">URL do Vídeo:</label><br>
-        <input type="text" name="video_url" id="video_url" value="<?= htmlspecialchars($aula['video_url']) ?>"><br><br>
+            <label for="video_url">URL do Vídeo:</label><br>
+            <input type="text" name="video_url" id="video_url" value="<?= htmlspecialchars($aula['video_url']) ?>"><br><br>
 
-        <button type="submit">Salvar Alterações</button>
-        
-    </form>
+            <button type="submit">Salvar Alterações</button>
+
+        </form>
+    </div>
 </body>
 
 </html>
