@@ -68,6 +68,8 @@ $emailAluno = $_SESSION['email'] ?? '';
             <a href="meuplano.php">Cancelar</a>
         </form>
     </main>
+    <!-- Chatra {literal} -->
+    <script src="../funcoes/chatbot/usuarios/chatra.js"> </script>
 </body>
 
 </html>

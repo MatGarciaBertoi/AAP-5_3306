@@ -52,8 +52,8 @@ $planos_result = $conexao->query($sql_planos);
             <div class="planos-container">
                 <?php while ($plano = $planos_result->fetch_assoc()): ?>
                     <?php
-                        $beneficios = !empty($plano['beneficios']) ? explode("\n", trim($plano['beneficios'])) : [];
-                        $planoAtivo = $planoAtual && $planoAtual['plano_id'] == $plano['id'];
+                    $beneficios = !empty($plano['beneficios']) ? explode("\n", trim($plano['beneficios'])) : [];
+                    $planoAtivo = $planoAtual && $planoAtual['plano_id'] == $plano['id'];
                     ?>
                     <div class="plano-card<?= $planoAtivo ? ' destaque' : '' ?>">
                         <h3><?= htmlspecialchars($plano['nome']) ?></h3>
@@ -84,25 +84,8 @@ $planos_result = $conexao->query($sql_planos);
         </div>
     </div>
 
-    <!-- Chatra -->
-    <script>
-        (function(d, w, c) {
-            w.ChatraID = 'igHEh7N4PEvoDEkR7';
-            var s = d.createElement('script');
-            w[c] = w[c] || function() {
-                (w[c].q = w[c].q || []).push(arguments);
-            };
-            s.async = true;
-            s.src = 'https://call.chatra.io/chatra.js';
-            if (d.head) d.head.appendChild(s);
-        })(document, window, 'Chatra');
-        window.ChatraSetup = {
-            colors: {
-                buttonText: '#202124',
-                buttonBg: '#F1F3F4'
-            }
-        };
-    </script>
+    <!-- Chatra {literal} -->
+    <script src="../funcoes/chatbot/suporte/chatra.js"> </script>
 </body>
 
 </html>
