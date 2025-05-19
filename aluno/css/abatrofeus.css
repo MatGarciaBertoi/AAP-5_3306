@@ -1,11 +1,11 @@
 .certificate {
     margin: 10px 0;
     padding: 15px;
-    background: #f1f1f1;
+    background: #ffffff;
     border-radius: 8px;
     text-align: center;
     font-size: 18px;
-    transition: background 0.3s;
+    transition: 0.2s;
 }
 
 .certificate a {
@@ -15,5 +15,9 @@
 }
 
 .certificate:hover {
-    background: #e0e0e0;
+   transform: scale(1.1);
+}
+
+.certificate button{
+    cursor: pointer;
 }
