@@ -90,16 +90,6 @@
           </div>
         </div>
       </section>
-
-      <section id="accessibility" class="accessibility">
-        <h2>Acessibilidade</h2>
-        <p>
-          Na CW Cursos, acreditamos que a educação deve ser acessível para
-          todos. Por isso, todos os nossos cursos são projetados com recursos de
-          acessibilidade para pessoas surdas, incluindo vídeos com interpretação
-          em Libras e legendas em todos os materiais audiovisuais.
-        </p>
-      </section>
     </div>
   </main>
   <?php include 'partials/footer.php'; ?> <!-- Inclui o footer -->

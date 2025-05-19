@@ -25,6 +25,7 @@ $formulario = $resultado->fetch_assoc();
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <title>Detalhes do Formulário</title>
@@ -66,6 +67,7 @@ $formulario = $resultado->fetch_assoc();
         }
     </style>
 </head>
+
 <body>
     <?php include 'partials/header.php'; ?>
 
@@ -80,10 +82,17 @@ $formulario = $resultado->fetch_assoc();
         <?php endforeach; ?>
 
         <a href="formularios.php" class="voltar">← Voltar para a lista de formulários</a>
+
+        <form action="funcoes/exportar_csv.php" method="get" style="text-align: center; margin-top: 20px;">
+            <input type="hidden" name="id" value="<?= $formulario['id'] ?>">
+            <button type="submit">Exportar para CSV</button>
+        </form>
+
     </div>
 
     <?php include 'partials/footer.php'; ?>
 </body>
+
 </html>
 
 <?php

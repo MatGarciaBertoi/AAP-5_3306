@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="../images/logotipocw.png" />
     <link rel="stylesheet" href="css/forms.css">
 </head>
-
+<?php include '../funcoes/usuario/acessibilidade.php'; ?>
 <body>
     <div class="container">
         <h1>Formulário de Satisfação e Preferências</h1>

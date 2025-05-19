@@ -69,10 +69,6 @@ $total_alunos = $resultAlunos['total_alunos'] ?? 0;
         <h2><?= $total_alunos ?></h2>
         <p>Alunos Matriculados</p>
       </div>
-      <div class="card">
-        <h2>3</h2> <!-- Esse ainda está fixo-->
-        <p>Mensagens Novas</p>
-      </div>
     </section>
 
 
