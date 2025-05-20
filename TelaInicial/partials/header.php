@@ -20,7 +20,7 @@
                     </div>
                 <?php elseif ($_SESSION['tipo'] === 'administrador'): ?>
                     <div class="btn-area">
-                        <a href="../adm/index.php" class="planos-btn">Área do Administrador</a>
+                        <a href="../administrador/index.php" class="planos-btn">Área do Administrador</a>
                     </div>
                 <?php endif; ?>
 

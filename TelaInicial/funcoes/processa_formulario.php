@@ -2,11 +2,11 @@
 session_start();
 require '../../funcoes/conexao.php'; // conexao com o banco
 
-if (!isset($_SESSION['usuario_id'])) {
+if (!isset($_SESSION['id'])) {
     die("Você precisa estar logado para enviar o formulário.");
 }
 
-$usuario_id = $_SESSION['usuario_id'];
+$usuario_id = $_SESSION['id'];
 
 // Pegando os dados do formulário
 $nome = $_POST['name'];

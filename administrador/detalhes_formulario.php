@@ -29,6 +29,7 @@ $formulario = $resultado->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <title>Detalhes do Formulário</title>
+    <link rel="shortcut icon" href="../images/logotipocw.png" />
     <link rel="stylesheet" href="partials/style.css">
     <link rel="stylesheet" href="css/index.css">
     <style>
