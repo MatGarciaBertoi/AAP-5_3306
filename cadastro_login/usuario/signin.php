@@ -1,16 +1,12 @@
 <?php
-// Inicia a sessão para poder usar variáveis de sessão
 session_start();
-// Inclui o arquivo de conexão com o banco de dados
 include_once('../../funcoes/conexao.php');
 
-// Verifica se o formulário foi enviado via POST e se o botão de submit foi clicado
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 
     $login = $_POST['login'];
     $senha = $_POST['senha'];
 
-    // Prepara a consulta com suporte a login via usuário OU email
     $query = "SELECT * FROM usuarios WHERE usuario = ? OR email = ?";
     $stmt = $conexao->prepare($query);
     $stmt->bind_param("ss", $login, $login);
@@ -20,14 +16,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
 
-        // Verifica se a senha está correta
         if (password_verify($senha, $user['senha'])) {
-
-            // Verifica se o status da conta é bloqueado
+            // Verifica o status da conta
             if ($user['status'] === 'bloqueado') {
                 $mensagemErro = "Sua conta está bloqueada. Por favor, entre em contato com o suporte.";
-            } else {
-                // Inicia as variáveis de sessão
+            } elseif ($user['status'] === 'pendente') {
+                $mensagemErro = "Sua conta ainda não foi ativada. Verifique seu e-mail e clique no link de ativação.";
+            } elseif ($user['status'] === 'ativo') {
+                // Login bem-sucedido
                 $_SESSION['id'] = $user['id'];
                 $_SESSION['nome'] = $user['nome'];
                 $_SESSION['usuario'] = $user['usuario'];
@@ -35,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
                 $_SESSION['tipo'] = $user['tipo'];
                 $_SESSION['status'] = $user['status'];
 
-                // Redireciona para a página conforme o tipo de usuário
+                // Redirecionamento conforme o tipo
                 if ($user['tipo'] === 'administrador') {
                     header("Location: http://localhost/AAP-5_3306/administrador/index.php");
                     exit;
@@ -48,6 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
                 } else {
                     $mensagemErro = "Tipo de usuário desconhecido.";
                 }
+            } else {
+                $mensagemErro = "Status de conta inválido.";
             }
         } else {
             $mensagemErro = "Senha incorreta.";

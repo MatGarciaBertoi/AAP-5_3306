@@ -44,59 +44,51 @@ if (isset($_POST['submit'])) {
     // Hash da senha para segurança
     $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
+    $tokenAtivacao = bin2hex(random_bytes(32)); // Gera um token seguro
+
     // Caminho da imagem padrão
     $fotoPadrao = '/AAP-5_3306/funcoes/uploads/profile/default_profile.jpg';
 
     $aceitouTermos = 1; // Como já validou o checkbox, pode setar 1 direto
 
     // Insere os dados no banco de dados
-    $insertQuery = "INSERT INTO usuarios (nome, usuario, email, senha, data_nascimento, tipo, status, photo, aceitou_termos) VALUES (?, ?, ?, ?, ?, 'aluno', 'ativo', ?, ?)";
+    $insertQuery = "INSERT INTO usuarios (nome, usuario, email, senha, data_nascimento, tipo, status, photo, aceitou_termos, token_ativacao)
+                VALUES (?, ?, ?, ?, ?, 'aluno', 'pendente', ?, ?, ?)";
     $stmt = $conexao->prepare($insertQuery);
-    $stmt->bind_param("ssssssi", $nome, $usuario, $email, $senhaHash, $dataNascimento, $fotoPadrao, $aceitouTermos);
+    $stmt->bind_param("ssssssis", $nome, $usuario, $email, $senhaHash, $dataNascimento, $fotoPadrao, $aceitouTermos, $tokenAtivacao);
 
 
     if ($stmt->execute()) {
-        // Aguarda um momento para garantir que o banco de dados seja atualizado corretamente
-        sleep(1);
+        // Envia e-mail de ativação
+        require_once('../../lib/phpmailer/mailer.php');
 
-        // Envia o e-mail de confirmação
-        require_once('../../lib/phpmailer/mailer.php'); // Caminho relativo
+        $ativacaoLink = "http://localhost/AAP-5_3306/cadastro_login/usuario/ativar.php?email=" . urlencode($email) . "&token=" . urlencode($tokenAtivacao);
 
-        try {
-            $mail->setFrom("suportecwcursos@gmail.com", "CW Cursos"); // Remetente
-            $mail->addAddress($email, $nome); // Destinatário
-            $mail->Subject = "Confirmação de Cadastro - CW Cursos";
+        $mail->CharSet = 'UTF-8';
 
-            // Corpo do e-mail (HTML)
-            $mail->Body = "
-        <h2>Olá, $nome!</h2>
-        <p>Seu cadastro foi realizado com sucesso.</p>
-        <p>Agora você pode acessar a plataforma com seu usuário <strong>$usuario</strong>.</p>
-        <br>
-        <p>Atenciosamente,</p>
-        <p>Equipe CW Cursos</p>
-    ";
+        $mail->setFrom("suportecwcursos@gmail.com", "CW Cursos");
+        $mail->addAddress($email, $nome);
+        $mail->Subject = "Confirmação de Cadastro - Ative sua Conta";
+        $mail->isHTML(true);
+        $mail->Body = "
+            <h2>Bem-vindo a CW Cursos!</h2>
+            <p>Olá <strong>$nome</strong>,</p>
+            <p>Obrigado por se cadastrar! Para ativar sua conta, clique no botão abaixo:</p>
+            <a href='$ativacaoLink' style='display: inline-block; padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;'>Ativar Conta</a>
+            <p>Se não foi você quem se cadastrou, ignore este e-mail.</p>
+        ";
 
-            $mail->AltBody = "Olá, $nome! Seu cadastro foi realizado com sucesso. Acesse a plataforma com seu usuário $usuario.";
-
-            $mail->send();
-
-            echo "<script>
-        alert('Usuário cadastrado com sucesso! Um e-mail de confirmação foi enviado.');
-        window.location.href = 'http://localhost/AAP-5_3306/cadastro_login/usuario/signin.php';
-    </script>";
-        } catch (Exception $e) {
-            echo "<script>
-        alert('Usuário cadastrado, mas houve um erro ao enviar o e-mail: {$mail->ErrorInfo}');
-        window.location.href = 'http://localhost/AAP-5_3306/cadastro_login/usuario/signin.php';
-    </script>";
+        if ($mail->send()) {
+            echo "<script>alert('Cadastro realizado com sucesso! Verifique seu e-mail para ativar sua conta.'); window.location.href='signin.php';</script>";
+        } else {
+            echo "<script>alert('Cadastro realizado, mas houve um erro ao enviar o e-mail.'); window.location.href='signin.php';</script>";
         }
     } else {
-        echo "<script>alert('Erro ao cadastrar o usuário.');</script>";
+        echo "<script>alert('Erro ao cadastrar.'); window.location.href='signup.php';</script>";
     }
 
-    // Fecha as conexões
     $stmt->close();
+    $stmtCheck->close();
     $conexao->close();
 }
 ?>
