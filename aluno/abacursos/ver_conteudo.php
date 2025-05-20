@@ -76,10 +76,16 @@ while ($prova = $result_provas->fetch_assoc()) {
 
     // Busca a nota do aluno para cada prova
     $stmt2 = $conexao->prepare(
-        "SELECT nota FROM respostas_alunos 
-         WHERE aluno_id = ? AND avaliacao_id = ?"
+        "SELECT ra.nota
+     FROM respostas_alunos ra
+     INNER JOIN (
+         SELECT MAX(data_envio) AS ultima_tentativa
+         FROM respostas_alunos
+         WHERE aluno_id = ? AND avaliacao_id = ?
+     ) ult ON ra.data_envio = ult.ultima_tentativa
+     WHERE ra.aluno_id = ? AND ra.avaliacao_id = ?"
     );
-    $stmt2->bind_param("ii", $aluno_id, $avaliacao_id);
+    $stmt2->bind_param("iiii", $aluno_id, $avaliacao_id, $aluno_id, $avaliacao_id);
     $stmt2->execute();
     $res_nota = $stmt2->get_result();
 
@@ -299,7 +305,6 @@ while ($row = $result_notas->fetch_assoc()) {
             document.getElementById(abaId).classList.add('active');
             event.target.classList.add('active');
         }
-        
     </script>
 </body>
 
