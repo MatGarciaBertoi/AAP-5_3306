@@ -456,7 +456,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `usuario`, `email`, `senha`, `photo`, `data_nascimento`, `tipo`, `status`, `reset_token_hash`, `reset_token_expires_at`, `aceitou_termos`, `cpf`, `rg`, `endereco`, `telefone`, `linkedin`, `experiencia`, `area_conhecimento`, `disponibilidade`, `token_ativacao`) VALUES
-(52, 'CW Cursos ADM', 'CW ADM', 'cwcursos21@gmail.com', '$2y$10$aTBYlTKcgTw0H4KrCXk1Luw..gi9Im1GNiJXD7uAwRb24H4S8NRBy', '/AAP-5_3306/funcoes/uploads/profile/default_profile.jpg	', '2007-07-17', 'administrador', 'ativo', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(52, 'CW Cursos ADM', 'CW ADM', 'suportecwcursos@gmail.com', '$2y$10$aTBYlTKcgTw0H4KrCXk1Luw..gi9Im1GNiJXD7uAwRb24H4S8NRBy', '/AAP-5_3306/funcoes/uploads/profile/default_profile.jpg	', '2007-07-17', 'administrador', 'ativo', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (53, 'Garcia Conceição Yoshioka Zanata', 'cwcursosprof', 'cwcursos21863@cwprof.com', '$2y$10$B2GdRtTo7dX.rB17Gr3BhelTcKl45HJJvU19cj6DOPFaE6MoLtvxK', '/AAP-5_3306/funcoes/uploads/profile/default_profile.jpg	', '2007-07-17', 'professor', 'ativo', NULL, NULL, 0, '79602764201', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 COMMIT;
 
