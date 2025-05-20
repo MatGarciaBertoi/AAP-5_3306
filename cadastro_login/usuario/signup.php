@@ -57,13 +57,40 @@ if (isset($_POST['submit'])) {
 
     if ($stmt->execute()) {
         // Aguarda um momento para garantir que o banco de dados seja atualizado corretamente
-        sleep(1); // Adiciona uma pequena pausa para garantir a atualização do banco
+        sleep(1);
 
-        // Exibe mensagem de sucesso e redireciona para home.html
-        echo "<script>
-                    alert('Usuário cadastrado com sucesso!');
-                    window.location.href = 'http://localhost/AAP-5_3306/cadastro_login/aluno/signin.php';
-                    </script>";
+        // Envia o e-mail de confirmação
+        require_once('../../lib/phpmailer/mailer.php'); // Caminho relativo
+
+        try {
+            $mail->setFrom("suportecwcursos@gmail.com", "CW Cursos"); // Remetente
+            $mail->addAddress($email, $nome); // Destinatário
+            $mail->Subject = "Confirmação de Cadastro - CW Cursos";
+
+            // Corpo do e-mail (HTML)
+            $mail->Body = "
+        <h2>Olá, $nome!</h2>
+        <p>Seu cadastro foi realizado com sucesso.</p>
+        <p>Agora você pode acessar a plataforma com seu usuário <strong>$usuario</strong>.</p>
+        <br>
+        <p>Atenciosamente,</p>
+        <p>Equipe CW Cursos</p>
+    ";
+
+            $mail->AltBody = "Olá, $nome! Seu cadastro foi realizado com sucesso. Acesse a plataforma com seu usuário $usuario.";
+
+            $mail->send();
+
+            echo "<script>
+        alert('Usuário cadastrado com sucesso! Um e-mail de confirmação foi enviado.');
+        window.location.href = 'http://localhost/AAP-5_3306/cadastro_login/usuario/signin.php';
+    </script>";
+        } catch (Exception $e) {
+            echo "<script>
+        alert('Usuário cadastrado, mas houve um erro ao enviar o e-mail: {$mail->ErrorInfo}');
+        window.location.href = 'http://localhost/AAP-5_3306/cadastro_login/usuario/signin.php';
+    </script>";
+        }
     } else {
         echo "<script>alert('Erro ao cadastrar o usuário.');</script>";
     }
