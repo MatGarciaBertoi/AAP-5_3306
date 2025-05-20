@@ -82,7 +82,7 @@ $result = $stmt->get_result();
 
                         <div class="acoes-aula">
                             <a href="editar_aula.php?id=<?= $aula['id'] ?>" class="btn-editar">✏️ Editar</a>
-                            <a href="funcoes/excluir_aula.php?= $aula['id'] ?>" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir esta aula?');">🗑️ Excluir</a>
+                            <a href="funcoes/excluir_aula.php?id=<?= $aula['id'] ?>" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir esta aula?');">🗑️ Excluir</a>
                         </div>
                     </li>
                 <?php endwhile; ?>
