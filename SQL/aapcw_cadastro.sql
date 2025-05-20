@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 19, 2025 at 08:00 PM
+-- Generation Time: May 20, 2025 at 01:09 AM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -38,13 +38,6 @@ CREATE TABLE IF NOT EXISTS `assinaturas` (
   KEY `aluno_id` (`aluno_id`),
   KEY `fk_plano_id` (`plano_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `assinaturas`
---
-
-INSERT INTO `assinaturas` (`id`, `aluno_id`, `plano_id`, `data_assinatura`, `data_expiracao`) VALUES
-(10, 36, 2, '2025-05-19 17:26:59', '2025-06-18 17:26:59');
 
 -- --------------------------------------------------------
 
@@ -167,15 +160,8 @@ CREATE TABLE IF NOT EXISTS `cursos_concluidos` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `aluno_curso_unico` (`aluno_id`,`curso_id`),
   KEY `curso_id` (`curso_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `cursos_concluidos`
---
-
-INSERT INTO `cursos_concluidos` (`id`, `aluno_id`, `curso_id`, `data_conclusao`) VALUES
-(12, 36, 6, '2025-05-19 16:57:51'),
-(11, 36, 36, '2025-05-19 14:32:22');
 
 -- --------------------------------------------------------
 
@@ -195,12 +181,6 @@ CREATE TABLE IF NOT EXISTS `feedbacks` (
   KEY `curso_id` (`curso_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `feedbacks`
---
-
-INSERT INTO `feedbacks` (`id`, `aluno_id`, `curso_id`, `comentario`, `data_envio`) VALUES
-(5, 36, 36, 'Gostei bastante do curso e dos conceitos abordados!', '2025-05-19 14:32:44');
 
 -- --------------------------------------------------------
 
@@ -234,7 +214,6 @@ CREATE TABLE IF NOT EXISTS `formularios` (
   PRIMARY KEY (`id`),
   KEY `usuario_id` (`usuario_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 
 -- --------------------------------------------------------
 
@@ -344,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `progresso_aula` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `aluno_id` (`aluno_id`,`aula_id`),
   KEY `aula_id` (`aula_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 -- --------------------------------------------------------
@@ -401,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `respostas_alunos` (
   `tentativa` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `avaliacao_id` (`avaliacao_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -438,7 +417,6 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
 -- --------------------------------------------------------
 
 --
@@ -467,18 +445,19 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `experiencia` text COLLATE utf8mb4_general_ci,
   `area_conhecimento` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `disponibilidade` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `token_ativacao` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `usuario` (`usuario`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome`, `usuario`, `email`, `senha`, `photo`, `data_nascimento`, `tipo`, `status`, `reset_token_hash`, `reset_token_expires_at`, `aceitou_termos`, `cpf`, `rg`, `endereco`, `telefone`, `linkedin`, `experiencia`, `area_conhecimento`, `disponibilidade`) VALUES
-(52, 'CW Cursos ADM', 'CW ADM', 'cwcursos21@gmail.com', '$2y$10$aTBYlTKcgTw0H4KrCXk1Luw..gi9Im1GNiJXD7uAwRb24H4S8NRBy', '/AAP-5_3306/funcoes/uploads/profile/default_profile.jpg	', '2007-07-17', 'administrador', 'ativo', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(53, 'Garcia Conceição Yoshioka Zanata', 'cwcursosprof', 'cwcursos21863@cwprof.com', '$2y$10$B2GdRtTo7dX.rB17Gr3BhelTcKl45HJJvU19cj6DOPFaE6MoLtvxK', '/AAP-5_3306/funcoes/uploads/profile/default_profile.jpg	', '2007-07-17', 'professor', 'ativo', NULL, NULL, 0, '79602764201', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `usuarios` (`id`, `nome`, `usuario`, `email`, `senha`, `photo`, `data_nascimento`, `tipo`, `status`, `reset_token_hash`, `reset_token_expires_at`, `aceitou_termos`, `cpf`, `rg`, `endereco`, `telefone`, `linkedin`, `experiencia`, `area_conhecimento`, `disponibilidade`, `token_ativacao`) VALUES
+(52, 'CW Cursos ADM', 'CW ADM', 'cwcursos21@gmail.com', '$2y$10$aTBYlTKcgTw0H4KrCXk1Luw..gi9Im1GNiJXD7uAwRb24H4S8NRBy', '/AAP-5_3306/funcoes/uploads/profile/default_profile.jpg	', '2007-07-17', 'administrador', 'ativo', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(53, 'Garcia Conceição Yoshioka Zanata', 'cwcursosprof', 'cwcursos21863@cwprof.com', '$2y$10$B2GdRtTo7dX.rB17Gr3BhelTcKl45HJJvU19cj6DOPFaE6MoLtvxK', '/AAP-5_3306/funcoes/uploads/profile/default_profile.jpg	', '2007-07-17', 'professor', 'ativo', NULL, NULL, 0, '79602764201', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
