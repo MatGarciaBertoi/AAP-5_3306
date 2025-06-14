@@ -2,7 +2,7 @@
 $servidor = "localhost"; // Define o hostname do servidor de banco de dados
 $usuario = "root"; // Define o nome de usuário do banco de dados
 $senha = ""; // Define a senha do banco de dados
-$dbname = "aapcw_cadastro"; // Define o nome do banco de dados
+$dbname = "cwcursos_db"; // Define o nome do banco de dados
 
 // Cria uma nova conexão com o banco de dados usando as credenciais fornecidas
 $conexao = new mysqli($servidor, $usuario, $senha, $dbname);
